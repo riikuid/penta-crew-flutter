@@ -231,6 +231,45 @@ Rincian operasional ada di [`implementation-plan.md`](implementation-plan.md) §
 - **Repo:** history boilerplate dipisah ke `riikuid/boilerplate-flutter-3-47`;
   `riikuid/penta-crew-flutter` dimulai dari satu commit snapshot boilerplate.
 
+### Catatan implementasi TASK-004 (fondasi, 2 Okt 2026)
+
+Hal yang dokumen di atas belum menentukan dan diputuskan saat mengerjakan
+fondasi (tidak mengubah kontrak API):
+
+- **Urutan `cannot_apply_reason`** mengikuti urutan di kontrak §1:
+  `closed` → `already_applied` → `no_matching_role` → `date_conflict`. Jadi
+  C8/C9 (event sudah tutup) membawa `closed`, dan status aplikasi dibaca dari
+  `my_application`, bukan dari reason.
+- **Enum selalu punya `unknown`** (`VerificationStatus`, `Gender`,
+  `ApplicationStatus`, `EventStatus`, `CannotApplyReason`, `NotificationType`)
+  lewat `unknownEnumValue`, dan `unknown` diperlakukan sebagai "tidak
+  terverifikasi"/"tidak diketahui" — backend yang menambah nilai baru tidak
+  membuat app crash. `User.verificationStatus` default `unknown` sehingga
+  payload parsial tetap bisa diparse.
+- **`Application.position`** = `assigned_position ?? applied_position` —
+  yang ditampilkan di UI selalu penempatan admin bila ada (D-09).
+- **Mock dataset relatif terhadap jam** (`MockServer(clock:)`), bukan tanggal
+  tetap: prototype dibuat untuk 2 Okt 2026, dan dataset digeser ke "hari ini"
+  agar skeleton/urgent/closed tetap terlihat kapan pun app dijalankan. Fixture
+  tetap `const` (offset hari), dikonversi saat `_reset()`.
+- **Satu deviasi dari prototype di mock:** *Mahesa Group town hall* (D1)
+  dipindah ke tanggal yang sama dengan *Kirana 17th birthday* (18 Okt) supaya
+  state C3 `date_conflict` bisa dilihat di simulator tanpa menambah event
+  (header C1 tetap "3 open"). History ditambah 3 event lampau agar counter D2
+  "06 since Jul" terpenuhi.
+- **Shell memberi `MediaQuery.padding.bottom` tambahan** sebesar tinggi nav
+  ke konten tab, sehingga `SafeArea`/`ListView` di tab tidak perlu tahu
+  tentang pill nav. Nav di-overlay 20 px dari sisi, `max(30, safeArea+8)` dari
+  bawah.
+- **`unverifiedOnly()`** adalah guard terpisah untuk `/verification` (seperti
+  `guestOnly()`), bukan parameter tambahan di `guard()`.
+- **Ikon nav** memakai Material (`home_outlined`, `explore_outlined`,
+  `event_available_outlined`, `account_circle_outlined`) sebagai padanan
+  lucide `house / compass / calendar-check / circle-user` — konsisten dengan
+  keputusan ikon di D-12.
+- `Paginated.meta` menyimpan meta mentah (tanpa `data`) agar `meta.summary`
+  dan `meta.unread_count` dibaca tanpa model paginator khusus.
+
 ---
 
 ## Konsekuensi ke boilerplate (untuk dikerjakan saat implementasi, bukan sekarang)
