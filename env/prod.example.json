@@ -2,5 +2,6 @@
   "FLAVOR": "prod",
   "APP_NAME": "Penta Crew",
   "BASE_URL": "https://api.example.com/api",
-  "ENABLE_LOGGING": false
+  "ENABLE_LOGGING": false,
+  "USE_MOCK": false
 }

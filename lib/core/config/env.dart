@@ -24,6 +24,13 @@ abstract final class Env {
     defaultValue: true,
   );
 
+  /// Dev-only in-memory backend (D-13 §2.2). `env/dev.json` turns it on;
+  /// production builds never set it, so `MockInterceptor` is tree-shaken.
+  static const bool useMock = bool.fromEnvironment(
+    'USE_MOCK',
+    defaultValue: false,
+  );
+
   static bool get isDev => flavor == 'dev';
   static bool get isStaging => flavor == 'staging';
   static bool get isProd => flavor == 'prod';
