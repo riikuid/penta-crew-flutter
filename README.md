@@ -62,8 +62,9 @@ lib/
 │   ├── push/                 PushService interface + NoopPushService
 │   ├── json/                 JsonConverters (DateOnlyConverter, BoolIntConverter, …)
 │   ├── logging/              Talker factory + BlocObserver
-│   ├── theme/                ThemeData from a ColorScheme
-│   └── widgets/              toast, buttons, LoadingView / EmptyView / ErrorView
+│   ├── theme/                AppColors (7 tokens) · AppTokens ThemeExtension (`context.tokens`) · AppTheme (light only)
+│   └── widgets/              AppButton, AppTextField/AppPickerField, StatusPill, SegmentedTabs,
+│                             FloatingPillNav, AppCard, Skeleton, Eyebrow, toast, Empty/Error/LoadingView
 ├── features/
 │   ├── auth/                 login, session, splash, forbidden — the only feature with a global cubit
 │   ├── home/                 placeholder landing screen
@@ -314,7 +315,8 @@ is applied conditionally) and a failing `Firebase.initializeApp` is caught in
 - No `PermissionCubit`: permissions are read from `User.permissions`
   (loaded by `GET /me`). Add a refresh path if your backend changes
   permissions without re-login.
-- Theme is a single `ColorScheme`; no dark mode tokens yet.
+- Theme is light only by decision (docs/decisions.md D-12); Inter is fetched
+  at runtime by `google_fonts` until TTFs are bundled in `assets/google_fonts/`.
 - Release signing (`android/app/build.gradle.kts`) still uses the debug key.
 - App icon / splash: `flutter_launcher_icons` and `flutter_native_splash` are
   in dev deps but not configured.

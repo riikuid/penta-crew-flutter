@@ -52,8 +52,9 @@ class _AppState extends State<App> {
           child: MaterialApp.router(
             title: Env.appName,
             debugShowCheckedModeBanner: !Env.isProd,
+            // Light only — the prototype has no dark direction (D-12).
             theme: AppTheme.light(),
-            darkTheme: AppTheme.dark(),
+            themeMode: ThemeMode.light,
             routerConfig: router,
           ),
         ),

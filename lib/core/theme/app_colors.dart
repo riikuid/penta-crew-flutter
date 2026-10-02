@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 
-/// Brand palette. Everything else derives from `ColorScheme.fromSeed`, so
-/// changing the seed re-themes the whole app.
+/// The crew-app palette — exactly the seven flat colours used by the
+/// prototype ("editorial light"). No gradients, no derived tints.
+///
+/// Prefer reading colours through `context.tokens` (see `app_tokens.dart`);
+/// these constants exist so the theme and the tokens share one source.
 abstract final class AppColors {
-  static const Color seed = Color(0xFF1E6FD9);
-  static const Color success = Color(0xFF2E7D32);
-  static const Color warning = Color(0xFFF9A825);
-  static const Color danger = Color(0xFFC62828);
+  /// Primary text, primary buttons, active nav/tab, "Selected" pills.
+  static const Color ink = Color(0xFF221F1F);
+
+  /// Secondary text, eyebrow labels, inactive icons.
+  static const Color muted = Color(0xFF6F6B69);
+
+  /// Cards, inputs, the floating nav.
+  static const Color surface = Color(0xFFFFFFFF);
+
+  /// Scaffold background.
+  static const Color background = Color(0xFFF7F7F6);
+
+  /// Hairline borders, skeletons, disabled buttons, segmented-tab track.
+  static const Color line = Color(0xFFE4E4E3);
+
+  /// Blush accent: secondary buttons, "Waiting" pills, highlight cards,
+  /// avatar circles.
+  static const Color accent = Color(0xFFE9DDD8);
+
+  /// Form errors and "Not approved" only — never used for "Not selected".
+  static const Color error = Color(0xFFB3261E);
 }

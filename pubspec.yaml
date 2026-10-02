@@ -38,6 +38,9 @@ dependencies:
   firebase_core: ^4.15.0
   firebase_messaging: ^16.7.0
   flutter_local_notifications: ^22.3.1
+  # Inter. Pinned <9: v9 switched to material_ui types, which this app does not
+  # use yet. Drop Inter TTFs into assets/google_fonts/ to bundle them offline.
+  google_fonts: ^8.1.0
 
 dev_dependencies:
   flutter_test:
