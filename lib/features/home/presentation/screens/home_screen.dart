@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_tokens.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../auth/presentation/cubit/auth_state.dart';
-import '../../../sample/sample_routes.dart';
 
-/// Landing page after login. Replace with the real shell (bottom nav, etc.).
+/// Placeholder for B1–B3; the real Home arrives with TASK-018. Keeps a sign
+/// out action so the shell/guard loop can be exercised on a simulator.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final tokens = context.tokens;
     final user = context.select(
       (AuthCubit c) => switch (c.state) {
         Authenticated(:final user) => user,
@@ -20,36 +21,24 @@ class HomeScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          IconButton(
-            tooltip: 'Sign out',
-            onPressed: () => context.read<AuthCubit>().logout(),
-            icon: const Icon(Icons.logout),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          Text(
-            'Hello, ${user?.name ?? '-'}',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          if (user?.email != null) Text(user!.email!),
-          const SizedBox(height: 24),
-          // Feature entry points go here.
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.list_alt_outlined),
-              title: const Text('Sample'),
-              subtitle: const Text('Feature template: paginated list + detail'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.push(SampleRoutes.list),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+          children: [
+            Text('B1', style: tokens.eyebrow),
+            const SizedBox(height: 8),
+            Text('Hello, ${user?.name ?? '-'}', style: tokens.display),
+            if (user?.email != null) ...[
+              const SizedBox(height: 8),
+              Text(user!.email!, style: tokens.caption),
+            ],
+            const SizedBox(height: 24),
+            TextButton(
+              onPressed: () => context.read<AuthCubit>().logout(),
+              child: const Text('Sign out'),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

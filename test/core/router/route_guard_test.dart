@@ -12,7 +12,15 @@ class _FakeSession implements SessionInfo {
   @override
   bool isAuthenticated = false;
   @override
+  bool isVerified = false;
+  @override
   Set<String> permissions = const {};
+
+  /// Signed in and approved — the common case for existing tests.
+  void signInVerified() {
+    isAuthenticated = true;
+    isVerified = true;
+  }
 }
 
 /// Minimal router exercising the guards exactly as feature routes do.
@@ -22,7 +30,13 @@ GoRouter _router({String initial = '/protected'}) => GoRouter(
     GoRoute(path: AppRoutes.login, redirect: guestOnly(), builder: _page),
     GoRoute(path: AppRoutes.home, builder: _page),
     GoRoute(path: AppRoutes.forbidden, builder: _page),
+    GoRoute(path: AppRoutes.verification, redirect: unverifiedOnly(), builder: _page),
     GoRoute(path: '/protected', redirect: guard(), builder: _page),
+    GoRoute(
+      path: '/profile/edit',
+      redirect: guard(requireVerified: false),
+      builder: _page,
+    ),
     GoRoute(
       path: '/orders',
       redirect: guard(perms: ['order.read']),
@@ -66,7 +80,7 @@ void main() {
     });
 
     testWidgets('authenticated → stays', (tester) async {
-      session.isAuthenticated = true;
+      session.signInVerified();
       final router = await _pump(tester, _router());
 
       expect(router.state.uri.path, '/protected');
@@ -87,7 +101,7 @@ void main() {
 
     testWidgets('authenticated without permission → /forbidden', (tester) async {
       session
-        ..isAuthenticated = true
+        ..signInVerified()
         ..permissions = {'order.create'};
       final router = await _pump(tester, _router(initial: '/orders'));
 
@@ -96,7 +110,7 @@ void main() {
 
     testWidgets('PermMode.any: one matching permission is enough', (tester) async {
       session
-        ..isAuthenticated = true
+        ..signInVerified()
         ..permissions = {'order.read'};
       final router = await _pump(tester, _router(initial: '/orders'));
 
@@ -105,7 +119,7 @@ void main() {
 
     testWidgets('PermMode.all: every permission required', (tester) async {
       session
-        ..isAuthenticated = true
+        ..signInVerified()
         ..permissions = {'user.manage'};
       var router = await _pump(tester, _router(initial: '/admin'));
       expect(router.state.uri.path, AppRoutes.forbidden);
@@ -119,6 +133,59 @@ void main() {
       final router = await _pump(tester, _router(initial: '/orders'));
 
       expect(router.state.uri.path, AppRoutes.login);
+    });
+  });
+
+  group('guard() verification (D-01)', () {
+    testWidgets('authenticated but unverified → /verification', (tester) async {
+      session.isAuthenticated = true;
+      final router = await _pump(tester, _router());
+
+      expect(router.state.uri.path, AppRoutes.verification);
+    });
+
+    testWidgets('requireVerified: false lets an unverified user through', (
+      tester,
+    ) async {
+      session.isAuthenticated = true;
+      final router = await _pump(tester, _router(initial: '/profile/edit'));
+
+      expect(router.state.uri.path, '/profile/edit');
+    });
+
+    testWidgets('unverified beats permission check', (tester) async {
+      session
+        ..isAuthenticated = true
+        ..permissions = {'order.read'};
+      final router = await _pump(tester, _router(initial: '/orders'));
+
+      expect(router.state.uri.path, AppRoutes.verification);
+    });
+  });
+
+  group('unverifiedOnly()', () {
+    testWidgets('verified user opening /verification → home', (tester) async {
+      session.signInVerified();
+      final router = await _pump(tester, _router(initial: AppRoutes.verification));
+
+      expect(router.state.uri.path, AppRoutes.home);
+    });
+
+    testWidgets('unverified user stays', (tester) async {
+      session.isAuthenticated = true;
+      final router = await _pump(tester, _router(initial: AppRoutes.verification));
+
+      expect(router.state.uri.path, AppRoutes.verification);
+    });
+
+    testWidgets('guest → /login?from=/verification', (tester) async {
+      final router = await _pump(tester, _router(initial: AppRoutes.verification));
+
+      expect(router.state.uri.path, AppRoutes.login);
+      expect(
+        router.state.uri.queryParameters[AppRoutes.fromParam],
+        AppRoutes.verification,
+      );
     });
   });
 

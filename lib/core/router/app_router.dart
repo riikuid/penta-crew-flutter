@@ -2,16 +2,20 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/auth_routes.dart';
-import '../../features/home/home_routes.dart';
+import '../../features/events/events_routes.dart';
+import '../../features/notifications/notifications_routes.dart';
+import '../../features/profile/profile_routes.dart';
 import '../../features/sample/sample_routes.dart';
+import '../../features/verification/verification_routes.dart';
 import '../config/env.dart';
 import '../di/locator.dart';
 import '../session/session_info.dart';
 import '../widgets/state_views.dart';
 import 'app_routes.dart';
+import 'app_shell.dart';
 
-/// Assembles every feature's routes. This and `locator.dart` are the only two
-/// files in `core/` that import from `features/`.
+/// Assembles every feature's routes. This, `app_shell.dart` and `locator.dart`
+/// are the only files in `core/` that import from `features/`.
 GoRouter buildAppRouter({required Listenable refreshListenable}) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -21,9 +25,14 @@ GoRouter buildAppRouter({required Listenable refreshListenable}) {
     redirect: _resolveSessionFirst,
     routes: [
       ...authRoutes,
-      ...homeRoutes,
+      ...verificationRoutes,
+      // The four tab roots (home, events, schedule, profile).
+      appShellRoute,
+      // Root-level pages shown without the pill nav.
+      ...eventsRoutes,
+      ...profileRoutes,
+      ...notificationsRoutes,
       ...sampleRoutes,
-      // ...add each feature's routes here.
     ],
     errorBuilder: (context, state) => ErrorView(
       message: 'Page not found: ${state.uri}',

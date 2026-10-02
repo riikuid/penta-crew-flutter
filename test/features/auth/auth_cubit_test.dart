@@ -58,6 +58,8 @@ void main() {
       expect: () => const [AuthState.authenticated(_user)],
       verify: (c) {
         expect(c.isAuthenticated, isTrue);
+        // `_user` has no verification_status → unverified until approved.
+        expect(c.isVerified, isFalse);
         expect(c.isResolving, isFalse);
         expect(c.permissions, {'order.read'});
         expect(c.user, _user);

@@ -38,6 +38,9 @@ class AuthCubit extends Cubit<AuthState> implements SessionInfo {
   bool get isAuthenticated => state is Authenticated;
 
   @override
+  bool get isVerified => user?.isVerified ?? false;
+
+  @override
   Set<String> get permissions => switch (state) {
     Authenticated(:final user) => user.permissions,
     _ => const {},

@@ -8,6 +8,9 @@ abstract final class AppRoutes {
   static const String home = '/home';
   static const String forbidden = '/forbidden';
 
+  /// Where authenticated-but-unverified users live (D-01).
+  static const String verification = '/verification';
+
   /// Query key used to send the user back where they were heading after the
   /// session resolves / after login.
   static const String fromParam = 'from';

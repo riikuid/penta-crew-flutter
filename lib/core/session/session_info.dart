@@ -9,6 +9,10 @@ abstract interface class SessionInfo {
 
   bool get isAuthenticated;
 
+  /// Signed in **and** approved by an admin (D-01). Unverified users are
+  /// confined to `/verification` and the profile editor.
+  bool get isVerified;
+
   /// Permission slugs of the signed-in user; empty when signed out.
   Set<String> get permissions;
 }

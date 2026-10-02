@@ -5,8 +5,10 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../../features/auth/auth_di.dart';
 import '../../features/events/events_di.dart';
 import '../../features/notifications/notifications_di.dart';
+import '../../features/profile/profile_di.dart';
 import '../../features/sample/sample_di.dart';
 import '../../features/schedule/schedule_di.dart';
+import '../../features/verification/verification_di.dart';
 import '../../integrations/firebase/firebase_di.dart';
 import '../../integrations/local_notifications/local_notifications_di.dart';
 import '../logging/app_logger.dart';
@@ -42,6 +44,8 @@ Future<void> setupLocator() async {
   registerEvents(sl);
   registerSchedule(sl);
   registerNotifications(sl);
+  registerProfile(sl);
+  registerVerification(sl);
   registerSample(sl);
   // ...add each feature's register<Feature>(sl) here.
 }
