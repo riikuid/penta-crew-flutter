@@ -1215,7 +1215,10 @@
               </div>
             </div>
             <div style="flex:none;padding:12px 20px 36px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
-              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:{{ pwBtnBg }};color:{{ pwBtnFg }};font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Update password</button>
+              <!-- E3 submit button is bound to form validity (see pwBtnBg/pwBtnFg in the data script below):
+                   allOk → background #221F1F (ink) / color #FFFFFF; otherwise background #E4E4E3 (line) / color #6F6B69 (muted).
+                   Static enabled-state values are inlined here so the file stays valid CSS for editors. -->
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Update password</button>
             </div>
           </div>
         </x-import>
