@@ -171,7 +171,9 @@ jangan ubah diam-diam — Lead yang memutuskan.
 
 ## 4. Rincian ticket
 
-### T1 · Foundation (Wave 1, critical path)
+Pemetaan ke kanban: T1=`TASK-004`, T2=`TASK-005`, T3=`TASK-006`, T4=`TASK-014`, T5=`TASK-015`, T6=`TASK-016`, T7=`TASK-017`, T8=`TASK-018`, T9=`TASK-019`, T10=`TASK-020`. Sub-task: TASK-004 → 007–013, TASK-014 → 021–023, TASK-015 → 024–025, TASK-016 → 026–027.
+
+### T1 · Foundation (Wave 1, critical path) — `TASK-004`
 Deliverable, berurutan (sub-task):
 1. **English copy + `Failed.code` + `Paginated.meta`** — §2.1, §2.6;
    `Paginated<T>` menyimpan `meta` mentah agar `summary`/`unread_count`
@@ -201,7 +203,7 @@ Deliverable, berurutan (sub-task):
    verifikasi, smoke test `MockInterceptor` (login → me → apply → tracked),
    README "Running without a backend".
 
-### T2 · Investigasi: deep link reset password (Wave 1, paralel)
+### T2 · Investigasi: deep link reset password (Wave 1, paralel) — `TASK-005`
 Hasil: isi persis `Runner.entitlements` (`applinks:`),
 `Info.plist` (`FlutterDeepLinkingEnabled`), `intent-filter`
 `autoVerify`, kedua file `.well-known` dengan placeholder (Team ID,
@@ -209,7 +211,7 @@ Hasil: isi persis `Runner.entitlements` (`applinks:`),
 cold/warm start, dan perintah uji (`xcrun simctl openurl`, `adb shell am
 start`). Dipakai sebagai lampiran T4 dan jawaban §7.1 kontrak.
 
-### T3 · Investigasi: audit gap widget & copy vs prototype (Wave 1, paralel)
+### T3 · Investigasi: audit gap widget & copy vs prototype (Wave 1, paralel) — `TASK-006`
 UI/UX Reviewer membandingkan `core/theme` + `core/widgets` dengan
 `prototype/screens.html` (ukuran, radius, spacing, warna, tipografi,
 touch target) dan menyusun **tabel copy English** per screen (headline,
@@ -217,7 +219,7 @@ body, CTA, empty/error) agar 5 worker wave 2 memakai copy yang sama.
 Temuan BLOCKER masuk T1 bila masih berjalan, sisanya dilampirkan ke ticket
 feature terkait.
 
-### T4 · Auth screens (Wave 2)
+### T4 · Auth screens (Wave 2) — `TASK-014`
 Sub-task: (a) Sign in rebuild A2/A3 di atas widget baru, error inline, email
 dipertahankan; (b) Create account A4→A5 (`RegisterCubit` 2 langkah, validasi
 per langkah, `GET /branches` dropdown, 422 `errors` → field, sukses →
@@ -225,7 +227,7 @@ per langkah, `GET /branches` dropdown, 422 `errors` → field, sukses →
 (D-02) + wiring deep link dari T2 (`APP_DOMAIN` dari `Env`). Splash A1
 disesuaikan visualnya.
 
-### T5 · Verification + Profile (Wave 2)
+### T5 · Verification + Profile (Wave 2) — `TASK-015`
 Sub-task: (a) A6 pending (timeline `ProgressTimeline`, "View my data",
 Sign out), A7 rejected (catatan admin, "Edit profile" → `/profile/edit`,
 "Submit again" = 2.7 lalu 3.1); (b) E1 Profile read-only (dari
@@ -234,7 +236,7 @@ re-review; `updateUser` setelah sukses), E3 Change password (rule live), avatar
 `POST /me/avatar` (`image_picker` **sudah/belum** ada? — kalau belum, ini
 dependency baru → tanyakan Lead sebelum menambah), Sign out dengan konfirmasi.
 
-### T6 · Events (Wave 2, long pole)
+### T6 · Events (Wave 2, long pole) — `TASK-016`
 Sub-task: (a) C1 Open (header "N open · Branch" dari `meta.total`, sort
 deadline, chip posisi match, pill urgent, search), C2 Tracked (semua status
 aktif, timeline Applied → Closes → Result), C10 empty, `SegmentedTabs`;
@@ -245,27 +247,27 @@ Setelah apply/withdraw: refresh detail dan kirim sinyal agar Tracked/Home
 refresh saat kembali (cukup `refresh()` di `didPopNext`/on return — tidak
 perlu event bus).
 
-### T7 · Schedule (Wave 2)
+### T7 · Schedule (Wave 2) — `TASK-017`
 D1 Upcoming (grup per bulan di client, item pertama "Next"), D2 History
 (counter "06 events worked since Jul 2026" dari `meta.summary`, label
 Completed/Not selected dari D-07), D3 empty dengan copy yang mengarahkan ke
 Events › Tracked. Tap item → `EventsRoutes.detail(id)`.
 
-### T8 · Home (Wave 2)
+### T8 · Home (Wave 2) — `TASK-018`
 B1 dengan `HomeCubit` per-seksi (D-05): greeting + roles dari `AuthCubit`;
 next shift; counter WAITING (D-04, copy final diputuskan di sini dan dicatat
 ke D-04); counter worked; carousel Open for you (`EventCard` compact). B2
 skeleton per seksi, B3 empty. Bell icon → `NotificationsRoutes.root`
 (badge ditambahkan T9). Pull-to-refresh menembak ulang semua seksi.
 
-### T9 · Notifications (Wave 3, blocked by T1 + T8)
+### T9 · Notifications (Wave 3, blocked by T1 + T8) — `TASK-019`
 List berhalaman (pola C2, grup Today/Earlier, dot unread), tap → mark read →
 navigasi sesuai `type` (D-06 tabel), read-all, badge unread di bell Home
 (`GET /notifications/unread-count` saat Home tampil/resume), routing tap push
 dari `PushService.onMessageOpened` dan `getInitialMessage` memakai handler
 yang sama, `onTokenRefresh` → `PUT /me/device-token`.
 
-### T10 · Investigasi: visual QA (Wave 4)
+### T10 · Investigasi: visual QA (Wave 4) — `TASK-020`
 UI/UX Reviewer menjalankan app mock di simulator, screenshot 26+4 screen,
 bandingkan dengan prototype, laporkan BLOCKER/ISSUE/SUGGESTION per screen →
 Lead membuka fix ticket.
