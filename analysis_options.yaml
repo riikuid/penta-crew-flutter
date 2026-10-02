@@ -1,0 +1,24 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    # Generated code — never lint, never edit.
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/integrations/firebase/firebase_options.dart
+  errors:
+    invalid_annotation_target: ignore # freezed + json_serializable @JsonKey on factory params
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    require_trailing_commas: true
+    always_declare_return_types: true
+    avoid_print: true
+    unnecessary_lambdas: true
+    directives_ordering: true

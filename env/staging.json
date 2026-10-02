@@ -1,0 +1,6 @@
+{
+  "FLAVOR": "staging",
+  "APP_NAME": "Penta Crew Staging",
+  "BASE_URL": "https://staging-api.example.com/api",
+  "ENABLE_LOGGING": true
+}

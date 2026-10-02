@@ -1,0 +1,18 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        generate_for:
+          - lib/**/models/**.dart
+          - lib/**/presentation/**.dart
+        options:
+          # Laravel API ↔ Dart: is_active ↔ isActive for every model, no per-field @JsonKey.
+          field_rename: snake
+          # Nested models are serialized via their own toJson() instead of being left as objects.
+          explicit_to_json: true
+          # A key missing from the response fails loudly during development instead of silently becoming null.
+          checked: true
+      freezed:
+        generate_for:
+          - lib/**/models/**.dart
+          - lib/**/presentation/**.dart
