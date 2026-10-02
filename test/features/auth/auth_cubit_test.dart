@@ -83,12 +83,12 @@ void main() {
       setUp: () async {
         await storage.saveToken('t0k3n');
         when(() => getMe(any())).thenAnswer(
-          (_) async => const Result.failed('Tidak dapat terhubung ke server.'),
+          (_) async => const Result.failed("Can't reach the server."),
         );
       },
       build: build,
       act: (c) => c.checkSession(),
-      expect: () => const [AuthState.unavailable('Tidak dapat terhubung ke server.')],
+      expect: () => const [AuthState.unavailable("Can't reach the server.")],
       verify: (_) async => expect(await storage.readToken(), 't0k3n'),
     );
 

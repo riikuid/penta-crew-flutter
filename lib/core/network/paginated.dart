@@ -16,6 +16,7 @@ class Paginated<T> {
     required this.currentPage,
     required this.lastPage,
     required this.total,
+    this.meta = const {},
   });
 
   factory Paginated.fromJson(
@@ -39,6 +40,7 @@ class Paginated<T> {
       currentPage: _asInt(meta['current_page']) ?? 1,
       lastPage: _asInt(meta['last_page']) ?? 1,
       total: _asInt(meta['total']) ?? items.length,
+      meta: Map<String, dynamic>.from(meta)..remove('data'),
     );
   }
 
@@ -46,6 +48,10 @@ class Paginated<T> {
   final int currentPage;
   final int lastPage;
   final int total;
+
+  /// Raw paginator meta, so endpoints can carry extras next to the page
+  /// numbers (`meta.summary` on history, `meta.unread_count` on notifications).
+  final Map<String, dynamic> meta;
 
   bool get hasMore => currentPage < lastPage;
   bool get isEmpty => data.isEmpty;

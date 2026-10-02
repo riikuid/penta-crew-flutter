@@ -11,10 +11,10 @@ class ForbiddenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Akses ditolak')),
+      appBar: AppBar(title: const Text('Access denied')),
       body: ErrorView(
         message: AppMessages.forbidden,
-        retryLabel: 'Ke beranda',
+        retryLabel: 'Go home',
         onRetry: () => context.go(AppRoutes.home),
       ),
     );

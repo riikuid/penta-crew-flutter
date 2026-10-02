@@ -26,9 +26,9 @@ GoRouter buildAppRouter({required Listenable refreshListenable}) {
       // ...add each feature's routes here.
     ],
     errorBuilder: (context, state) => ErrorView(
-      message: 'Halaman tidak ditemukan: ${state.uri}',
+      message: 'Page not found: ${state.uri}',
       onRetry: () => context.go(AppRoutes.home),
-      retryLabel: 'Ke beranda',
+      retryLabel: 'Go home',
     ),
   );
 }

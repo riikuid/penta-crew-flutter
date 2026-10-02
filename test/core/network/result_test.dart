@@ -7,7 +7,7 @@ void main() {
     'Validation failed',
     statusCode: 422,
     fieldErrors: {
-      'email': ['Email wajib diisi.', 'Format email salah.'],
+      'email': ['Email is required.', 'Email format is invalid.'],
     },
   );
 
@@ -31,6 +31,13 @@ void main() {
       expect(mapped, isA<Success<String>>());
       expect(mapped.valueOrNull, 'v21');
       expect(mapped.statusCode, 200);
+    });
+
+    test('map keeps failure code', () {
+      const f = Result<int>.failed('Closed', statusCode: 409, code: 'closed');
+      final mapped = f.map((v) => '$v') as Failed<String>;
+      expect(mapped.code, 'closed');
+      expect(mapped.toString(), contains('code: closed'));
     });
 
     test('map keeps failure untouched (message, statusCode, fieldErrors)', () {
@@ -73,7 +80,7 @@ void main() {
 
     test('fieldError returns the first message or null', () {
       const f = failed as Failed<int>;
-      expect(f.fieldError('email'), 'Email wajib diisi.');
+      expect(f.fieldError('email'), 'Email is required.');
       expect(f.fieldError('password'), isNull);
       expect(const Failed<void>('x').fieldError('email'), isNull);
     });

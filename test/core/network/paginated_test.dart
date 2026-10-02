@@ -36,6 +36,31 @@ void main() {
     expect(page.hasMore, isFalse);
   });
 
+  test('exposes raw meta extras (summary, unread_count) without "data"', () {
+    final page = Paginated.fromJson({
+      'data': [{'id': 1}],
+      'meta': {
+        'current_page': 1,
+        'last_page': 1,
+        'total': 1,
+        'summary': {'worked_count': 6, 'worked_since': '2026-07-01'},
+      },
+    }, parseId);
+
+    expect(page.meta['summary'], {'worked_count': 6, 'worked_since': '2026-07-01'});
+    expect(page.meta.containsKey('data'), isFalse);
+
+    final plain = Paginated.fromJson({
+      'data': [{'id': 1}],
+      'current_page': 1,
+      'last_page': 1,
+      'total': 1,
+      'unread_count': 3,
+    }, parseId);
+    expect(plain.meta['unread_count'], 3);
+    expect(plain.meta.containsKey('data'), isFalse);
+  });
+
   test('throws FormatException on a non-paginator body', () {
     expect(() => Paginated.fromJson([1, 2], parseId), throwsFormatException);
     expect(

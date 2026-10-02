@@ -111,6 +111,30 @@ void main() {
       expect(failed.fieldErrors, isNull);
     });
 
+    test('business error body → Failed.code from the "code" key', () async {
+      final dio = _dio(
+        _StubAdapter.json(
+          {'message': 'Applications closed on 12 Jul.', 'code': 'deadline_passed'},
+          status: 409,
+        ),
+      );
+
+      final result = await dioCall(() => dio.post('/apply'), parse: noBody);
+
+      final failed = result as Failed<void>;
+      expect(failed.statusCode, 409);
+      expect(failed.code, 'deadline_passed');
+      expect(failed.message, 'Applications closed on 12 Jul.');
+    });
+
+    test('error body without "code" → Failed.code is null', () async {
+      final dio = _dio(_StubAdapter.json({'message': 'Nope'}, status: 400));
+
+      final result = await dioCall(() => dio.get('/x'), parse: noBody);
+
+      expect((result as Failed<void>).code, isNull);
+    });
+
     test('500 without message → generic/HTTP message, no crash', () async {
       final dio = _dio(_StubAdapter.json({'trace': '...'}, status: 500));
 

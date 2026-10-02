@@ -104,7 +104,7 @@ class _SampleListScreenState extends State<SampleListScreen> {
           ),
           SampleListLoaded(:final data) when data.isEmpty => _Refreshable(
             onRefresh: _cubit.refresh,
-            child: const EmptyView(message: 'Tidak ada data.'),
+            child: const EmptyView(message: 'Nothing here yet.'),
           ),
           SampleListLoaded(:final data, :final isLoadingMore) => RefreshIndicator(
             onRefresh: _cubit.refresh,

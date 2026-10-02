@@ -20,7 +20,7 @@ class EmptyView extends StatelessWidget {
   const EmptyView({
     super.key,
     this.title,
-    this.message = 'Belum ada data.',
+    this.message = 'Nothing here yet.',
     this.icon = Icons.inbox_outlined,
     this.action,
   });
@@ -49,7 +49,7 @@ class ErrorView extends StatelessWidget {
     required this.message,
     this.title,
     this.onRetry,
-    this.retryLabel = 'Coba lagi',
+    this.retryLabel = 'Try again',
   });
 
   final String message;

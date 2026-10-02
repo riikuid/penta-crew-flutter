@@ -21,10 +21,10 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Beranda'),
+        title: const Text('Home'),
         actions: [
           IconButton(
-            tooltip: 'Keluar',
+            tooltip: 'Sign out',
             onPressed: () => context.read<AuthCubit>().logout(),
             icon: const Icon(Icons.logout),
           ),
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Halo, ${user?.name ?? '-'}',
+            'Hello, ${user?.name ?? '-'}',
             style: Theme.of(context).textTheme.titleLarge,
           ),
           if (user?.email != null) Text(user!.email!),
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             child: ListTile(
               leading: const Icon(Icons.list_alt_outlined),
               title: const Text('Sample'),
-              subtitle: const Text('Template fitur: list paginated + detail'),
+              subtitle: const Text('Feature template: paginated list + detail'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => context.push(SampleRoutes.list),
             ),

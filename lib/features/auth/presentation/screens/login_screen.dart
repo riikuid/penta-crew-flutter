@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               errorText: errors['email']?.firstOrNull,
                             ),
                             validator: (v) => (v == null || v.trim().isEmpty)
-                                ? 'Email wajib diisi'
+                                ? 'Email is required'
                                 : null,
                           ),
                           const SizedBox(height: 16),
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             autofillHints: const [AutofillHints.password],
                             onFieldSubmitted: (_) => _submit(),
                             decoration: InputDecoration(
-                              labelText: 'Kata sandi',
+                              labelText: 'Password',
                               errorText: errors['password']?.firstOrNull,
                               suffixIcon: IconButton(
                                 onPressed: () =>
@@ -114,12 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             validator: (v) => (v == null || v.isEmpty)
-                                ? 'Kata sandi wajib diisi'
+                                ? 'Password is required'
                                 : null,
                           ),
                           const SizedBox(height: 24),
                           AppButton(
-                            label: 'Masuk',
+                            label: 'Sign in',
                             loading: submitting,
                             onPressed: _submit,
                           ),

@@ -20,6 +20,7 @@ sealed class Result<T> {
   const factory Result.failed(
     String message, {
     int? statusCode,
+    String? code,
     Map<String, List<String>>? fieldErrors,
   }) = Failed<T>;
 
@@ -42,11 +43,13 @@ sealed class Result<T> {
       transform(value),
       statusCode: statusCode,
     ),
-    Failed(:final message, :final statusCode, :final fieldErrors) => Failed(
-      message,
-      statusCode: statusCode,
-      fieldErrors: fieldErrors,
-    ),
+    Failed(:final message, :final statusCode, :final code, :final fieldErrors) =>
+      Failed(
+        message,
+        statusCode: statusCode,
+        code: code,
+        fieldErrors: fieldErrors,
+      ),
   };
 
   R fold<R>({
@@ -68,10 +71,15 @@ final class Success<T> extends Result<T> {
 }
 
 final class Failed<T> extends Result<T> {
-  const Failed(this.message, {super.statusCode, this.fieldErrors});
+  const Failed(this.message, {super.statusCode, this.code, this.fieldErrors});
 
   /// Human-readable message, already safe to show to the user.
   final String message;
+
+  /// Machine-readable business error from the body's `code` key (API contract
+  /// §0), e.g. `invalid_credentials`, `date_conflict`, `deadline_passed`.
+  /// Cubits branch on this, never on [message].
+  final String? code;
 
   /// Laravel-style validation errors (`422`): `{ "email": ["..."] }`.
   final Map<String, List<String>>? fieldErrors;
@@ -85,5 +93,6 @@ final class Failed<T> extends Result<T> {
   String? fieldError(String field) => fieldErrors?[field]?.firstOrNull;
 
   @override
-  String toString() => 'Failed($message, status: $statusCode)';
+  String toString() =>
+      'Failed($message, status: $statusCode${code == null ? '' : ', code: $code'})';
 }

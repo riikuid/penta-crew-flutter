@@ -48,7 +48,7 @@ Result<T> _fromDioException<T>(DioException e) {
     case DioExceptionType.connectionError:
       return Result.failed(AppMessages.noConnection, statusCode: statusCode);
     case DioExceptionType.cancel:
-      return Result.failed('Permintaan dibatalkan.', statusCode: statusCode);
+      return Result.failed(AppMessages.cancelled, statusCode: statusCode);
     case DioExceptionType.unknown:
       final detail = e.error?.toString() ?? e.message;
       return Result.failed(
@@ -69,8 +69,15 @@ Result<T> _fromDioException<T>(DioException e) {
   return Result.failed(
     message,
     statusCode: statusCode,
+    code: _errorCode(body),
     fieldErrors: _fieldErrors(body),
   );
+}
+
+/// Business error code (`{"message": "...", "code": "deadline_passed"}`).
+String? _errorCode(dynamic body) {
+  if (body is Map && body['code'] is String) return body['code'] as String;
+  return null;
 }
 
 String? _serverMessage(dynamic body) {

@@ -31,9 +31,9 @@ final List<RouteBase> sampleRoutes = [
       final id = int.tryParse(state.pathParameters['id'] ?? '');
       if (id == null) {
         return ErrorView(
-          message: 'ID tidak valid: ${state.pathParameters['id']}',
+          message: 'Invalid id: ${state.pathParameters['id']}',
           onRetry: context.pop,
-          retryLabel: 'Kembali',
+          retryLabel: 'Back',
         );
       }
       return BlocProvider(
