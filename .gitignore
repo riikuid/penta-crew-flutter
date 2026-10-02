@@ -60,3 +60,4 @@ ios/Runner/GoogleService-Info.plist
 
 # Sokudo IDE (worker worktrees live here)
 .sokudo/
+**/.sokudo/

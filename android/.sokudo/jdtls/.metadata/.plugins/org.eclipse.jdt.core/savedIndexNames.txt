@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+/Users/fahmiwa/localstr/penta-crew-flutter/android/.sokudo/jdtls/.metadata/.plugins/org.eclipse.jdt.core
-1865797976.index
-3842426239.index
-3506238388.index
