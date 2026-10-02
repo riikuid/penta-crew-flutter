@@ -211,6 +211,26 @@ Backend **belum ada**, jadi kita yang mengusulkan bentuknya.
   dari boilerplate, sedangkan prototype berbahasa Inggris. Bahasa UI final
   belum diputuskan → `REVISIT` saat screen pertama dibangun.
 
+## D-13 · Eksekusi: bahasa UI, mock backend, batas antar-feature (2 Okt 2026)
+
+Rincian operasional ada di [`implementation-plan.md`](implementation-plan.md) §2.
+
+- **Bahasa UI: English**, mengikuti prototype; default Indonesia di boilerplate
+  diganti. Tidak ada i18n/ARB di v1 (menutup `REVISIT` copy di D-12).
+- **Mock backend dev-only** (`USE_MOCK` dart-define, `MockInterceptor` di Dio,
+  fixtures sebagai Dart const agar tree-shaken di release) karena backend belum
+  ada dan app harus bisa diverifikasi visual + flow-nya diuji. Tiga persona:
+  approved / pending / rejected.
+- **Model dimiliki feature pemilik endpoint**; feature boleh mengimpor
+  `models/`, `usecases/`, `*_routes.dart`, dan `presentation/widgets/` feature
+  lain, **tidak** `repositories/` atau `cubit/`-nya.
+- **Shell:** hanya 4 tab root di dalam `StatefulShellRoute`; halaman lain
+  root-level tanpa nav (sesuai prototype: detail punya header back, bukan nav).
+- `Failed` ditambah `code` (kontrak §0) agar cubit mencabang pada kode stabil,
+  bukan pada teks `message`.
+- **Repo:** history boilerplate dipisah ke `riikuid/boilerplate-flutter-3-47`;
+  `riikuid/penta-crew-flutter` dimulai dari satu commit snapshot boilerplate.
+
 ---
 
 ## Konsekuensi ke boilerplate (untuk dikerjakan saat implementasi, bukan sekarang)

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="3fdbfa84-7dec-49c6-9064-11f66d2f269b"></script>
+</head>
+<body>
+
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("06f7559d-844c-4ebf-be72-949bd949c012") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("5441349d-0082-451e-9f98-dfb7fc74d99b") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("9a445d2f-cc8f-4e04-8a65-ccd2d85448cd") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("7377ae4c-d902-423b-95fb-f3b38c7b2ad8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("9aad517d-fa16-4174-90b4-c2647a1cbb61") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("7848c14b-9292-4cdc-a578-a8772ced884f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("15262d0c-4544-4599-90a2-0f6efa0edd32") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("06f7559d-844c-4ebf-be72-949bd949c012") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("5441349d-0082-451e-9f98-dfb7fc74d99b") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9a445d2f-cc8f-4e04-8a65-ccd2d85448cd") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("7377ae4c-d902-423b-95fb-f3b38c7b2ad8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9aad517d-fa16-4174-90b4-c2647a1cbb61") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("7848c14b-9292-4cdc-a578-a8772ced884f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("15262d0c-4544-4599-90a2-0f6efa0edd32") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("06f7559d-844c-4ebf-be72-949bd949c012") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("5441349d-0082-451e-9f98-dfb7fc74d99b") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9a445d2f-cc8f-4e04-8a65-ccd2d85448cd") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("7377ae4c-d902-423b-95fb-f3b38c7b2ad8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9aad517d-fa16-4174-90b4-c2647a1cbb61") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("7848c14b-9292-4cdc-a578-a8772ced884f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("15262d0c-4544-4599-90a2-0f6efa0edd32") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("06f7559d-844c-4ebf-be72-949bd949c012") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("5441349d-0082-451e-9f98-dfb7fc74d99b") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("9a445d2f-cc8f-4e04-8a65-ccd2d85448cd") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("7377ae4c-d902-423b-95fb-f3b38c7b2ad8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("9aad517d-fa16-4174-90b4-c2647a1cbb61") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("7848c14b-9292-4cdc-a578-a8772ced884f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("15262d0c-4544-4599-90a2-0f6efa0edd32") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+  <script src="fe80b045-bd73-4af2-a217-e9a66ce9ebb1"></script>
+  <style>body{margin:0;background:#E4E4E3;color:#221F1F;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;} a{color:#221F1F;text-underline-offset:3px;} a:hover{color:#6F6B69;} input::placeholder,textarea::placeholder{color:#6F6B69;} *::-webkit-scrollbar{display:none;}</style>
+</helmet>
+<section id="turn-2" style="padding:64px;display:grid;gap:72px;min-width:1400px;font-family:Inter,sans-serif;">
+  <header style="display:grid;gap:20px;max-width:780px;">
+    <img src="7a037f2c-a44a-450a-bb0d-24fafd878098" alt="Pentamoo" style="height:28px;width:auto;justify-self:start;">
+    <div style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Crew app · v2 · Editorial light direction</div>
+    <h1 style="margin:0;font-size:56px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Crew mobile screens</h1>
+    <p style="margin:0;font-size:16px;line-height:1.6;color:#6F6B69;text-wrap:pretty;">Same apply model as <a href="Crew App Screens.dc.html">v1</a>: crew browse open events and apply for a position, can withdraw until the deadline, and Selected means confirmed. Rebuilt on warm neutrals, Inter, 40px cards and a floating pill nav.</p>
+  </header>
+
+  <div style="display:grid;gap:32px;">
+    <h2 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">A · Registration &amp; verification</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+      <div id="A1" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A1</span><strong style="font-weight:500;">Splash</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:grid;place-items:center;transform:translateZ(0);">
+            <div style="display:grid;gap:28px;justify-items:center;">
+              <img src="0c3ac602-4abc-476e-b180-36c6a66470d3" alt="Pentamoo" style="width:168px;height:auto;">
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6F6B69;">Freelance event crew</span>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Checks the session, then routes to Sign in, Verification or Home.</p>
+      </div>
+
+      <div id="A2" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A2</span><strong style="font-weight:500;">Sign in</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;padding:72px 20px 40px;box-sizing:border-box;transform:translateZ(0);">
+            <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:40px;height:40px;">
+            <div style="display:grid;gap:12px;margin-top:56px;">
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Crew account</span>
+              <h1 style="margin:0;font-size:44px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Welcome back.</h1>
+              <p style="margin:0;font-size:16px;line-height:1.5;color:#6F6B69;">Sign in with the email you registered with.</p>
+            </div>
+            <div style="display:grid;gap:16px;margin-top:36px;">
+              <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Email</span><input type="email" placeholder="name@email.com" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;color:#221F1F;outline:none;" style-focus="border-color:#221F1F;"></label>
+              <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Password</span>
+                <div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;"><input type="password" placeholder="Enter password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font:400 16px Inter,sans-serif;color:#221F1F;"><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="eye" size="{{ 20 }}" hint-size="20px,20px"></x-import></span></div>
+              </label>
+              <a href="#A2" style="justify-self:end;font-size:14px;font-weight:500;padding:8px 0;">Forgot password?</a>
+            </div>
+            <div style="margin-top:auto;display:grid;gap:10px;">
+              <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Sign in</button>
+              <button style="height:56px;border:none;border-radius:9999px;background:#E9DDD8;color:#221F1F;font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Create account</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Editorial headline, two fields, actions pinned to the thumb zone.</p>
+      </div>
+
+      <div id="A3" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A3</span><strong style="font-weight:500;">Sign in · error</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;padding:72px 20px 40px;box-sizing:border-box;transform:translateZ(0);">
+            <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:40px;height:40px;">
+            <div style="display:grid;gap:12px;margin-top:56px;">
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Crew account</span>
+              <h1 style="margin:0;font-size:44px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Welcome back.</h1>
+              <p style="margin:0;font-size:16px;line-height:1.5;color:#6F6B69;">Sign in with the email you registered with.</p>
+            </div>
+            <div style="display:grid;gap:16px;margin-top:36px;">
+              <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Email</span><div style="height:56px;padding:0 20px;display:flex;align-items:center;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font-size:16px;box-sizing:border-box;">rina.maharani@gmail.com</div></div>
+              <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Password</span>
+                <div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1.5px solid #B3261E;border-radius:20px;box-sizing:border-box;"><span style="flex:1;font-size:16px;letter-spacing:0.2em;">•••••••••</span><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="eye" size="{{ 20 }}" hint-size="20px,20px"></x-import></span></div>
+                <div style="display:flex;gap:8px;align-items:center;font-size:14px;color:#B3261E;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-alert" size="{{ 16 }}" hint-size="16px,16px"></x-import><span>Email or password is incorrect.</span></div>
+              </div>
+              <a href="#A2" style="justify-self:end;font-size:14px;font-weight:500;padding:8px 0;">Forgot password?</a>
+            </div>
+            <div style="margin-top:auto;display:grid;gap:10px;">
+              <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;">Sign in</button>
+              <button style="height:56px;border:none;border-radius:9999px;background:#E9DDD8;color:#221F1F;font:500 16px Inter,sans-serif;cursor:pointer;">Create account</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Error uses colour, icon and text together. Email is kept.</p>
+      </div>
+
+      <div id="A4" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A4</span><strong style="font-weight:500;">Create account</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 0;display:flex;align-items:center;gap:16px;">
+              <div style="width:44px;height:44px;flex:none;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <div style="flex:1;display:flex;gap:6px;"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span><span style="flex:1;height:4px;border-radius:9999px;background:#E4E4E3;"></span></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;color:#6F6B69;">01 / 02</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:32px 20px 24px;display:grid;gap:28px;align-content:start;">
+              <div style="display:grid;gap:10px;">
+                <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Tell us who you are.</h1>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">Account details. You'll add your crew profile next.</p>
+              </div>
+              <div style="display:grid;gap:14px;">
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Full name</span><input placeholder="As on your ID" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Email</span><input type="email" placeholder="name@email.com" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Phone number</span><input type="tel" placeholder="0812 3456 7890" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Password</span><input type="password" placeholder="At least 8 characters" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirm password</span><input type="password" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 36px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">Continue<x-import component-from-global-scope="PentamooProject.Icon" name="arrow-right" size="{{ 18 }}" hint-size="18px,18px"></x-import></button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Segmented progress replaces the "Step 1 of 2" subtitle.</p>
+      </div>
+
+      <div id="A5" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A5</span><strong style="font-weight:500;">Complete profile</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 0;display:flex;align-items:center;gap:16px;">
+              <div style="width:44px;height:44px;flex:none;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <div style="flex:1;display:flex;gap:6px;"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;color:#6F6B69;">02 / 02</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:32px 20px 24px;display:grid;gap:28px;align-content:start;">
+              <div style="display:grid;gap:10px;">
+                <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Your crew profile.</h1>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">An admin reviews this before your first event.</p>
+              </div>
+              <div style="display:grid;gap:14px;">
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Date of birth</span><input placeholder="DD / MM / YYYY" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Gender</span><div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font-size:16px;color:#6F6B69;box-sizing:border-box;">Select<x-import component-from-global-scope="PentamooProject.Icon" name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></x-import></div></div>
+                  <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Branch</span><div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font-size:16px;box-sizing:border-box;">Jakarta<x-import component-from-global-scope="PentamooProject.Icon" name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></x-import></div></div>
+                </div>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Home address</span><textarea rows="3" placeholder="Street, district, city" style="padding:16px 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px/1.5 Inter,sans-serif;outline:none;resize:none;" style-focus="border-color:#221F1F;"></textarea></label>
+              </div>
+              <div style="display:flex;gap:12px;padding:18px 20px;background:#E9DDD8;border-radius:24px;font-size:14px;line-height:1.5;">
+                <span style="flex:none;display:flex;padding-top:1px;"><x-import component-from-global-scope="PentamooProject.Icon" name="info" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                <span>Your crew roles and tags are set by an admin after they review your profile.</span>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 36px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;">Submit for review</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Gender and branch share a row. No role picker; admin assigns roles.</p>
+      </div>
+
+      <div id="A6" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A6</span><strong style="font-weight:500;">Verification · pending</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;padding:72px 20px 40px;box-sizing:border-box;gap:32px;transform:translateZ(0);">
+            <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:40px;height:40px;">
+            <div style="display:grid;gap:14px;justify-items:start;">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#E9DDD8;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 14 }}" hint-size="14px,14px"></x-import>Under review</span>
+              <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">We're reviewing your profile.</h1>
+              <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;text-wrap:pretty;">An admin from the Jakarta branch will check your data and assign your crew roles. We'll notify you when it's done.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:24px;display:grid;gap:0;">
+              <div style="display:flex;gap:14px;">
+                <div style="display:grid;justify-items:center;flex:none;"><span style="width:28px;height:28px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 14 }}" hint-size="14px,14px"></x-import></span><span style="width:2px;height:28px;background:#221F1F;"></span></div>
+                <div style="display:grid;gap:2px;align-content:start;padding-top:4px;"><span style="font-size:15px;font-weight:500;">Profile submitted</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;color:#6F6B69;">25 SEP 2026 · 09:40</span></div>
+              </div>
+              <div style="display:flex;gap:14px;">
+                <div style="display:grid;justify-items:center;flex:none;"><span style="width:28px;height:28px;border-radius:9999px;background:#E9DDD8;border:2px solid #221F1F;box-sizing:border-box;display:grid;place-items:center;"><span style="width:8px;height:8px;border-radius:9999px;background:#221F1F;"></span></span><span style="width:2px;height:28px;background:#E4E4E3;"></span></div>
+                <div style="display:grid;gap:2px;align-content:start;padding-top:4px;"><span style="font-size:15px;font-weight:500;">Admin review</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;color:#6F6B69;">JAKARTA BRANCH · IN PROGRESS</span></div>
+              </div>
+              <div style="display:flex;gap:14px;">
+                <div style="display:grid;justify-items:center;flex:none;"><span style="width:28px;height:28px;border-radius:9999px;border:2px solid #E4E4E3;box-sizing:border-box;"></span></div>
+                <div style="display:grid;gap:2px;align-content:start;padding-top:4px;"><span style="font-size:15px;font-weight:500;color:#6F6B69;">Roles assigned</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;color:#6F6B69;">NEXT</span></div>
+              </div>
+            </div>
+            <div style="margin-top:auto;display:grid;gap:6px;">
+              <button style="height:56px;border:none;border-radius:9999px;background:#E9DDD8;color:#221F1F;font:500 16px Inter,sans-serif;cursor:pointer;">View my data</button>
+              <button style="height:48px;border:none;border-radius:9999px;background:transparent;color:#221F1F;font:500 15px Inter,sans-serif;cursor:pointer;">Sign out</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Status as a timeline, so crew see where they are and what comes next.</p>
+      </div>
+
+      <div id="A7" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">A7</span><strong style="font-weight:500;">Verification · not approved</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;padding:72px 20px 40px;box-sizing:border-box;gap:32px;transform:translateZ(0);">
+            <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:40px;height:40px;">
+            <div style="display:grid;gap:14px;justify-items:start;">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;border:1px solid #B3261E;color:#B3261E;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;box-sizing:border-box;"><x-import component-from-global-scope="PentamooProject.Icon" name="x" size="{{ 14 }}" hint-size="14px,14px"></x-import>Not approved</span>
+              <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Your profile needs changes.</h1>
+              <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;text-wrap:pretty;">Update the details below and submit again. Your account stays inactive until it's approved.</p>
+            </div>
+            <div style="background:#E9DDD8;border-radius:40px;padding:24px;display:grid;gap:12px;">
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Note from admin</span>
+              <p style="margin:0;font-size:17px;line-height:1.45;text-wrap:pretty;">"We couldn't reach your phone number and your date of birth doesn't match your ID. Please check both."</p>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;color:#6F6B69;">JAKARTA BRANCH · 26 SEP 2026</span>
+            </div>
+            <div style="margin-top:auto;display:grid;gap:6px;">
+              <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;">Edit profile</button>
+              <button style="height:48px;border:none;border-radius:9999px;background:transparent;color:#221F1F;font:500 15px Inter,sans-serif;cursor:pointer;">Sign out</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Admin note is the focal block. Edit reopens A5 prefilled.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:32px;">
+    <h2 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">B · Home</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+      <div id="B1" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">B1</span><strong style="font-weight:500;">Home</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:60px 20px 130px;box-sizing:border-box;display:grid;gap:24px;align-content:start;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:36px;height:36px;">
+                <div style="position:relative;width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="bell" size="{{ 20 }}" hint-size="20px,20px"></x-import><span style="position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:9999px;background:#221F1F;border:2px solid #FFFFFF;"></span></div>
+              </div>
+              <div style="display:grid;gap:8px;">
+                <span style="font-size:17px;color:#6F6B69;">Greetings, Rina!</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;text-wrap:balance;">Your next shift is in 8 days.</h1>
+              </div>
+              <div style="background:#E9DDD8;border-radius:40px;padding:24px;display:grid;gap:18px;" style-active="transform:scale(0.99);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 14 }}" hint-size="14px,14px"></x-import>Selected</span>
+                  <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">As crew</span>
+                </div>
+                <div style="display:flex;align-items:flex-end;gap:14px;">
+                  <span style="font-size:88px;font-weight:500;line-height:0.85;letter-spacing:-0.05em;">03</span>
+                  <div style="display:grid;gap:4px;padding-bottom:4px;font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;"><span>OCT</span><span style="color:#6F6B69;">SAT</span></div>
+                </div>
+                <div style="display:grid;gap:6px;">
+                  <strong style="font-size:22px;font-weight:500;letter-spacing:-0.02em;">Wedding of Laras &amp; Bima</strong>
+                  <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.04em;color:#6F6B69;">07:00–15:00 · PLATARAN MENTENG</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:14px;">Briefing 06:30</span>
+                  <span style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Inspect<x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:12px;">
+                <a href="#C2" style="text-decoration:none;color:#221F1F;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:8px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Tracked</span><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 16 }}" hint-size="16px,16px"></x-import></div>
+                  <span style="font-size:44px;font-weight:400;line-height:1;letter-spacing:-0.04em;">02</span>
+                  <span style="font-size:13px;color:#6F6B69;">waiting for selection</span>
+                </a>
+                <a href="#D2" style="text-decoration:none;color:#221F1F;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:8px;">
+                  <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Worked</span>
+                  <span style="font-size:44px;font-weight:400;line-height:1;letter-spacing:-0.04em;">06</span>
+                  <span style="font-size:13px;color:#6F6B69;">since Jul 2026</span>
+                </a>
+              </div>
+              <div style="display:grid;gap:14px;">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;">
+                  <h2 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.02em;">Open for you</h2>
+                  <a href="#C1" style="font-size:14px;font-weight:500;">View list</a>
+                </div>
+                <div style="display:flex;gap:12px;overflow-x:auto;margin:0 -20px;padding:0 20px;">
+                  <sc-for list="{{ homeOpen }}" as="ev" hint-placeholder-count="2">
+                    <div style="flex:none;width:250px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:14px;box-sizing:border-box;" style-active="transform:scale(0.98);">
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:9999px;background:#F7F7F6;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.04em;">{{ ev.date }}</span>
+                        <x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 18 }}" hint-size="18px,18px"></x-import>
+                      </div>
+                      <div style="display:grid;gap:4px;">
+                        <strong style="font-size:18px;font-weight:500;letter-spacing:-0.01em;">{{ ev.title }}</strong>
+                        <span style="font-size:13px;color:#6F6B69;">{{ ev.time }} · {{ ev.venue }}</span>
+                      </div>
+                      <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;background:#E9DDD8;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 12 }}" hint-size="12px,12px"></x-import>{{ ev.deadline }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Home</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">First viewport: who (greeting), what's next (featured shift), what needs attention (tracked count), where to explore (open roles carousel).</p>
+      </div>
+
+      <div id="B2" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">B2</span><strong style="font-weight:500;">Home · loading</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:60px 20px 0;display:grid;gap:24px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:36px;height:36px;"><span style="width:44px;height:44px;border-radius:9999px;background:#E4E4E3;opacity:0.6;"></span></div>
+              <div style="display:grid;gap:12px;"><span style="width:130px;height:16px;border-radius:9999px;background:#E4E4E3;opacity:0.6;"></span><span style="width:300px;height:36px;border-radius:12px;background:#E4E4E3;opacity:0.6;"></span><span style="width:190px;height:36px;border-radius:12px;background:#E4E4E3;opacity:0.6;"></span></div>
+              <span style="height:290px;border-radius:40px;background:#E9DDD8;opacity:0.7;"></span>
+              <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:12px;"><span style="height:132px;border-radius:32px;background:#FFFFFF;border:1px solid #E4E4E3;"></span><span style="height:132px;border-radius:32px;background:#FFFFFF;border:1px solid #E4E4E3;"></span></div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Home</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Skeleton keeps B1's shapes and tones so nothing jumps.</p>
+      </div>
+
+      <div id="B3" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">B3</span><strong style="font-weight:500;">Home · empty</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:60px 20px 0;display:grid;gap:24px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <img src="b03bb8bc-53ed-4279-b5d5-df3995223684" alt="Pentamoo" style="width:36px;height:36px;">
+                <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="bell" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              </div>
+              <div style="display:grid;gap:8px;">
+                <span style="font-size:17px;color:#6F6B69;">Greetings, Rina!</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">You're verified and ready.</h1>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:flex;gap:14px;align-items:center;">
+                <span style="flex:none;width:40px;height:40px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                <div style="display:grid;gap:4px;"><strong style="font-size:15px;font-weight:500;">Roles assigned</strong><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.04em;color:#6F6B69;">CREW · EVENT MANAGER · JAKARTA</span></div>
+              </div>
+              <div style="background:#E9DDD8;border-radius:40px;padding:28px 24px;display:grid;gap:14px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Open for you · 00</span>
+                <h2 style="margin:0;font-size:28px;font-weight:500;line-height:1.1;letter-spacing:-0.02em;">No open events yet.</h2>
+                <p style="margin:0;font-size:15px;line-height:1.5;text-wrap:pretty;">When an admin publishes an event that matches your roles, it shows up here and you'll get a notification.</p>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Home</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">First session after approval, before any event is published.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:32px;">
+    <h2 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">C · Events, detail &amp; apply</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+      <div id="C1" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C1</span><strong style="font-weight:500;">Events · open</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:62px 20px 130px;box-sizing:border-box;display:grid;gap:18px;align-content:start;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">3 open · Jakarta</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Events</h1>
+              </div>
+              <div style="height:52px;padding:0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;"><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="search" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><input placeholder="Search events or venues" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font:400 15px Inter,sans-serif;"></div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Open<span style="font-family:Inter,sans-serif;font-size:11px;opacity:0.7;">03</span></span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:9999px;font-size:14px;font-weight:500;">Tracked<span style="font-family:Inter,sans-serif;font-size:11px;color:#6F6B69;">04</span></span>
+              </div>
+              <sc-for list="{{ openEvents }}" as="ev" hint-placeholder-count="3">
+                <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:24px;display:grid;gap:16px;" style-active="transform:scale(0.99);">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                    <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;">{{ ev.date }}</span>
+                    <sc-if value="{{ ev.urgent }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;background:#E9DDD8;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 12 }}" hint-size="12px,12px"></x-import>{{ ev.deadline }}</span></sc-if>
+                    <sc-if value="{{ ev.calm }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;border:1px solid #E4E4E3;box-sizing:border-box;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">{{ ev.deadline }}</span></sc-if>
+                  </div>
+                  <div style="display:grid;gap:6px;">
+                    <strong style="font-size:22px;font-weight:500;line-height:1.2;letter-spacing:-0.02em;">{{ ev.title }}</strong>
+                    <span style="font-size:14px;color:#6F6B69;">{{ ev.time }} · {{ ev.venue }}</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #E4E4E3;">
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                      <sc-for list="{{ ev.positions }}" as="p" hint-placeholder-count="2"><span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:9999px;background:#F7F7F6;font-size:13px;font-weight:500;">{{ p }}</span></sc-for>
+                    </div>
+                    <span style="flex:none;width:44px;height:44px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Events</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Sorted by deadline. Urgent deadlines get the blush pill; chips show only positions that match your roles.</p>
+      </div>
+
+      <div id="C2" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C2</span><strong style="font-weight:500;">Events · tracked</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:62px 20px 130px;box-sizing:border-box;display:grid;gap:18px;align-content:start;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">4 applications</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Events</h1>
+              </div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:9999px;font-size:14px;font-weight:500;">Open<span style="font-family:Inter,sans-serif;font-size:11px;color:#6F6B69;">03</span></span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Tracked<span style="font-family:Inter,sans-serif;font-size:11px;opacity:0.7;">04</span></span>
+              </div>
+              <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">Monitor your applications and selection results.</p>
+              <sc-for list="{{ tracked }}" as="ev" hint-placeholder-count="4">
+                <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:14px;" style-active="transform:scale(0.99);">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+                    <div style="display:grid;gap:4px;min-width:0;">
+                      <strong style="font-size:17px;font-weight:500;letter-spacing:-0.01em;">{{ ev.title }}</strong>
+                      <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.04em;color:#6F6B69;">{{ ev.meta }}</span>
+                    </div>
+                    <sc-if value="{{ ev.isPending }}" hint-placeholder-val="{{ false }}"><span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;background:#E9DDD8;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 12 }}" hint-size="12px,12px"></x-import>Waiting</span></sc-if>
+                    <sc-if value="{{ ev.isSelected }}" hint-placeholder-val="{{ false }}"><span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 12 }}" hint-size="12px,12px"></x-import>Selected</span></sc-if>
+                    <sc-if value="{{ ev.isNot }}" hint-placeholder-val="{{ false }}"><span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;border:1px solid #E4E4E3;box-sizing:border-box;color:#6F6B69;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="x" size="{{ 12 }}" hint-size="12px,12px"></x-import>Not selected</span></sc-if>
+                  </div>
+                  <div style="display:grid;gap:8px;">
+                    <div style="display:flex;gap:4px;">
+                      <span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span>
+                      <sc-if value="{{ ev.s2 }}" hint-placeholder-val="{{ false }}"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span></sc-if>
+                      <sc-if value="{{ ev.n2 }}" hint-placeholder-val="{{ true }}"><span style="flex:1;height:4px;border-radius:9999px;background:#E4E4E3;"></span></sc-if>
+                      <sc-if value="{{ ev.s3 }}" hint-placeholder-val="{{ false }}"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span></sc-if>
+                      <sc-if value="{{ ev.n3 }}" hint-placeholder-val="{{ true }}"><span style="flex:1;height:4px;border-radius:9999px;background:#E4E4E3;"></span></sc-if>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#6F6B69;"><span>Applied</span><span>Closes {{ ev.close }}</span><span style="text-align:right;">Result</span></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Events</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Each application shows where it sits: applied → deadline → result. Status pairs icon, label and tone.</p>
+      </div>
+
+      <div id="C3" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C3</span><strong style="font-weight:500;">Event detail · open</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Jakarta branch</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:8px 20px 24px;display:grid;gap:20px;align-content:start;">
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Arunika annual gathering</h1>
+              <div style="background:#E9DDD8;border-radius:40px;padding:24px;display:grid;gap:18px;">
+                <div style="display:flex;align-items:flex-end;gap:14px;">
+                  <span style="font-size:80px;font-weight:500;line-height:0.85;letter-spacing:-0.05em;">05</span>
+                  <div style="display:grid;gap:4px;padding-bottom:4px;font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;"><span>OCT 2026</span><span style="color:#6F6B69;">MONDAY</span></div>
+                </div>
+                <div style="display:grid;gap:12px;padding-top:16px;border-top:1px solid rgba(34,31,31,0.12);">
+                  <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><span style="font-size:15px;">14:00–20:00 · 6 hours</span></div>
+                  <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">JIExpo Kemayoran, Hall B</span><span style="font-size:13px;color:#6F6B69;">Jl. Benyamin Sueb, Jakarta Pusat</span></div></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:center;padding:16px 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:24px;">
+                <span style="flex:none;width:40px;height:40px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="hourglass" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                <div style="display:grid;gap:2px;"><span style="font-size:15px;font-weight:500;">Apply by Mon, 28 Sep · 18:00</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;color:#6F6B69;">3 DAYS LEFT</span></div>
+              </div>
+              <div style="display:grid;gap:12px;">
+                <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-0.02em;">Positions</h2>
+                <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:4px 20px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #E4E4E3;"><div style="display:grid;gap:2px;"><span style="font-size:15px;font-weight:500;">Event Manager</span><span style="font-size:13px;color:#6F6B69;">Matches your role</span></div><span style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;">02 NEEDED</span></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #E4E4E3;"><div style="display:grid;gap:2px;"><span style="font-size:15px;font-weight:500;">Crew</span><span style="font-size:13px;color:#6F6B69;">Matches your role</span></div><span style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;">06 NEEDED</span></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;color:#6F6B69;"><div style="display:grid;gap:2px;"><span style="font-size:15px;font-weight:500;display:flex;gap:6px;align-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="lock" size="{{ 14 }}" hint-size="14px,14px"></x-import>Trainee</span><span style="font-size:13px;">Not one of your roles</span></div><span style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;">01 NEEDED</span></div>
+                </div>
+              </div>
+              <div style="display:grid;gap:12px;">
+                <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-0.02em;">Requirements</h2>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                  <span style="display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;font-size:13px;font-weight:500;">Usher</span>
+                  <span style="display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;font-size:13px;font-weight:500;">Registration desk</span>
+                  <span style="display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;font-size:13px;font-weight:500;">Any gender</span>
+                </div>
+                <p style="margin:0;font-size:15px;line-height:1.55;color:#6F6B69;text-wrap:pretty;">All black, closed shoes. Briefing at 13:00 at the Hall B loading dock. Meals provided.</p>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 34px;border-top:1px solid #E4E4E3;background:#F7F7F6;display:grid;gap:8px;">
+              <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Apply</button>
+              <span style="font-size:13px;color:#6F6B69;text-align:center;">Can't make it? You don't need to do anything.</span>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Date is the hero block; deadline sits right under it. One action.</p>
+      </div>
+
+      <div id="C4" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C4</span><strong style="font-weight:500;">Apply · choose position</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:62px 20px 0;display:grid;gap:20px;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;"></div>
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Arunika annual gathering</h1>
+              <div style="height:260px;border-radius:40px;background:#E9DDD8;"></div>
+            </div>
+            <div style="position:absolute;inset:0;background:rgba(34,31,31,0.4);"></div>
+            <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-radius:40px 40px 0 0;padding:12px 24px 36px;display:grid;gap:22px;">
+              <span style="justify-self:center;width:40px;height:4px;border-radius:9999px;background:#E4E4E3;"></span>
+              <div style="display:grid;gap:8px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Mon 05 Oct · 14:00–20:00</span>
+                <h2 style="margin:0;font-size:28px;font-weight:500;line-height:1.1;letter-spacing:-0.02em;">Apply as</h2>
+              </div>
+              <div style="display:grid;gap:10px;">
+                <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;border:2px solid #221F1F;border-radius:24px;background:#E9DDD8;">
+                  <div style="flex:1;display:grid;gap:2px;"><span style="font-size:16px;font-weight:500;">Crew</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#6F6B69;">06 NEEDED</span></div>
+                  <span style="width:28px;height:28px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 14 }}" hint-size="14px,14px"></x-import></span>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;padding:19px 21px;border:1px solid #E4E4E3;border-radius:24px;">
+                  <div style="flex:1;display:grid;gap:2px;"><span style="font-size:16px;font-weight:500;">Event Manager</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#6F6B69;">02 NEEDED</span></div>
+                  <span style="width:28px;height:28px;border-radius:9999px;border:2px solid #E4E4E3;box-sizing:border-box;"></span>
+                </div>
+              </div>
+              <span style="font-size:13px;color:#6F6B69;">You can withdraw until Mon, 28 Sep · 18:00.</span>
+              <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;">Send application</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Large selectable cards instead of radios. If only one position matches, show a plain confirm.</p>
+      </div>
+
+      <div id="C5" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C5</span><strong style="font-weight:500;">Event detail · applied</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Jakarta branch</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:8px 20px 24px;display:grid;gap:20px;align-content:start;">
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Arunika annual gathering</h1>
+              <div style="background:#E9DDD8;border-radius:40px;padding:24px;display:grid;gap:16px;">
+                <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 14 }}" hint-size="14px,14px"></x-import>Waiting for selection</span>
+                <span style="font-size:20px;font-weight:500;letter-spacing:-0.01em;">Applied as Crew</span>
+                <div style="display:grid;gap:8px;">
+                  <div style="display:flex;gap:4px;"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span><span style="flex:1;height:4px;border-radius:9999px;background:rgba(34,31,31,0.15);"></span><span style="flex:1;height:4px;border-radius:9999px;background:rgba(34,31,31,0.15);"></span></div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#6F6B69;"><span>25 Sep 10:12</span><span>Closes 28 Sep</span><span style="text-align:right;">Result</span></div>
+                </div>
+                <span style="font-size:14px;line-height:1.5;">You'll get a notification when the admin picks the crew.</span>
+              </div>
+              <div style="display:grid;gap:14px;padding:0 4px;">
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-days" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">Monday, 5 October 2026</span><span style="font-size:13px;color:#6F6B69;">14:00–20:00 · 6 hours</span></div></div>
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">JIExpo Kemayoran, Hall B</span><span style="font-size:13px;color:#6F6B69;">Jl. Benyamin Sueb, Jakarta Pusat</span></div></div>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 34px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:1px solid #221F1F;border-radius:9999px;background:transparent;color:#221F1F;font:500 16px Inter,sans-serif;cursor:pointer;">Withdraw application</button>
+            </div>
+            <div style="position:absolute;top:60px;left:16px;right:16px;z-index:10;display:flex;gap:12px;align-items:center;padding:14px 16px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:24px;box-shadow:0 12px 32px rgba(34,31,31,0.12);">
+              <span style="flex:none;width:36px;height:36px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+              <div style="display:grid;gap:2px;"><strong style="font-size:15px;font-weight:500;">Application sent</strong><span style="font-size:13px;color:#6F6B69;">Applied as Crew for Arunika annual gathering.</span></div>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Status card replaces the date hero and shows progress. Withdraw is the only action.</p>
+      </div>
+
+      <div id="C6" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C6</span><strong style="font-weight:500;">Withdraw · confirm</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:62px 20px 0;display:grid;gap:20px;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;"></div>
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Arunika annual gathering</h1>
+              <div style="height:240px;border-radius:40px;background:#E9DDD8;"></div>
+            </div>
+            <div style="position:absolute;inset:0;background:rgba(34,31,31,0.4);"></div>
+            <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-radius:40px 40px 0 0;padding:12px 24px 36px;display:grid;gap:22px;">
+              <span style="justify-self:center;width:40px;height:4px;border-radius:9999px;background:#E4E4E3;"></span>
+              <div style="display:grid;gap:10px;">
+                <h2 style="margin:0;font-size:28px;font-weight:500;line-height:1.1;letter-spacing:-0.02em;">Withdraw application?</h2>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">You can apply again until Mon, 28 Sep · 18:00.</p>
+              </div>
+              <div style="display:grid;gap:6px;">
+                <button style="height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;">Withdraw</button>
+                <button style="height:48px;border:none;border-radius:9999px;background:transparent;color:#221F1F;font:500 15px Inter,sans-serif;cursor:pointer;">Keep application</button>
+              </div>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Only withdrawing asks for confirmation.</p>
+      </div>
+
+      <div id="C7" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C7</span><strong style="font-weight:500;">Event detail · closed, waiting</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Jakarta branch</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:8px 20px 24px;display:grid;gap:20px;align-content:start;">
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Arunika annual gathering</h1>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:24px;display:grid;gap:16px;">
+                <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#E9DDD8;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="clock" size="{{ 14 }}" hint-size="14px,14px"></x-import>Waiting for selection</span>
+                <span style="font-size:20px;font-weight:500;letter-spacing:-0.01em;">Applied as Crew</span>
+                <div style="display:grid;gap:8px;">
+                  <div style="display:flex;gap:4px;"><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span><span style="flex:1;height:4px;border-radius:9999px;background:#221F1F;"></span><span style="flex:1;height:4px;border-radius:9999px;background:#E4E4E3;"></span></div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#6F6B69;"><span>25 Sep 10:12</span><span>Closed 28 Sep</span><span style="text-align:right;">Result</span></div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;padding:12px 14px;background:#F7F7F6;border-radius:20px;font-size:14px;color:#6F6B69;"><span style="flex:none;display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="lock" size="{{ 16 }}" hint-size="16px,16px"></x-import></span><span>Applications closed. This can't be changed now.</span></div>
+              </div>
+              <div style="display:grid;gap:14px;padding:0 4px;">
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-days" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">Monday, 5 October 2026</span><span style="font-size:13px;color:#6F6B69;">14:00–20:00 · 6 hours</span></div></div>
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">JIExpo Kemayoran, Hall B</span><span style="font-size:13px;color:#6F6B69;">Jl. Benyamin Sueb, Jakarta Pusat</span></div></div>
+              </div>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">After the deadline: read-only, no bottom action.</p>
+      </div>
+
+      <div id="C8" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C8</span><strong style="font-weight:500;">Event detail · selected</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Jakarta branch</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:8px 20px 24px;display:grid;gap:20px;align-content:start;">
+              <div style="background:#E9DDD8;border-radius:40px;padding:28px 24px;display:grid;gap:16px;">
+                <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 14 }}" hint-size="14px,14px"></x-import>Selected</span>
+                <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">You're on the crew.</h1>
+                <p style="margin:0;font-size:15px;line-height:1.5;">Confirmed as Crew for Arunika annual gathering. It's now in your schedule.</p>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:16px;">
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-days" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">Monday, 5 October 2026</span><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;color:#6F6B69;">14:00–20:00 · BRIEFING 13:00</span></div></div>
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">JIExpo Kemayoran, Hall B</span><span style="font-size:13px;color:#6F6B69;">Jl. Benyamin Sueb, Jakarta Pusat</span></div></div>
+              </div>
+              <div style="display:grid;gap:10px;padding:0 4px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Notes from admin</span>
+                <p style="margin:0;font-size:15px;line-height:1.55;text-wrap:pretty;">All black, closed shoes. Briefing at 13:00 at the Hall B loading dock. Meals provided.</p>
+              </div>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Opened from the "You're selected" push. "Can't attend" is left out until Flow 21 is decided.</p>
+      </div>
+
+      <div id="C9" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C9</span><strong style="font-weight:500;">Event detail · not selected</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Jakarta branch</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:8px 20px 24px;display:grid;gap:20px;align-content:start;">
+              <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Rumah Dansa studio opening</h1>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:24px;display:grid;gap:14px;">
+                <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;border:1px solid #E4E4E3;box-sizing:border-box;color:#6F6B69;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="x" size="{{ 14 }}" hint-size="14px,14px"></x-import>Not selected</span>
+                <p style="margin:0;font-size:16px;line-height:1.5;">All positions for this event have been filled. Thanks for applying as Crew.</p>
+              </div>
+              <div style="display:grid;gap:14px;padding:0 4px;">
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-days" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">Saturday, 26 September 2026</span><span style="font-size:13px;color:#6F6B69;">10:00–16:00</span></div></div>
+                <div style="display:flex;gap:12px;"><span style="flex:none;display:flex;padding-top:2px;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 18 }}" hint-size="18px,18px"></x-import></span><div style="display:grid;gap:2px;"><span style="font-size:15px;">Rumah Dansa, Kemang</span><span style="font-size:13px;color:#6F6B69;">Jl. Kemang Raya, Jakarta Selatan</span></div></div>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 34px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:#E9DDD8;color:#221F1F;font:500 16px Inter,sans-serif;cursor:pointer;">Browse open events</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Neutral tone; secondary action points to other open events.</p>
+      </div>
+
+      <div id="C10" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">C10</span><strong style="font-weight:500;">Events · empty</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:62px 20px 0;display:grid;gap:18px;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">0 open · Jakarta</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Events</h1>
+              </div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Open</span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;font-size:14px;font-weight:500;">Tracked</span>
+              </div>
+              <div style="margin-top:24px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:32px 24px;display:grid;gap:14px;">
+                <span style="width:52px;height:52px;border-radius:9999px;background:#E9DDD8;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></span>
+                <h2 style="margin:0;font-size:28px;font-weight:500;line-height:1.1;letter-spacing:-0.02em;">No open events right now.</h2>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">New events for your roles will show up here. You'll also get a notification.</p>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Events</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Same pattern for an empty Tracked tab: "You haven't applied to any events".</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:32px;">
+    <h2 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">D · Schedule &amp; history</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+      <div id="D1" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">D1</span><strong style="font-weight:500;">Schedule · upcoming</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:62px 20px 130px;box-sizing:border-box;display:grid;gap:18px;align-content:start;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirmed shifts</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Schedule</h1>
+              </div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Upcoming</span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;font-size:14px;font-weight:500;">History</span>
+              </div>
+              <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;padding-top:8px;">October 2026 · 2 events</span>
+              <sc-for list="{{ upcoming }}" as="ev" hint-placeholder-count="2">
+                <div style="display:flex;gap:16px;align-items:stretch;">
+                  <div style="flex:none;width:52px;display:grid;align-content:start;justify-items:start;gap:4px;padding-top:18px;">
+                    <span style="font-size:36px;font-weight:500;line-height:0.9;letter-spacing:-0.04em;">{{ ev.day }}</span>
+                    <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;color:#6F6B69;">{{ ev.dow }}</span>
+                  </div>
+                  <sc-if value="{{ ev.next }}" hint-placeholder-val="{{ false }}">
+                    <div style="flex:1;min-width:0;background:#E9DDD8;border-radius:32px;padding:20px;display:grid;gap:10px;">
+                      <div style="display:flex;justify-content:space-between;"><span style="font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Next · in 8 days</span><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 16 }}" hint-size="16px,16px"></x-import></div>
+                      <strong style="font-size:18px;font-weight:500;letter-spacing:-0.01em;">{{ ev.title }}</strong>
+                      <span style="font-size:13px;color:#6F6B69;">{{ ev.time }} · {{ ev.venue }}</span>
+                      <span style="justify-self:start;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#FFFFFF;font-size:12px;font-weight:500;">as {{ ev.position }}</span>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ev.later }}" hint-placeholder-val="{{ true }}">
+                    <div style="flex:1;min-width:0;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:20px;display:grid;gap:10px;">
+                      <div style="display:flex;justify-content:space-between;"><span style="font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirmed</span><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-up-right" size="{{ 16 }}" hint-size="16px,16px"></x-import></div>
+                      <strong style="font-size:18px;font-weight:500;letter-spacing:-0.01em;">{{ ev.title }}</strong>
+                      <span style="font-size:13px;color:#6F6B69;">{{ ev.time }} · {{ ev.venue }}</span>
+                      <span style="justify-self:start;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#F7F7F6;font-size:12px;font-weight:500;">as {{ ev.position }}</span>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Schedule</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Date rail + cards, grouped by month. Nearest shift highlighted.</p>
+      </div>
+
+      <div id="D2" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">D2</span><strong style="font-weight:500;">Schedule · history</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:62px 20px 130px;box-sizing:border-box;display:grid;gap:18px;align-content:start;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirmed shifts</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Schedule</h1>
+              </div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;font-size:14px;font-weight:500;">Upcoming</span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">History</span>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:14px;padding:8px 4px 0;">
+                <span style="font-size:64px;font-weight:400;line-height:0.85;letter-spacing:-0.05em;">06</span>
+                <span style="font-size:14px;color:#6F6B69;padding-bottom:2px;">events worked<br>since Jul 2026</span>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:4px 20px;">
+                <sc-for list="{{ history }}" as="ev" hint-placeholder-count="4">
+                  <div style="display:flex;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid #E4E4E3;">
+                    <div style="flex:1;min-width:0;display:grid;gap:4px;">
+                      <span style="font-size:15px;font-weight:500;">{{ ev.title }}</span>
+                      <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.04em;color:#6F6B69;">{{ ev.meta }}</span>
+                    </div>
+                    <sc-if value="{{ ev.done }}" hint-placeholder-val="{{ true }}"><span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;background:#F7F7F6;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 12 }}" hint-size="12px,12px"></x-import>Completed</span></sc-if>
+                    <sc-if value="{{ ev.missed }}" hint-placeholder-val="{{ false }}"><span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:9999px;border:1px solid #E4E4E3;box-sizing:border-box;color:#6F6B69;font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="x" size="{{ 12 }}" hint-size="12px,12px"></x-import>Not selected</span></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Schedule</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Count as an editorial numeral, then dense rows. Tap opens the read-only detail.</p>
+      </div>
+
+      <div id="D3" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">D3</span><strong style="font-weight:500;">Schedule · empty</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="padding:62px 20px 0;display:grid;gap:18px;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirmed shifts</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Schedule</h1>
+              </div>
+              <div style="display:flex;padding:4px;background:#E4E4E3;border-radius:9999px;">
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-size:14px;font-weight:500;">Upcoming</span>
+                <span style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;border-radius:9999px;font-size:14px;font-weight:500;">History</span>
+              </div>
+              <div style="margin-top:24px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:32px 24px;display:grid;gap:14px;">
+                <span style="width:52px;height:52px;border-radius:9999px;background:#E9DDD8;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></span>
+                <h2 style="margin:0;font-size:28px;font-weight:500;line-height:1.1;letter-spacing:-0.02em;">No confirmed events.</h2>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">Events you're selected for will appear here. Pending applications stay in Events › Tracked.</p>
+                <button style="justify-self:start;margin-top:6px;height:48px;padding:0 22px;border:none;border-radius:9999px;background:#E9DDD8;color:#221F1F;font:500 15px Inter,sans-serif;cursor:pointer;">Browse events</button>
+              </div>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Schedule</span></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 22 }}" hint-size="22px,22px"></x-import></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Explains where pending applications live.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:32px;">
+    <h2 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">E · Profile</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;">
+
+      <div id="E1" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">E1</span><strong style="font-weight:500;">Profile</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;transform:translateZ(0);">
+            <div style="height:100%;overflow:auto;padding:62px 20px 130px;box-sizing:border-box;display:grid;gap:18px;align-content:start;">
+              <div style="display:grid;gap:6px;">
+                <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Crew account</span>
+                <h1 style="margin:0;font-size:40px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Profile</h1>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:40px;padding:24px;display:grid;gap:20px;">
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <span style="flex:none;width:64px;height:64px;border-radius:9999px;background:#E9DDD8;display:grid;place-items:center;font-size:22px;font-weight:500;letter-spacing:-0.02em;">RA</span>
+                  <div style="display:grid;gap:4px;min-width:0;">
+                    <strong style="font-size:22px;font-weight:500;letter-spacing:-0.02em;">Rina Anggraini</strong>
+                    <span style="font-size:14px;color:#6F6B69;">rina.anggraini@email.com</span>
+                  </div>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                  <span style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 14 }}" hint-size="14px,14px"></x-import>Verified</span>
+                  <span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:9999px;background:#F7F7F6;font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Jakarta branch</span>
+                </div>
+                <div style="display:grid;gap:10px;padding-top:18px;border-top:1px solid #E4E4E3;">
+                  <span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Roles · set by admin</span>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                    <span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:9999px;background:#E9DDD8;font-size:13px;font-weight:500;">Crew</span>
+                    <span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:9999px;background:#E9DDD8;font-size:13px;font-weight:500;">Event Manager</span>
+                  </div>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:4px 20px;display:grid;">
+                <div style="display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid #E4E4E3;">
+                  <span style="display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="phone" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <div style="flex:1;display:grid;gap:2px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Phone</span><span style="font-size:15px;">+62 812 3456 7890</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid #E4E4E3;">
+                  <span style="display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="cake" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <div style="flex:1;display:grid;gap:2px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Date of birth</span><span style="font-size:15px;">14 March 2000 · Female</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;padding:18px 0;">
+                  <span style="display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="map-pin" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <div style="flex:1;display:grid;gap:2px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Home address</span><span style="font-size:15px;line-height:1.4;">Jl. Tebet Raya 21, Tebet, Jakarta Selatan</span></div>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:32px;padding:4px 20px;display:grid;">
+                <a href="#E2" style="display:flex;align-items:center;gap:14px;min-height:60px;border-bottom:1px solid #E4E4E3;text-decoration:none;color:#221F1F;">
+                  <span style="display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="user-pen" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <span style="flex:1;font-size:15px;font-weight:500;">Edit profile</span>
+                  <x-import component-from-global-scope="PentamooProject.Icon" name="chevron-right" size="{{ 18 }}" hint-size="18px,18px"></x-import>
+                </a>
+                <a href="#E3" style="display:flex;align-items:center;gap:14px;min-height:60px;text-decoration:none;color:#221F1F;">
+                  <span style="display:flex;"><x-import component-from-global-scope="PentamooProject.Icon" name="lock-keyhole" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <span style="flex:1;font-size:15px;font-weight:500;">Change password</span>
+                  <x-import component-from-global-scope="PentamooProject.Icon" name="chevron-right" size="{{ 18 }}" hint-size="18px,18px"></x-import>
+                </a>
+              </div>
+              <button style="height:52px;border:1px solid #E4E4E3;border-radius:9999px;background:#FFFFFF;color:#B3261E;font:500 15px Inter,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;"><x-import component-from-global-scope="PentamooProject.Icon" name="log-out" size="{{ 18 }}" hint-size="18px,18px"></x-import>Sign out</button>
+            </div>
+            <div style="position:absolute;left:20px;right:20px;bottom:30px;z-index:5;"><div style="display:flex;justify-content:space-between;align-items:center;padding:6px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:9999px;box-shadow:0 10px 30px rgba(34,31,31,0.08);font-family:Inter,sans-serif;"><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="house" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="compass" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="width:52px;height:52px;display:grid;place-items:center;color:#221F1F;border-radius:9999px;"><x-import component-from-global-scope="PentamooProject.Icon" name="calendar-check" size="{{ 22 }}" hint-size="22px,22px"></x-import></div><div style="display:flex;align-items:center;gap:8px;height:52px;padding:0 20px 0 16px;background:#221F1F;color:#FFFFFF;border-radius:9999px;font-size:14px;font-weight:500;"><x-import component-from-global-scope="PentamooProject.Icon" name="circle-user" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Profile</span></div></div></div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Identity, verification and admin-set roles on top. Personal data read-only; actions below.</p>
+      </div>
+
+      <div id="E2" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">E2</span><strong style="font-weight:500;">Edit profile</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 0;display:flex;align-items:center;gap:16px;">
+              <a href="#E1" style="width:44px;height:44px;flex:none;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;color:#221F1F;box-sizing:border-box;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></a>
+              <span style="font-size:17px;font-weight:500;">Edit profile</span>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:28px 20px 24px;display:grid;gap:24px;align-content:start;">
+              <div style="display:flex;align-items:center;gap:16px;">
+                <span style="flex:none;width:72px;height:72px;border-radius:9999px;background:#E9DDD8;display:grid;place-items:center;font-size:24px;font-weight:500;">RA</span>
+                <button style="height:44px;padding:0 18px;border:1px solid #E4E4E3;border-radius:9999px;background:#FFFFFF;color:#221F1F;font:500 14px Inter,sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;"><x-import component-from-global-scope="PentamooProject.Icon" name="camera" size="{{ 16 }}" hint-size="16px,16px"></x-import>Change photo</button>
+              </div>
+              <div style="display:grid;gap:14px;">
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Full name</span><input value="Rina Anggraini" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;color:#221F1F;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Email</span><input type="email" value="rina.anggraini@email.com" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;color:#221F1F;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Phone</span><input type="tel" value="+62 812 3456 7890" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;color:#221F1F;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Date of birth</span><input value="14 / 03 / 2000" style="height:56px;padding:0 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px Inter,sans-serif;color:#221F1F;outline:none;" style-focus="border-color:#221F1F;"></label>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Gender</span><div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font-size:16px;box-sizing:border-box;">Female<x-import component-from-global-scope="PentamooProject.Icon" name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></x-import></div></div>
+                  <div style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Branch</span><div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font-size:16px;box-sizing:border-box;">Jakarta<x-import component-from-global-scope="PentamooProject.Icon" name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></x-import></div></div>
+                </div>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Home address</span><textarea rows="3" style="padding:16px 20px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;font:400 16px/1.5 Inter,sans-serif;color:#221F1F;outline:none;resize:none;" style-focus="border-color:#221F1F;">Jl. Tebet Raya 21, Tebet, Jakarta Selatan</textarea></label>
+              </div>
+              <div style="display:flex;gap:12px;padding:18px 20px;background:#E9DDD8;border-radius:24px;font-size:14px;line-height:1.5;">
+                <span style="flex:none;display:flex;padding-top:1px;"><x-import component-from-global-scope="PentamooProject.Icon" name="info" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                <span>Changing your name, date of birth or branch sends your profile back to admin review.</span>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 36px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:#221F1F;color:#FFFFFF;font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Save changes</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Same fields as registration, prefilled. Roles aren't editable here.</p>
+      </div>
+
+      <div id="E3" style="display:grid;gap:14px;width:402px;align-content:start;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:9999px;background:#221F1F;color:#FFFFFF;font-family:Inter,sans-serif;font-size:11px;font-weight:600;">E3</span><strong style="font-weight:500;">Change password</strong></div>
+        <x-import component-from-global-scope="IOSDevice" from="4ad232ed-4383-4573-9d4a-055f3b56eb11#/ios-frame.jsx" hint-size="402px,874px">
+          <div style="height:100%;position:relative;overflow:hidden;background:#F7F7F6;font-family:Inter,sans-serif;color:#221F1F;display:flex;flex-direction:column;transform:translateZ(0);">
+            <div style="flex:none;padding:62px 20px 0;display:flex;align-items:center;gap:16px;">
+              <a href="#E1" style="width:44px;height:44px;flex:none;border-radius:9999px;background:#FFFFFF;border:1px solid #E4E4E3;display:grid;place-items:center;color:#221F1F;box-sizing:border-box;"><x-import component-from-global-scope="PentamooProject.Icon" name="arrow-left" size="{{ 20 }}" hint-size="20px,20px"></x-import></a>
+            </div>
+            <div style="flex:1;min-height:0;overflow:auto;padding:28px 20px 24px;display:grid;gap:28px;align-content:start;">
+              <div style="display:grid;gap:10px;">
+                <h1 style="margin:0;font-size:36px;font-weight:500;line-height:1.04;letter-spacing:-0.03em;">Change password.</h1>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#6F6B69;">You'll stay signed in on this phone.</p>
+              </div>
+              <div style="display:grid;gap:14px;">
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Current password</span>
+                  <div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;"><input type="password" placeholder="Enter current password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font:400 16px Inter,sans-serif;color:#221F1F;"><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="eye" size="{{ 20 }}" hint-size="20px,20px"></x-import></span></div>
+                </label>
+                <a href="#A2" style="justify-self:end;font-size:14px;font-weight:500;padding:4px 0;">Forgot password?</a>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">New password</span>
+                  <div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;"><input type="password" placeholder="At least 8 characters" sc-camel-on-input="{{ onPw }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font:400 16px Inter,sans-serif;color:#221F1F;"><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="eye" size="{{ 20 }}" hint-size="20px,20px"></x-import></span></div>
+                </label>
+                <label style="display:grid;gap:8px;"><span style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6F6B69;">Confirm new password</span>
+                  <div style="height:56px;padding:0 16px 0 20px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E4E4E3;border-radius:20px;"><input type="password" placeholder="Type it again" sc-camel-on-input="{{ onPw2 }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font:400 16px Inter,sans-serif;color:#221F1F;"><span style="display:flex;color:#6F6B69;"><x-import component-from-global-scope="PentamooProject.Icon" name="eye" size="{{ 20 }}" hint-size="20px,20px"></x-import></span></div>
+                </label>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #E4E4E3;border-radius:24px;padding:18px 20px;display:grid;gap:12px;">
+                <sc-for list="{{ pwRules }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
+                    <sc-if value="{{ r.ok }}" hint-placeholder-val="{{ false }}"><span style="flex:none;width:22px;height:22px;border-radius:9999px;background:#221F1F;color:#FFFFFF;display:grid;place-items:center;"><x-import component-from-global-scope="PentamooProject.Icon" name="check" size="{{ 12 }}" hint-size="12px,12px"></x-import></span></sc-if>
+                    <sc-if value="{{ r.no }}" hint-placeholder-val="{{ true }}"><span style="flex:none;width:22px;height:22px;border-radius:9999px;border:2px solid #E4E4E3;box-sizing:border-box;"></span></sc-if>
+                    <span>{{ r.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="flex:none;padding:12px 20px 36px;border-top:1px solid #E4E4E3;background:#F7F7F6;">
+              <button style="width:100%;height:56px;border:none;border-radius:9999px;background:{{ pwBtnBg }};color:{{ pwBtnFg }};font:500 16px Inter,sans-serif;cursor:pointer;" style-active="transform:scale(0.98);">Update password</button>
+            </div>
+          </div>
+        </x-import>
+        <p style="margin:0;font-size:14px;line-height:1.5;color:#6F6B69;">Type in the new-password fields: rules tick off live and the button activates once all pass.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+class Component extends DCLogic {
+  renderVals() {
+    const tr = (t, meta, close, stage, status) => ({
+      title: t, meta, close,
+      s2: stage >= 2, n2: stage < 2, s3: stage >= 3, n3: stage < 3,
+      isPending: status === 'p', isSelected: status === 's', isNot: status === 'n',
+    });
+    const pw = this.state?.pw ?? '', pw2 = this.state?.pw2 ?? '';
+    const pwRules = [
+      { label: 'At least 8 characters', ok: pw.length >= 8 },
+      { label: 'Contains a number', ok: /\d/.test(pw) },
+      { label: 'Both new passwords match', ok: pw.length > 0 && pw === pw2 },
+    ].map(r => ({ ...r, no: !r.ok }));
+    const allOk = pwRules.every(r => r.ok);
+    return {
+      pwRules,
+      pwBtnBg: allOk ? '#221F1F' : '#E4E4E3',
+      pwBtnFg: allOk ? '#FFFFFF' : '#6F6B69',
+      onPw: e => this.setState({ pw: e.target.value }),
+      onPw2: e => this.setState({ pw2: e.target.value }),
+      homeOpen: [
+        { date: 'MON 05 OCT', title: 'Arunika annual gathering', time: '14:00–20:00', venue: 'JIExpo Kemayoran', deadline: '3 days left' },
+        { date: 'SAT 10 OCT', title: 'Wedding of Nadia & Reza', time: '08:00–16:00', venue: 'The Glass House', deadline: 'Apply by 2 Oct' },
+        { date: 'SUN 18 OCT', title: 'Kirana 17th birthday', time: '17:00–22:00', venue: 'Hotel Mulia', deadline: 'Apply by 9 Oct' },
+      ],
+      openEvents: [
+        { date: 'MON 05 OCT', title: 'Arunika annual gathering', time: '14:00–20:00', venue: 'JIExpo Kemayoran', positions: ['Crew', 'Event Manager'], deadline: '3 days left', urgent: true, calm: false },
+        { date: 'SAT 10 OCT', title: 'Wedding of Nadia & Reza', time: '08:00–16:00', venue: 'The Glass House', positions: ['Crew'], deadline: 'Apply by 2 Oct', urgent: false, calm: true },
+        { date: 'SUN 18 OCT', title: 'Kirana 17th birthday', time: '17:00–22:00', venue: 'Hotel Mulia Senayan', positions: ['Crew', 'Event Manager'], deadline: 'Apply by 9 Oct', urgent: false, calm: true },
+      ],
+      tracked: [
+        tr('Arunika annual gathering', 'MON 05 OCT · AS CREW', '28 Sep', 1, 'p'),
+        tr('Wedding of Nadia & Reza', 'SAT 10 OCT · AS CREW', '2 Oct', 1, 'p'),
+        tr('Wedding of Laras & Bima', 'SAT 03 OCT · AS CREW', '24 Sep', 3, 's'),
+        tr('Rumah Dansa studio opening', 'SAT 26 SEP · AS CREW', '20 Sep', 3, 'n'),
+      ],
+      upcoming: [
+        { day: '03', dow: 'SAT', title: 'Wedding of Laras & Bima', time: '07:00–15:00', venue: 'Plataran Menteng', position: 'Crew', next: true, later: false },
+        { day: '24', dow: 'SAT', title: 'Mahesa Group town hall', time: '09:00–13:00', venue: 'Pullman Thamrin', position: 'Event Manager', next: false, later: true },
+      ],
+      history: [
+        { title: 'Wedding of Dian & Fajar', meta: 'SUN 20 SEP · CREW', done: true, missed: false },
+        { title: 'Sagara product launch', meta: 'SAT 12 SEP · CREW', done: false, missed: true },
+        { title: 'Wedding of Putri & Arya', meta: 'SAT 29 AUG · EVENT MANAGER', done: true, missed: false },
+        { title: 'Lumina charity gala', meta: 'FRI 14 AUG · CREW', done: true, missed: false },
+      ],
+    };
+  }
+}
+</script>
+
+
+</body></html>
