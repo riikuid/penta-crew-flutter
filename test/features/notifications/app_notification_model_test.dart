@@ -33,11 +33,23 @@ void main() {
     test('every v1 type maps; unknown falls back', () {
       NotificationType typeOf(String t) =>
           AppNotification.fromJson({..._json, 'type': t}).type;
-      expect(typeOf('verification.approved'), NotificationType.verificationApproved);
-      expect(typeOf('verification.rejected'), NotificationType.verificationRejected);
+      expect(
+        typeOf('verification.approved'),
+        NotificationType.verificationApproved,
+      );
+      expect(
+        typeOf('verification.rejected'),
+        NotificationType.verificationRejected,
+      );
       expect(typeOf('event.published'), NotificationType.eventPublished);
-      expect(typeOf('application.submitted'), NotificationType.applicationSubmitted);
-      expect(typeOf('application.not_selected'), NotificationType.applicationNotSelected);
+      expect(
+        typeOf('application.submitted'),
+        NotificationType.applicationSubmitted,
+      );
+      expect(
+        typeOf('application.not_selected'),
+        NotificationType.applicationNotSelected,
+      );
       expect(typeOf('event.reminder'), NotificationType.unknown);
     });
   });
