@@ -5,6 +5,7 @@ import '../../core/di/locator.dart';
 import '../../core/router/app_routes.dart';
 import '../../core/router/route_guard.dart';
 import '../auth/presentation/cubit/auth_cubit.dart';
+import 'presentation/cubit/event_detail_cubit.dart';
 import 'presentation/cubit/open_events_cubit.dart';
 import 'presentation/cubit/tracked_cubit.dart';
 import 'presentation/screens/event_detail_screen.dart';
@@ -54,8 +55,12 @@ final List<RouteBase> eventsRoutes = [
     path: '${EventsRoutes.root}/:id',
     parentNavigatorKey: rootNavigatorKey,
     redirect: guard(),
-    builder: (context, state) => EventDetailScreen(
-      eventId: int.tryParse(state.pathParameters['id'] ?? '') ?? 0,
-    ),
+    builder: (context, state) {
+      final eventId = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+      return BlocProvider(
+        create: (_) => sl<EventDetailCubit>()..fetch(eventId),
+        child: const EventDetailScreen(),
+      );
+    },
   ),
 ];

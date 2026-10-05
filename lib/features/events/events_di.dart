@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import 'presentation/cubit/event_detail_cubit.dart';
 import 'presentation/cubit/open_events_cubit.dart';
 import 'presentation/cubit/tracked_cubit.dart';
 import 'repositories/events_repository.dart';
@@ -26,4 +27,11 @@ void registerEvents(GetIt sl) {
     (branchId, _) => OpenEventsCubit(sl(), branchId: branchId),
   );
   sl.registerFactory(() => TrackedCubit(sl()));
+  sl.registerFactory(
+    () => EventDetailCubit(
+      getEventDetail: sl(),
+      applyToEvent: sl(),
+      withdrawApplication: sl(),
+    ),
+  );
 }
