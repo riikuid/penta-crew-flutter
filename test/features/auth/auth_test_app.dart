@@ -15,6 +15,12 @@ const authScreenPath = '/under-test';
 /// the screen can be asserted through `router.state`. Real theme, plus the
 /// toast overlay `AppToast` needs.
 Future<GoRouter> pumpAuthScreen(WidgetTester tester, Widget screen) async {
+  // A tall phone (prototype frame is 402×874) so lazily built lists show
+  // every field without scrolling.
+  tester.view.physicalSize = const Size(402, 1400);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+
   final router = GoRouter(
     initialLocation: authScreenPath,
     routes: [
