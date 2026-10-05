@@ -276,6 +276,19 @@ fondasi (tidak mengubah kontrak API):
 - `Paginated.meta` menyimpan meta mentah (tanpa `data`) agar `meta.summary`
   dan `meta.unread_count` dibaca tanpa model paginator khusus.
 
+## D-14 · Briefing tidak ditampilkan di Home hero (5 Okt 2026)
+
+Laporan TASK-018 mengusulkan menambah `briefing_time` ke summary `Event`
+(kontrak §1 list) agar hero "next shift" di B1 bisa menampilkan baris
+`Briefing …`. **Ditolak**: teknis hari-H (waktu briefing, titik kumpul, dll.)
+dikomunikasikan admin langsung ke crew setelah seleksi, bukan lewat app.
+
+- Kontrak summary `Event` **tidak berubah**; `briefing_time` tetap hanya ada
+  (opsional, `string|null`) di `EventDetail` dan ditampilkan C8 bila backend
+  mengisinya.
+- Hero B1 tetap `{start}–{end} · {VENUE}` tanpa baris briefing. Tidak ada
+  pekerjaan lanjutan dari item ini.
+
 ---
 
 ## Konsekuensi ke boilerplate (untuk dikerjakan saat implementasi, bukan sekarang)
