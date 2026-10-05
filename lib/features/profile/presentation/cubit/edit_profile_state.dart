@@ -48,7 +48,8 @@ sealed class EditProfileState with _$EditProfileState {
     _ => const {},
   };
 
-  bool get saving => this is EditProfileReady && (this as EditProfileReady).saving;
+  bool get saving =>
+      this is EditProfileReady && (this as EditProfileReady).saving;
 
   bool get uploadingAvatar =>
       this is EditProfileReady && (this as EditProfileReady).uploadingAvatar;

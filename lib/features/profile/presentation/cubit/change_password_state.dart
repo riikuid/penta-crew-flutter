@@ -15,9 +15,11 @@ abstract class ChangePasswordState with _$ChangePasswordState {
     @Default('') String password,
     @Default('') String confirmation,
     @Default(ChangePasswordStatus.idle) ChangePasswordStatus status,
+
     /// Server `message` of the last failure (toasted when [fieldErrors] is
     /// empty).
     String? message,
+
     /// 422 `errors` — `current_password` is shown under its field.
     @Default({}) Map<String, List<String>> fieldErrors,
   }) = _ChangePasswordState;

@@ -58,9 +58,8 @@ void main() {
     uploadAvatar = _MockUploadAvatar();
     resubmitVerification = _MockResubmitVerification();
     avatarPicker = _MockAvatarPicker();
-    when(() => getBranches(any())).thenAnswer(
-      (_) async => const Result.success(_branches),
-    );
+    when(() => getBranches(any()))
+        .thenAnswer((_) async => const Result.success(_branches));
   });
 
   tearDown(() => auth.dispose());
@@ -107,9 +106,9 @@ void main() {
 
     blocTest<EditProfileCubit, EditProfileState>(
       'success → AuthCubit.updateUser, saved; no resubmit',
-      setUp: () => when(() => updateProfile(any())).thenAnswer(
-        (_) async => Result.success(updated),
-      ),
+      setUp: () =>
+          when(() => updateProfile(any()))
+              .thenAnswer((_) async => Result.success(updated)),
       build: build,
       seed: () => const EditProfileState.ready(branches: _branches),
       act: (cubit) => cubit.save(_fields),
@@ -153,7 +152,8 @@ void main() {
     blocTest<EditProfileCubit, EditProfileState>(
       'ignored while already saving',
       build: build,
-      seed: () => const EditProfileState.ready(branches: _branches, saving: true),
+      seed: () =>
+          const EditProfileState.ready(branches: _branches, saving: true),
       act: (cubit) => cubit.save(_fields),
       expect: () => const <EditProfileState>[],
       verify: (_) => verifyNever(() => updateProfile(any())),
@@ -177,12 +177,10 @@ void main() {
     blocTest<EditProfileCubit, EditProfileState>(
       'update then resubmit → user is pending, saved(resubmitted)',
       setUp: () {
-        when(() => updateProfile(any())).thenAnswer(
-          (_) async => Result.success(updatedRejected),
-        );
-        when(() => resubmitVerification(any())).thenAnswer(
-          (_) async => Result.success(resubmitted),
-        );
+        when(() => updateProfile(any()))
+            .thenAnswer((_) async => Result.success(updatedRejected));
+        when(() => resubmitVerification(any()))
+            .thenAnswer((_) async => Result.success(resubmitted));
       },
       build: () => build(user: rejectedUser),
       seed: () => const EditProfileState.ready(branches: _branches),
@@ -204,9 +202,8 @@ void main() {
     blocTest<EditProfileCubit, EditProfileState>(
       'resubmit fails → profile still saved, failure toast',
       setUp: () {
-        when(() => updateProfile(any())).thenAnswer(
-          (_) async => Result.success(updatedRejected),
-        );
+        when(() => updateProfile(any()))
+            .thenAnswer((_) async => Result.success(updatedRejected));
         when(() => resubmitVerification(any())).thenAnswer(
           (_) async => const Result.failed(
             'Only a rejected profile can be submitted again.',
@@ -232,7 +229,8 @@ void main() {
   group('changePhoto', () {
     blocTest<EditProfileCubit, EditProfileState>(
       'cancelled picker → nothing happens',
-      setUp: () => when(() => avatarPicker.pick()).thenAnswer((_) async => null),
+      setUp: () =>
+          when(() => avatarPicker.pick()).thenAnswer((_) async => null),
       build: build,
       seed: () => const EditProfileState.ready(branches: _branches),
       act: (cubit) => cubit.changePhoto(),
@@ -244,9 +242,8 @@ void main() {
       'upload success → avatar_url patched on the user',
       setUp: () {
         when(() => avatarPicker.pick()).thenAnswer((_) async => '/tmp/a.jpg');
-        when(() => uploadAvatar(any())).thenAnswer(
-          (_) async => const Result.success('https://cdn/a.jpg'),
-        );
+        when(() => uploadAvatar(any()))
+            .thenAnswer((_) async => const Result.success('https://cdn/a.jpg'));
       },
       build: build,
       seed: () => const EditProfileState.ready(branches: _branches),
@@ -256,8 +253,9 @@ void main() {
         EditProfileState.ready(branches: _branches),
       ],
       verify: (_) {
-        final params = verify(() => uploadAvatar(captureAny())).captured.single
-            as UploadAvatarParams;
+        final params =
+            verify(() => uploadAvatar(captureAny())).captured.single
+                as UploadAvatarParams;
         expect(params.filePath, '/tmp/a.jpg');
         expect(auth.cubit.user?.avatarUrl, 'https://cdn/a.jpg');
       },
@@ -268,7 +266,8 @@ void main() {
       setUp: () {
         when(() => avatarPicker.pick()).thenAnswer((_) async => '/tmp/a.jpg');
         when(() => uploadAvatar(any())).thenAnswer(
-          (_) async => const Result.failed('The avatar may not be greater than 5 MB.'),
+          (_) async =>
+              const Result.failed('The avatar may not be greater than 5 MB.'),
         );
       },
       build: build,

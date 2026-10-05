@@ -28,7 +28,9 @@ void main() {
   }
 
   group('A6 pending', () {
-    testWidgets('renders pill, headline, body and the timeline', (tester) async {
+    testWidgets('renders pill, headline, body and the timeline', (
+      tester,
+    ) async {
       await pump(tester, pendingUser);
 
       expect(find.text('UNDER REVIEW'), findsOneWidget);
@@ -64,9 +66,8 @@ void main() {
     testWidgets('pull to refresh re-checks the session', (tester) async {
       await pump(tester, pendingUser);
       await auth.storage.saveToken('t0k3n');
-      when(() => auth.getMe(any())).thenAnswer(
-        (_) async => Result.success(pendingUser),
-      );
+      when(() => auth.getMe(any()))
+          .thenAnswer((_) async => Result.success(pendingUser));
 
       // RefreshIndicator triggers after a quarter of the viewport height.
       await tester.drag(find.byType(CustomScrollView), const Offset(0, 900));
@@ -124,35 +125,37 @@ void main() {
   });
 
   group('Sign out', () {
-    testWidgets('opens the confirmation sheet; "Stay signed in" keeps the session',
-        (tester) async {
-      await pump(tester, pendingUser);
+    testWidgets(
+      'opens the confirmation sheet; "Stay signed in" keeps the session',
+      (tester) async {
+        await pump(tester, pendingUser);
 
-      await tester.tap(find.text('Sign out'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Sign out'));
+        await tester.pumpAndSettle();
 
-      expect(find.text('Sign out?'), findsOneWidget);
-      expect(
-        find.text("You'll need your email and password to sign back in."),
-        findsOneWidget,
-      );
-      expect(find.text('Stay signed in'), findsOneWidget);
+        expect(find.text('Sign out?'), findsOneWidget);
+        expect(
+          find.text("You'll need your email and password to sign back in."),
+          findsOneWidget,
+        );
+        expect(find.text('Stay signed in'), findsOneWidget);
 
-      await tester.tap(find.text('Stay signed in'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Stay signed in'));
+        await tester.pumpAndSettle();
 
-      expect(find.text('Sign out?'), findsNothing);
-      expect(auth.cubit.isAuthenticated, isTrue);
-      verifyNever(() => auth.logout(any()));
-    });
+        expect(find.text('Sign out?'), findsNothing);
+        expect(auth.cubit.isAuthenticated, isTrue);
+        verifyNever(() => auth.logout(any()));
+      },
+    );
 
     testWidgets('confirming signs the user out', (tester) async {
       await pump(tester, pendingUser);
 
       await tester.tap(find.text('Sign out'));
       await tester.pumpAndSettle();
-      // The sheet's primary action is the only filled "Sign out" button.
-      await tester.tap(find.widgetWithText(FilledButton, 'Sign out'));
+      // The sheet's primary action is the danger (outlined) "Sign out" button.
+      await tester.tap(find.widgetWithText(OutlinedButton, 'Sign out'));
       await tester.pumpAndSettle();
 
       verify(() => auth.logout(any())).called(1);

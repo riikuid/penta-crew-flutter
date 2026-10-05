@@ -18,9 +18,11 @@ void main() {
   late _MockChangePassword changePassword;
   late AuthHarness auth;
 
-  setUpAll(() => registerFallbackValue(
-    const ChangePasswordParams(currentPassword: '', password: ''),
-  ));
+  setUpAll(
+    () => registerFallbackValue(
+      const ChangePasswordParams(currentPassword: '', password: ''),
+    ),
+  );
 
   setUp(() => changePassword = _MockChangePassword());
   tearDown(() => auth.dispose());
@@ -48,15 +50,19 @@ void main() {
   }
 
   Finder field(String label) => find.descendant(
-    of: find.ancestor(of: find.text(label), matching: find.byType(Column)).first,
+    of: find
+        .ancestor(of: find.text(label), matching: find.byType(Column))
+        .first,
     matching: find.byType(TextFormField),
   );
 
-  FilledButton updateButton(WidgetTester tester) =>
-      tester.widget<FilledButton>(find.widgetWithText(FilledButton, 'Update password'));
+  FilledButton updateButton(WidgetTester tester) => tester.widget<FilledButton>(
+    find.widgetWithText(FilledButton, 'Update password'),
+  );
 
-  testWidgets('renders copy, fields and the rule checklist; CTA disabled',
-      (tester) async {
+  testWidgets('renders copy, fields and the rule checklist; CTA disabled', (
+    tester,
+  ) async {
     await pump(tester);
 
     expect(find.text('Change password.'), findsOneWidget);
@@ -74,7 +80,9 @@ void main() {
     expect(updateButton(tester).onPressed, isNull);
   });
 
-  testWidgets('rules tick live and the CTA enables once all pass', (tester) async {
+  testWidgets('rules tick live and the CTA enables once all pass', (
+    tester,
+  ) async {
     await pump(tester);
 
     await tester.enterText(field('CURRENT PASSWORD'), 'password1');
@@ -94,7 +102,9 @@ void main() {
     expect(updateButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('wrong current password shows the server error inline', (tester) async {
+  testWidgets('wrong current password shows the server error inline', (
+    tester,
+  ) async {
     when(() => changePassword(any())).thenAnswer(
       (_) async => const Result.failed(
         'The given data was invalid.',
@@ -119,9 +129,8 @@ void main() {
   });
 
   testWidgets('success toasts and pops', (tester) async {
-    when(() => changePassword(any())).thenAnswer(
-      (_) async => const Result.success(null),
-    );
+    when(() => changePassword(any()))
+        .thenAnswer((_) async => const Result.success(null));
     await pump(tester);
 
     await tester.enterText(field('CURRENT PASSWORD'), 'password1');
@@ -131,8 +140,9 @@ void main() {
     await tester.tap(find.text('Update password'));
     await tester.pumpAndSettle();
 
-    final params = verify(() => changePassword(captureAny())).captured.single
-        as ChangePasswordParams;
+    final params =
+        verify(() => changePassword(captureAny())).captured.single
+            as ChangePasswordParams;
     expect(params.currentPassword, 'password1');
     expect(params.password, 'abcdefg1');
     expect(find.text('Password updated'), findsOneWidget);

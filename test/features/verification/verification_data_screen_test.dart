@@ -9,9 +9,15 @@ void main() {
 
   tearDown(() => auth.dispose());
 
-  testWidgets('shows the read-only profile rows for the pending user', (tester) async {
+  testWidgets('shows the read-only profile rows for the pending user', (
+    tester,
+  ) async {
     auth = AuthHarness(pendingUser);
-    await pumpRouted(tester, home: const VerificationDataScreen(), auth: auth.cubit);
+    await pumpRouted(
+      tester,
+      home: const VerificationDataScreen(),
+      auth: auth.cubit,
+    );
 
     expect(find.byType(CircleBackButton), findsOneWidget);
     expect(find.text('CREW ACCOUNT'), findsOneWidget);
@@ -34,7 +40,10 @@ void main() {
     expect(find.text('DATE OF BIRTH'), findsOneWidget);
     expect(find.text('14 March 2000 · Female'), findsOneWidget);
     expect(find.text('HOME ADDRESS'), findsOneWidget);
-    expect(find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'), findsOneWidget);
+    expect(
+      find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'),
+      findsOneWidget,
+    );
     // No roles while pending, no actions anywhere.
     expect(find.text('Edit profile'), findsNothing);
     expect(find.text('Sign out'), findsNothing);

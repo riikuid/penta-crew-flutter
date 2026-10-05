@@ -69,7 +69,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
             _auth.updateUser(value);
             emit(const EditProfileState.saved(resubmitted: true));
           case Failed(:final message):
-            emit(EditProfileState.failure(branches: branches, message: message));
+            emit(
+              EditProfileState.failure(branches: branches, message: message),
+            );
         }
       case Failed(:final message, :final fieldErrors):
         emit(

@@ -29,8 +29,8 @@ class ChangePasswordScreen extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<ChangePasswordCubit>();
         final busy = state.submitting;
-        final currentPasswordError = state.fieldErrors['current_password']
-            ?.firstOrNull;
+        final currentPasswordError =
+            state.fieldErrors['current_password']?.firstOrNull;
 
         return Scaffold(
           body: SafeArea(

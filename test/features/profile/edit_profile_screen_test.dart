@@ -59,9 +59,8 @@ void main() {
     getBranches = _MockGetBranches();
     updateProfile = _MockUpdateProfile();
     resubmitVerification = _MockResubmitVerification();
-    when(() => getBranches(any())).thenAnswer(
-      (_) async => const Result.success(_branches),
-    );
+    when(() => getBranches(any()))
+        .thenAnswer((_) async => const Result.success(_branches));
   });
 
   tearDown(() => auth.dispose());
@@ -95,7 +94,9 @@ void main() {
     return router;
   }
 
-  testWidgets('loading: spinner while branches load, no form yet', (tester) async {
+  testWidgets('loading: spinner while branches load, no form yet', (
+    tester,
+  ) async {
     final completer = Completer<Result<List<Branch>>>();
     when(() => getBranches(any())).thenAnswer((_) => completer.future);
     auth = AuthHarness(approvedUser);
@@ -134,17 +135,16 @@ void main() {
   });
 
   testWidgets('error: ErrorView with retry that reloads', (tester) async {
-    when(() => getBranches(any())).thenAnswer(
-      (_) async => const Result.failed("Can't reach the server."),
-    );
+    when(
+      () => getBranches(any()),
+    ).thenAnswer((_) async => const Result.failed("Can't reach the server."));
     await pump(tester);
 
     expect(find.byType(ErrorView), findsOneWidget);
     expect(find.text("Can't reach the server."), findsOneWidget);
 
-    when(() => getBranches(any())).thenAnswer(
-      (_) async => const Result.success(_branches),
-    );
+    when(() => getBranches(any()))
+        .thenAnswer((_) async => const Result.success(_branches));
     await tester.tap(find.text('Try again'));
     await tester.pumpAndSettle();
 
@@ -152,8 +152,9 @@ void main() {
     verify(() => getBranches(any())).called(2);
   });
 
-  testWidgets('loaded: prefilled fields, read-only email, no re-review note',
-      (tester) async {
+  testWidgets('loaded: prefilled fields, read-only email, no re-review note', (
+    tester,
+  ) async {
     await pump(tester);
 
     expect(find.text('RA'), findsOneWidget);
@@ -178,19 +179,33 @@ void main() {
     expect(find.text('BRANCH'), findsOneWidget);
     expect(find.text('Jakarta'), findsOneWidget);
     expect(find.text('HOME ADDRESS'), findsOneWidget);
-    expect(find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'), findsOneWidget);
+    expect(
+      find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'),
+      findsOneWidget,
+    );
     expect(find.text('Save changes'), findsOneWidget);
     // D-08
     expect(find.textContaining('back to admin review'), findsNothing);
   });
 
-  testWidgets('empty required fields show the A4/A5 validation copy', (tester) async {
+  testWidgets('empty required fields show the A4/A5 validation copy', (
+    tester,
+  ) async {
     await pump(tester);
 
-    await tester.enterText(find.widgetWithText(TextFormField, 'Rina Anggraini'), '');
-    await tester.enterText(find.widgetWithText(TextFormField, '+62 812 3456 7890'), '');
     await tester.enterText(
-      find.widgetWithText(TextFormField, 'Jl. Tebet Raya 21, Tebet, Jakarta Selatan'),
+      find.widgetWithText(TextFormField, 'Rina Anggraini'),
+      '',
+    );
+    await tester.enterText(
+      find.widgetWithText(TextFormField, '+62 812 3456 7890'),
+      '',
+    );
+    await tester.enterText(
+      find.widgetWithText(
+        TextFormField,
+        'Jl. Tebet Raya 21, Tebet, Jakarta Selatan',
+      ),
       '',
     );
     await tester.tap(find.text('Save changes'));
@@ -202,7 +217,9 @@ void main() {
     verifyNever(() => updateProfile(any()));
   });
 
-  testWidgets('branch picker lists GET /branches and updates the field', (tester) async {
+  testWidgets('branch picker lists GET /branches and updates the field', (
+    tester,
+  ) async {
     await pump(tester);
 
     await tester.tap(find.text('Jakarta'));
@@ -216,12 +233,12 @@ void main() {
     expect(find.text('Jakarta'), findsNothing);
   });
 
-  testWidgets('save: sends the fields, updates AuthCubit, toasts and pops',
-      (tester) async {
+  testWidgets('save: sends the fields, updates AuthCubit, toasts and pops', (
+    tester,
+  ) async {
     final updated = approvedUser.copyWith(name: 'Rina Putri');
-    when(() => updateProfile(any())).thenAnswer(
-      (_) async => Result.success(updated),
-    );
+    when(() => updateProfile(any()))
+        .thenAnswer((_) async => Result.success(updated));
     await pump(tester);
 
     await tester.enterText(
@@ -231,8 +248,9 @@ void main() {
     await tester.tap(find.text('Save changes'));
     await tester.pumpAndSettle();
 
-    final fields = verify(() => updateProfile(captureAny())).captured.single
-        as ProfileFields;
+    final fields =
+        verify(() => updateProfile(captureAny())).captured.single
+            as ProfileFields;
     expect(fields.name, 'Rina Putri');
     expect(fields.phone, '+62 812 3456 7890');
     expect(fields.dateOfBirth, DateTime(2000, 3, 14));
@@ -272,32 +290,32 @@ void main() {
     expect(find.text('Save changes'), findsOneWidget);
   });
 
-  testWidgets('rejected user: CTA reads "Submit again" and resubmits after saving',
-      (tester) async {
-    final resubmitted = rejectedUser.copyWith(
-      verificationStatus: VerificationStatus.pending,
-      verificationNote: null,
-    );
-    when(() => updateProfile(any())).thenAnswer(
-      (_) async => Result.success(rejectedUser),
-    );
-    when(() => resubmitVerification(any())).thenAnswer(
-      (_) async => Result.success(resubmitted),
-    );
-    await pump(tester, user: rejectedUser);
+  testWidgets(
+    'rejected user: CTA reads "Submit again" and resubmits after saving',
+    (tester) async {
+      final resubmitted = rejectedUser.copyWith(
+        verificationStatus: VerificationStatus.pending,
+        verificationNote: null,
+      );
+      when(() => updateProfile(any()))
+          .thenAnswer((_) async => Result.success(rejectedUser));
+      when(() => resubmitVerification(any()))
+          .thenAnswer((_) async => Result.success(resubmitted));
+      await pump(tester, user: rejectedUser);
 
-    expect(find.text('Submit again'), findsOneWidget);
-    expect(find.text('Save changes'), findsNothing);
+      expect(find.text('Submit again'), findsOneWidget);
+      expect(find.text('Save changes'), findsNothing);
 
-    await tester.tap(find.text('Submit again'));
-    await tester.pumpAndSettle();
+      await tester.tap(find.text('Submit again'));
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      () => updateProfile(any()),
-      () => resubmitVerification(any()),
-    ]);
-    expect(auth.cubit.user?.verificationStatus, VerificationStatus.pending);
-    expect(find.text('root'), findsOneWidget);
-    expect(find.text('Profile updated'), findsNothing);
-  });
+      verifyInOrder([
+        () => updateProfile(any()),
+        () => resubmitVerification(any()),
+      ]);
+      expect(auth.cubit.user?.verificationStatus, VerificationStatus.pending);
+      expect(find.text('root'), findsOneWidget);
+      expect(find.text('Profile updated'), findsNothing);
+    },
+  );
 }

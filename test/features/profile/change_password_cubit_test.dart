@@ -17,9 +17,11 @@ const _filled = ChangePasswordState(
 void main() {
   late _MockChangePassword changePassword;
 
-  setUpAll(() => registerFallbackValue(
-    const ChangePasswordParams(currentPassword: '', password: ''),
-  ));
+  setUpAll(
+    () => registerFallbackValue(
+      const ChangePasswordParams(currentPassword: '', password: ''),
+    ),
+  );
 
   setUp(() => changePassword = _MockChangePassword());
 
@@ -70,7 +72,10 @@ void main() {
         ..confirmationChanged('newpass99'),
       expect: () => const [
         ChangePasswordState(currentPassword: 'password1'),
-        ChangePasswordState(currentPassword: 'password1', password: 'newpass99'),
+        ChangePasswordState(
+          currentPassword: 'password1',
+          password: 'newpass99',
+        ),
         _filled,
       ],
       verify: (cubit) => expect(cubit.state.canSubmit, isTrue),
@@ -89,9 +94,9 @@ void main() {
 
     blocTest<ChangePasswordCubit, ChangePasswordState>(
       'success → submitting then success, sends current + new',
-      setUp: () => when(() => changePassword(any())).thenAnswer(
-        (_) async => const Result.success(null),
-      ),
+      setUp: () =>
+          when(() => changePassword(any()))
+              .thenAnswer((_) async => const Result.success(null)),
       build: build,
       seed: () => _filled,
       act: (cubit) => cubit.submit(),
@@ -110,8 +115,9 @@ void main() {
         ),
       ],
       verify: (_) {
-        final params = verify(() => changePassword(captureAny())).captured.single
-            as ChangePasswordParams;
+        final params =
+            verify(() => changePassword(captureAny())).captured.single
+                as ChangePasswordParams;
         expect(params.currentPassword, 'password1');
         expect(params.password, 'newpass99');
       },

@@ -23,7 +23,9 @@ void main() {
     stubPaths: [ProfileRoutes.edit, ProfileRoutes.password],
   );
 
-  testWidgets('E1 renders identity, badges, roles, rows and actions', (tester) async {
+  testWidgets('E1 renders identity, badges, roles, rows and actions', (
+    tester,
+  ) async {
     await pump(tester);
 
     expect(find.text('CREW ACCOUNT'), findsOneWidget);
@@ -42,7 +44,10 @@ void main() {
     expect(find.text('DATE OF BIRTH'), findsOneWidget);
     expect(find.text('14 March 2000 · Female'), findsOneWidget);
     expect(find.text('HOME ADDRESS'), findsOneWidget);
-    expect(find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'), findsOneWidget);
+    expect(
+      find.text('Jl. Tebet Raya 21, Tebet, Jakarta Selatan'),
+      findsOneWidget,
+    );
     expect(find.text('MEMBER SINCE'), findsOneWidget);
     expect(find.text('20 Jun 2026'), findsOneWidget);
     expect(find.text('Edit profile'), findsOneWidget);
@@ -53,7 +58,9 @@ void main() {
     expect(find.textContaining('admin review'), findsNothing);
   });
 
-  testWidgets('header updates when AuthCubit.updateUser emits a new name', (tester) async {
+  testWidgets('header updates when AuthCubit.updateUser emits a new name', (
+    tester,
+  ) async {
     await pump(tester);
 
     auth.cubit.updateUser(approvedUser.copyWith(name: 'Rina Putri'));
@@ -63,16 +70,22 @@ void main() {
     expect(find.text('RP'), findsOneWidget);
   });
 
-  testWidgets('shows the network avatar instead of initials when avatar_url is set',
-      (tester) async {
-    auth.cubit.updateUser(approvedUser.copyWith(avatarUrl: 'https://example.com/a.png'));
-    await pump(tester);
+  testWidgets(
+    'shows the network avatar instead of initials when avatar_url is set',
+    (tester) async {
+      auth.cubit.updateUser(
+        approvedUser.copyWith(avatarUrl: 'https://example.com/a.png'),
+      );
+      await pump(tester);
 
-    expect(find.byType(Image), findsOneWidget);
-    expect(find.text('RA'), findsNothing);
-  });
+      expect(find.byType(Image), findsOneWidget);
+      expect(find.text('RA'), findsNothing);
+    },
+  );
 
-  testWidgets('Edit profile and Change password push their routes', (tester) async {
+  testWidgets('Edit profile and Change password push their routes', (
+    tester,
+  ) async {
     final router = await pump(tester);
 
     await tester.tap(find.text('Edit profile'));
@@ -95,7 +108,9 @@ void main() {
     expect(find.text('Sign out?'), findsOneWidget);
     expect(find.byType(StatusPill), findsNWidgets(2));
 
-    await tester.tap(find.widgetWithText(FilledButton, 'Sign out'));
+    // Both the screen button and the sheet's primary are danger (outlined);
+    // the sheet's is the last one in the tree.
+    await tester.tap(find.widgetWithText(OutlinedButton, 'Sign out').last);
     await tester.pumpAndSettle();
 
     verify(() => auth.logout(any())).called(1);

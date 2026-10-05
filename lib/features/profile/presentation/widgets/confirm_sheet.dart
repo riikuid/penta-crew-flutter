@@ -8,7 +8,8 @@ import '../../../../core/widgets/app_button.dart';
 /// button. Padding `12 24 36`, 22 px between blocks.
 ///
 /// Resolves to `true` when the primary action is chosen, `false` otherwise
-/// (ghost button, scrim tap, swipe down).
+/// (ghost button, scrim tap, swipe down). [confirmVariant] is `primary`
+/// (ink, C6 "Withdraw") or `danger` (E1 "Sign out").
 class ConfirmSheet extends StatelessWidget {
   const ConfirmSheet({
     super.key,
@@ -16,12 +17,14 @@ class ConfirmSheet extends StatelessWidget {
     required this.body,
     required this.confirmLabel,
     required this.cancelLabel,
+    this.confirmVariant = AppButtonVariant.primary,
   });
 
   final String title;
   final String body;
   final String confirmLabel;
   final String cancelLabel;
+  final AppButtonVariant confirmVariant;
 
   static Future<bool> show(
     BuildContext context, {
@@ -29,6 +32,7 @@ class ConfirmSheet extends StatelessWidget {
     required String body,
     required String confirmLabel,
     required String cancelLabel,
+    AppButtonVariant confirmVariant = AppButtonVariant.primary,
   }) async {
     final confirmed = await showModalBottomSheet<bool>(
       context: context,
@@ -37,6 +41,7 @@ class ConfirmSheet extends StatelessWidget {
         body: body,
         confirmLabel: confirmLabel,
         cancelLabel: cancelLabel,
+        confirmVariant: confirmVariant,
       ),
     );
     return confirmed ?? false;
@@ -67,10 +72,14 @@ class ConfirmSheet extends StatelessWidget {
           const SizedBox(height: 22),
           Text(title, style: textTheme.headlineMedium),
           const SizedBox(height: 8),
-          Text(body, style: textTheme.bodyMedium?.copyWith(color: tokens.muted)),
+          Text(
+            body,
+            style: textTheme.bodyMedium?.copyWith(color: tokens.muted),
+          ),
           const SizedBox(height: 22),
           AppButton(
             label: confirmLabel,
+            variant: confirmVariant,
             onPressed: () => Navigator.of(context).pop(true),
           ),
           const SizedBox(height: 6),
@@ -93,4 +102,5 @@ Future<bool> confirmSignOut(BuildContext context) => ConfirmSheet.show(
   body: "You'll need your email and password to sign back in.",
   confirmLabel: 'Sign out',
   cancelLabel: 'Stay signed in',
+  confirmVariant: AppButtonVariant.danger,
 );

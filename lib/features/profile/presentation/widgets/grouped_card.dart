@@ -65,9 +65,8 @@ class InfoRow extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   value,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    height: 1.4,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium
+                      ?.copyWith(height: 1.4),
                 ),
               ],
             ),
@@ -105,9 +104,8 @@ class ActionRow extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             Icon(Icons.chevron_right, size: 20, color: tokens.ink),

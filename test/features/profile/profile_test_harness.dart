@@ -33,7 +33,10 @@ final approvedUser = User(
   gender: Gender.female,
   address: 'Jl. Tebet Raya 21, Tebet, Jakarta Selatan',
   branch: jakarta,
-  roles: const [CrewRole(id: 1, name: 'Crew'), CrewRole(id: 2, name: 'Event Manager')],
+  roles: const [
+    CrewRole(id: 1, name: 'Crew'),
+    CrewRole(id: 2, name: 'Event Manager'),
+  ],
   verificationStatus: VerificationStatus.approved,
   submittedAt: DateTime(2026, 6, 20, 9, 40),
   reviewedAt: DateTime(2026, 6, 22),
@@ -60,7 +63,8 @@ final rejectedUser = pendingUser.copyWith(
 class AuthHarness {
   AuthHarness(User user) {
     registerFallbackValue(const NoParams());
-    when(() => logout(any())).thenAnswer((_) async => const Result.success(null));
+    when(() => logout(any()))
+        .thenAnswer((_) async => const Result.success(null));
     cubit = AuthCubit(
       getMe: getMe,
       logout: logout,
@@ -115,7 +119,10 @@ Future<GoRouter> pumpRouted(
     BlocProvider.value(
       value: auth,
       child: ToastificationWrapper(
-        child: MaterialApp.router(theme: AppTheme.light(), routerConfig: router),
+        child: MaterialApp.router(
+          theme: AppTheme.light(),
+          routerConfig: router,
+        ),
       ),
     ),
   );

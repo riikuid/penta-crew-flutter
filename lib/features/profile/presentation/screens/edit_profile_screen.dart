@@ -178,7 +178,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             placeholder: 'DD / MM / YYYY',
             icon: Icons.calendar_today_outlined,
             enabled: !busy,
-            errorText: errors['date_of_birth']?.firstOrNull ?? _dateOfBirthError,
+            errorText:
+                errors['date_of_birth']?.firstOrNull ?? _dateOfBirthError,
             onTap: _pickDateOfBirth,
           ),
           const SizedBox(height: 14),
@@ -251,7 +252,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     switch (state) {
       case EditProfileSaved(:final resubmitted):
         if (!resubmitted) {
-          AppToast.success('Profile updated', description: 'Your changes are saved.');
+          AppToast.success(
+            'Profile updated',
+            description: 'Your changes are saved.',
+          );
         }
         context.pop();
       case EditProfileFailure(:final message, :final fieldErrors)
