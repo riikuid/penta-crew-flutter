@@ -31,6 +31,16 @@ abstract final class Env {
     defaultValue: false,
   );
 
+  /// Host of the universal / app links the backend emails (D-02:
+  /// `https://<APP_DOMAIN>/reset-password?token=…&email=…`). The platform
+  /// side cannot read dart-defines, so the same value must replace the
+  /// literal `APP_DOMAIN` placeholder in `ios/Runner/Runner.entitlements`
+  /// and `android/app/src/main/AndroidManifest.xml` per flavour.
+  static const String appDomain = String.fromEnvironment(
+    'APP_DOMAIN',
+    defaultValue: 'crew.example.test',
+  );
+
   static bool get isDev => flavor == 'dev';
   static bool get isStaging => flavor == 'staging';
   static bool get isProd => flavor == 'prod';
