@@ -2,7 +2,11 @@ import 'package:get_it/get_it.dart';
 
 import '../../core/session/session_info.dart';
 import 'presentation/cubit/auth_cubit.dart';
+import 'presentation/cubit/check_email_cubit.dart';
+import 'presentation/cubit/forgot_password_cubit.dart';
 import 'presentation/cubit/login_cubit.dart';
+import 'presentation/cubit/register_cubit.dart';
+import 'presentation/cubit/reset_password_cubit.dart';
 import 'repositories/auth_repository.dart';
 import 'usecases/change_password.dart';
 import 'usecases/forgot_password.dart';
@@ -43,4 +47,13 @@ void registerAuth(GetIt sl) {
 
   // Page-scoped cubits are factories; the route's BlocProvider owns their lifecycle.
   sl.registerFactory(() => LoginCubit(sl(), sl()));
+  sl.registerFactory(() => RegisterCubit(sl(), sl(), sl()));
+  sl.registerFactory(() => ForgotPasswordCubit(sl()));
+  // Route params travel in as factory params (`sl<T>(param1: …)`).
+  sl.registerFactoryParam<CheckEmailCubit, String, void>(
+    (email, _) => CheckEmailCubit(sl(), email: email),
+  );
+  sl.registerFactoryParam<ResetPasswordCubit, String, String>(
+    (token, email) => ResetPasswordCubit(sl(), token: token, email: email),
+  );
 }
