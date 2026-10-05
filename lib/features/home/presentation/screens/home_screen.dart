@@ -277,12 +277,14 @@ class HomeScreen extends StatelessWidget {
       ),
     };
 
-    // B3 replaces the whole section with the blush empty block.
-    final isEmpty = switch (state.openEvents) {
+    // B2 has no section header yet; B3 replaces the whole section with the
+    // blush empty block.
+    final headerless = switch (state.openEvents) {
+      SectionLoading() => true,
       SectionLoaded(:final data) => data.isEmpty,
-      _ => false,
+      SectionError() => false,
     };
-    if (isEmpty) return body;
+    if (headerless) return body;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,9 +295,11 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(
-                'Open for you',
-                style: Theme.of(context).textTheme.headlineSmall,
+              Expanded(
+                child: Text(
+                  'Open for you',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -661,19 +665,32 @@ class _SectionError extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     return AppCard(
-      padding: const EdgeInsets.fromLTRB(20, 16, 12, 16),
-      child: Row(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.error_outline, size: 18, color: tokens.muted),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              message,
-              style: tokens.caption.copyWith(color: tokens.ink),
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.error_outline, size: 18, color: tokens.muted),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  message,
+                  style: tokens.caption.copyWith(color: tokens.ink),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 8),
-          TextButton(onPressed: onRetry, child: const Text('Try again')),
+          const SizedBox(height: 4),
+          TextButton(
+            onPressed: onRetry,
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              alignment: Alignment.centerLeft,
+            ),
+            child: const Text('Try again'),
+          ),
         ],
       ),
     );
