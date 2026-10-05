@@ -44,13 +44,16 @@ abstract class AppNotification with _$AppNotification {
 
   /// `data.event_id` / `data.application_id`, tolerant of string values
   /// (FCM data payloads are always strings).
-  int? get eventId => _intOf(data['event_id']);
-  int? get applicationId => _intOf(data['application_id']);
+  int? get eventId => tolerantInt(data['event_id']);
+  int? get applicationId => tolerantInt(data['application_id']);
 }
 
-int? _intOf(Object? v) => switch (v) {
-  final int i => i,
-  final num n => n.toInt(),
-  final String s => int.tryParse(s),
+/// Reads an int out of a notification `data` value: the REST body sends real
+/// ints, an FCM data payload sends the same ids as strings. Shared with
+/// `notification_routing.dart` so both paths parse identically.
+int? tolerantInt(Object? value) => switch (value) {
+  final int integer => integer,
+  final num number => number.toInt(),
+  final String text => int.tryParse(text),
   _ => null,
 };

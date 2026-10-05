@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +12,7 @@ import '../../../../core/widgets/eyebrow.dart';
 import '../../../../core/widgets/skeleton.dart';
 import '../../../../core/widgets/state_views.dart';
 import '../../models/app_notification.dart';
+import '../../notification_routing.dart';
 import '../cubit/notifications_cubit.dart';
 import '../cubit/notifications_state.dart';
 import '../notification_formats.dart';
@@ -20,8 +23,8 @@ import '../notification_formats.dart';
 /// card per notification (unread = ink dot). Pull to refresh, infinite
 /// scroll; C10-style empty card; error card with retry.
 ///
-/// Tapping a row marks it read (optimistic). Navigation by type is added by
-/// the next unit of TASK-019.
+/// Tapping a row marks it read (optimistic) and opens the type's target
+/// (`routeForNotification`, D-06); `unknown` rows stay on the list.
 ///
 /// Expects a `NotificationsCubit` above it (provided by the route).
 class NotificationsScreen extends StatefulWidget {
@@ -178,13 +181,23 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: _NotificationCard(
               notification: notification,
               now: now,
-              onTap: () => _cubit.markRead(notification.id),
+              onTap: () => _onNotificationTap(notification),
             ),
           ),
           _LoadingRow() => const _LoadingMoreRow(),
         },
       ),
     );
+  }
+
+  /// Optimistic mark-read (the cubit swallows a server failure), then the
+  /// D-06 target for the type; nothing to open for `unknown`.
+  void _onNotificationTap(AppNotification notification) {
+    unawaited(_cubit.markRead(notification.id));
+    final path = routeForNotification(notification.type, notification.data);
+    if (path != null) {
+      openNotificationRoute(GoRouter.of(context), path);
+    }
   }
 
   void _onScroll() {
