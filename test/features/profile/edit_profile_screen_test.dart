@@ -9,9 +9,8 @@ import 'package:penta_crew/core/network/result.dart';
 import 'package:penta_crew/core/usecase/usecase.dart';
 import 'package:penta_crew/core/widgets/state_views.dart';
 import 'package:penta_crew/features/auth/models/branch.dart';
+import 'package:penta_crew/features/auth/models/profile_fields.dart';
 import 'package:penta_crew/features/auth/models/user.dart';
-import 'package:penta_crew/features/auth/repositories/auth_repository.dart'
-    show ProfileFields;
 import 'package:penta_crew/features/auth/usecases/get_branches.dart';
 import 'package:penta_crew/features/auth/usecases/resubmit_verification.dart';
 import 'package:penta_crew/features/auth/usecases/update_profile.dart';

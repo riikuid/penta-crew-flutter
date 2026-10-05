@@ -1,10 +1,11 @@
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/network/result.dart';
 import '../../../../core/usecase/usecase.dart';
+import '../../../auth/models/profile_fields.dart';
 import '../../../auth/models/user.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
-import '../../../auth/repositories/auth_repository.dart' show ProfileFields;
 import '../../../auth/usecases/get_branches.dart';
 import '../../../auth/usecases/resubmit_verification.dart';
 import '../../../auth/usecases/update_profile.dart';
@@ -85,12 +86,27 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   }
 
   /// "Change photo": pick from the library, upload, patch `avatar_url` on the
-  /// signed-in user. Cancelling the picker is a no-op.
+  /// signed-in user. Cancelling the picker is a no-op; a denied Photos
+  /// permission (`image_picker` throws `PlatformException`) is surfaced as a
+  /// failure toast instead of an unhandled error.
   Future<void> changePhoto() async {
     if (state.saving || state.uploadingAvatar) return;
     final branches = state.branches;
 
-    final filePath = await _avatarPicker.pick();
+    final String? filePath;
+    try {
+      filePath = await _avatarPicker.pick();
+    } on PlatformException {
+      if (isClosed) return;
+      emit(
+        EditProfileState.failure(
+          branches: branches,
+          message:
+              'Could not open your photos. Allow photo access in Settings.',
+        ),
+      );
+      return;
+    }
     if (filePath == null || isClosed) return;
     emit(EditProfileState.ready(branches: branches, uploadingAvatar: true));
 

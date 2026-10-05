@@ -1,12 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:penta_crew/core/network/result.dart';
 import 'package:penta_crew/core/usecase/usecase.dart';
 import 'package:penta_crew/features/auth/models/branch.dart';
+import 'package:penta_crew/features/auth/models/profile_fields.dart';
 import 'package:penta_crew/features/auth/models/user.dart';
-import 'package:penta_crew/features/auth/repositories/auth_repository.dart'
-    show ProfileFields;
 import 'package:penta_crew/features/auth/usecases/get_branches.dart';
 import 'package:penta_crew/features/auth/usecases/resubmit_verification.dart';
 import 'package:penta_crew/features/auth/usecases/update_profile.dart';
@@ -281,6 +281,24 @@ void main() {
         ),
       ],
       verify: (_) => expect(auth.cubit.user?.avatarUrl, isNull),
+    );
+
+    blocTest<EditProfileCubit, EditProfileState>(
+      'picker throws (photo access denied) → failure, no upload',
+      setUp: () =>
+          when(() => avatarPicker.pick())
+              .thenThrow(PlatformException(code: 'photo_access_denied')),
+      build: build,
+      seed: () => const EditProfileState.ready(branches: _branches),
+      act: (cubit) => cubit.changePhoto(),
+      expect: () => const [
+        EditProfileState.failure(
+          branches: _branches,
+          message:
+              'Could not open your photos. Allow photo access in Settings.',
+        ),
+      ],
+      verify: (_) => verifyNever(() => uploadAvatar(any())),
     );
   });
 }

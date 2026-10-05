@@ -3,14 +3,16 @@ import 'dart:io' show Platform;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import '../../../core/json/converters.dart';
 import '../../../core/network/api_json.dart';
 import '../../../core/network/auth_interceptor.dart';
 import '../../../core/network/dio_call.dart';
 import '../../../core/network/result.dart';
 import '../models/auth_response.dart';
 import '../models/branch.dart';
+import '../models/profile_fields.dart';
 import '../models/user.dart';
+
+export '../models/profile_fields.dart';
 
 /// `device_platform` value for contract §2.1 / §2.10.
 String? devicePlatform() {
@@ -18,34 +20,6 @@ String? devicePlatform() {
   if (Platform.isIOS) return 'ios';
   if (Platform.isAndroid) return 'android';
   return null;
-}
-
-/// Profile fields shared by register (§2.2) and update profile (§2.7).
-class ProfileFields {
-  const ProfileFields({
-    required this.name,
-    required this.phone,
-    required this.dateOfBirth,
-    required this.gender,
-    required this.branchId,
-    required this.address,
-  });
-
-  final String name;
-  final String phone;
-  final DateTime dateOfBirth;
-  final Gender gender;
-  final int branchId;
-  final String address;
-
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'phone': phone,
-    'date_of_birth': const DateOnlyConverter().toJson(dateOfBirth),
-    'gender': gender.name,
-    'branch_id': branchId,
-    'address': address,
-  };
 }
 
 /// Pure HTTP. One method per endpoint (contract §2–§3), no side effects —
@@ -107,7 +81,11 @@ class AuthRepository {
 
   /// §2.5 — always 200, never reveals whether the email exists.
   Future<Result<void>> forgotPassword(String email) => dioCall(
-    () => _dio.post('/forgot-password', data: {'email': email}, options: noAuth()),
+    () => _dio.post(
+      '/forgot-password',
+      data: {'email': email},
+      options: noAuth(),
+    ),
     parse: noBody,
   );
 
@@ -167,10 +145,7 @@ class AuthRepository {
   Future<Result<void>> updateDeviceToken(String deviceToken) => dioCall(
     () => _dio.put(
       '/me/device-token',
-      data: {
-        'device_token': deviceToken,
-        'device_platform': ?devicePlatform(),
-      },
+      data: {'device_token': deviceToken, 'device_platform': ?devicePlatform()},
     ),
     parse: noBody,
   );
