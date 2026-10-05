@@ -97,8 +97,7 @@ void main() {
             RegisterField.name: 'Enter your full name.',
             RegisterField.email: 'Enter a valid email address.',
             RegisterField.phone: 'Enter your phone number.',
-            RegisterField.password:
-                'Use at least 8 characters with a number.',
+            RegisterField.password: 'Use at least 8 characters with a number.',
           },
         ),
       ],
@@ -117,16 +116,12 @@ void main() {
       expect: () => [
         isA<RegisterState>()
             .having((s) => s.step, 'step', RegisterStep.account)
-            .having(
-              (s) => s.errors,
-              'errors',
-              const {
-                RegisterField.email: 'Enter a valid email address.',
-                RegisterField.password:
-                    'Use at least 8 characters with a number.',
-                RegisterField.passwordConfirmation: "Passwords don't match.",
-              },
-            ),
+            .having((s) => s.errors, 'errors', const {
+              RegisterField.email: 'Enter a valid email address.',
+              RegisterField.password:
+                  'Use at least 8 characters with a number.',
+              RegisterField.passwordConfirmation: "Passwords don't match.",
+            }),
       ],
     );
 
@@ -155,9 +150,8 @@ void main() {
   group('branches', () {
     blocTest<RegisterCubit, RegisterState>(
       'loadBranches → loading, then the list',
-      setUp: () => when(() => getBranches(any())).thenAnswer(
-        (_) async => const Result.success([_jakarta, _bandung]),
-      ),
+      setUp: () => when(() => getBranches(any()))
+          .thenAnswer((_) async => const Result.success([_jakarta, _bandung])),
       build: build,
       act: (cubit) => cubit.loadBranches(),
       expect: () => const [

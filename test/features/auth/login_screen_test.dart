@@ -27,7 +27,10 @@ void main() {
     states = StreamController<LoginState>.broadcast();
     whenListen(cubit, states.stream, initialState: const LoginState.idle());
     when(
-      () => cubit.submit(email: any(named: 'email'), password: any(named: 'password')),
+      () => cubit.submit(
+        email: any(named: 'email'),
+        password: any(named: 'password'),
+      ),
     ).thenAnswer((_) async {});
   });
 
@@ -41,14 +44,13 @@ void main() {
     await tester.pump();
   }
 
-  Future<GoRouter> pump(WidgetTester tester, {String? from}) =>
-      pumpAuthScreen(
-        tester,
-        BlocProvider<LoginCubit>.value(
-          value: cubit,
-          child: LoginScreen(from: from),
-        ),
-      );
+  Future<GoRouter> pump(WidgetTester tester, {String? from}) => pumpAuthScreen(
+    tester,
+    BlocProvider<LoginCubit>.value(
+      value: cubit,
+      child: LoginScreen(from: from),
+    ),
+  );
 
   Future<void> fillCredentials(WidgetTester tester) async {
     await tester.enterText(fieldLabeled('Email'), 'nadia@example.com');
@@ -82,10 +84,7 @@ void main() {
     expect(link.right, closeTo(password.right, 8));
 
     // Headline is the 44 px display variant.
-    expect(
-      tester.widget<Text>(find.text('Welcome back.')).style?.fontSize,
-      44,
-    );
+    expect(tester.widget<Text>(find.text('Welcome back.')).style?.fontSize, 44);
   });
 
   testWidgets('validation messages from the copy table, no cubit call', (
@@ -171,10 +170,7 @@ void main() {
         'nadia@example.com',
       );
       expect(
-        tester
-            .widget<TextFormField>(fieldLabeled('Password'))
-            .controller
-            ?.text,
+        tester.widget<TextFormField>(fieldLabeled('Password')).controller?.text,
         isEmpty,
       );
       // Not a toast.

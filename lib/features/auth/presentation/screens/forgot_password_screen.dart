@@ -77,10 +77,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
                 autofillHints: const [AutofillHints.email],
-                validator: (value) =>
-                    FormValidators.isEmail(value ?? '')
-                        ? null
-                        : 'Enter a valid email address.',
+                validator: (value) => FormValidators.isEmail(value ?? '')
+                    ? null
+                    : 'Enter a valid email address.',
                 onFieldSubmitted: (_) => _submit(),
               ),
             ),

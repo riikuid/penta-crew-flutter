@@ -225,7 +225,8 @@ class _AccountStep extends StatelessWidget {
           textInputAction: TextInputAction.done,
           autofillHints: const [AutofillHints.newPassword],
           errorText: state.errorFor(RegisterField.passwordConfirmation),
-          onChanged: (_) => cubit.clearError(RegisterField.passwordConfirmation),
+          onChanged: (_) =>
+              cubit.clearError(RegisterField.passwordConfirmation),
           onFieldSubmitted: (_) => onSubmit(),
         ),
       ],

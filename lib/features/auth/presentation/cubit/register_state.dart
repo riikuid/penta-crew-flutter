@@ -37,7 +37,13 @@ abstract final class RegisterField {
   static const branchId = 'branch_id';
   static const address = 'address';
 
-  static const accountStep = {name, email, phone, password, passwordConfirmation};
+  static const accountStep = {
+    name,
+    email,
+    phone,
+    password,
+    passwordConfirmation,
+  };
 }
 
 /// One state object for the whole two-step form: values of both steps live

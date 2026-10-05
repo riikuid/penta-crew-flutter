@@ -63,9 +63,8 @@ void main() {
   testWidgets('resend success → resent, then the cooldown restarts', (
     tester,
   ) async {
-    when(
-      () => forgotPassword(any()),
-    ).thenAnswer((_) async => const Result.success(null));
+    when(() => forgotPassword(any()))
+        .thenAnswer((_) async => const Result.success(null));
     start();
     await tester.pump(const Duration(seconds: 60));
     expect(cubit.state, const CheckEmailState.ready());
@@ -73,14 +72,11 @@ void main() {
     await cubit.resend();
     await tester.pump();
 
-    expect(
-      emitted.sublist(emitted.length - 3),
-      const [
-        CheckEmailState.resending(),
-        CheckEmailState.resent(),
-        CheckEmailState.coolingDown(60),
-      ],
-    );
+    expect(emitted.sublist(emitted.length - 3), const [
+      CheckEmailState.resending(),
+      CheckEmailState.resent(),
+      CheckEmailState.coolingDown(60),
+    ]);
     final params =
         verify(() => forgotPassword(captureAny())).captured.single
             as ForgotPasswordParams;
@@ -94,23 +90,19 @@ void main() {
   testWidgets('resend failure → failure(message), then ready again', (
     tester,
   ) async {
-    when(
-      () => forgotPassword(any()),
-    ).thenAnswer((_) async => const Result.failed('Too many attempts.'));
+    when(() => forgotPassword(any()))
+        .thenAnswer((_) async => const Result.failed('Too many attempts.'));
     start();
     await tester.pump(const Duration(seconds: 60));
 
     await cubit.resend();
     await tester.pump();
 
-    expect(
-      emitted.sublist(emitted.length - 3),
-      const [
-        CheckEmailState.resending(),
-        CheckEmailState.failure('Too many attempts.'),
-        CheckEmailState.ready(),
-      ],
-    );
+    expect(emitted.sublist(emitted.length - 3), const [
+      CheckEmailState.resending(),
+      CheckEmailState.failure('Too many attempts.'),
+      CheckEmailState.ready(),
+    ]);
     await cubit.close();
   });
 }

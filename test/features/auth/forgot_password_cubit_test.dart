@@ -21,9 +21,9 @@ void main() {
 
   blocTest<ForgotPasswordCubit, ForgotPasswordState>(
     'success → sent(email) with the trimmed email',
-    setUp: () => when(
-      () => forgotPassword(any()),
-    ).thenAnswer((_) async => const Result.success(null)),
+    setUp: () =>
+        when(() => forgotPassword(any()))
+            .thenAnswer((_) async => const Result.success(null)),
     build: build,
     act: (cubit) => cubit.submit('  nadia@example.com '),
     expect: () => const [
@@ -40,9 +40,9 @@ void main() {
 
   blocTest<ForgotPasswordCubit, ForgotPasswordState>(
     'failure → failure(message), stays on the form',
-    setUp: () => when(
-      () => forgotPassword(any()),
-    ).thenAnswer((_) async => const Result.failed('Too many attempts.')),
+    setUp: () =>
+        when(() => forgotPassword(any()))
+            .thenAnswer((_) async => const Result.failed('Too many attempts.')),
     build: build,
     act: (cubit) => cubit.submit('nadia@example.com'),
     expect: () => const [
@@ -53,9 +53,9 @@ void main() {
 
   blocTest<ForgotPasswordCubit, ForgotPasswordState>(
     'ignores a second submit while one is in flight',
-    setUp: () => when(
-      () => forgotPassword(any()),
-    ).thenAnswer((_) async => const Result.success(null)),
+    setUp: () =>
+        when(() => forgotPassword(any()))
+            .thenAnswer((_) async => const Result.success(null)),
     build: build,
     act: (cubit) async {
       final first = cubit.submit('nadia@example.com');

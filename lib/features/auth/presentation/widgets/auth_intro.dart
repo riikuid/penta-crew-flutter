@@ -38,7 +38,8 @@ class AuthIntro extends StatelessWidget {
         const SizedBox(height: 12),
         Text(
           body,
-          style: bodyStyle ?? textTheme.bodyLarge?.copyWith(color: tokens.muted),
+          style:
+              bodyStyle ?? textTheme.bodyLarge?.copyWith(color: tokens.muted),
         ),
       ],
     );

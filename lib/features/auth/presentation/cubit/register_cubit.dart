@@ -36,8 +36,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (name.trim().isEmpty) RegisterField.name: 'Enter your full name.',
       if (!FormValidators.isEmail(email))
         RegisterField.email: 'Enter a valid email address.',
-      if (phone.trim().isEmpty)
-        RegisterField.phone: 'Enter your phone number.',
+      if (phone.trim().isEmpty) RegisterField.phone: 'Enter your phone number.',
       if (!FormValidators.isStrongPassword(password))
         RegisterField.password: 'Use at least 8 characters with a number.',
       if (confirmPassword != password)
@@ -57,8 +56,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   /// Back from A5 — values stay, only the step changes.
-  void backToAccountStep() =>
-      emit(state.copyWith(step: RegisterStep.account));
+  void backToAccountStep() => emit(state.copyWith(step: RegisterStep.account));
 
   /// Called when the user edits a field, so a stale error does not linger.
   void clearError(String field) {

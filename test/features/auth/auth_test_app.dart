@@ -69,9 +69,11 @@ Finder appField(String label) =>
 
 /// The `TextFormField` under the eyebrow [label] (rendered uppercase).
 Finder fieldLabeled(String label) => find.descendant(
-  of: find.ancestor(
-    of: find.text(label.toUpperCase()),
-    matching: find.byType(Column),
-  ).first,
+  of: find
+      .ancestor(
+        of: find.text(label.toUpperCase()),
+        matching: find.byType(Column),
+      )
+      .first,
   matching: find.byType(TextFormField),
 );

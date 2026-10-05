@@ -46,10 +46,7 @@ void main() {
     // Only what the reset route builder resolves; the real cubit runs on a
     // mocked usecase so the token/email handed to it can be asserted.
     cubitParams = [];
-    sl.registerFactoryParam<ResetPasswordCubit, String, String>((
-      token,
-      email,
-    ) {
+    sl.registerFactoryParam<ResetPasswordCubit, String, String>((token, email) {
       cubitParams.add((token: token, email: email));
       return ResetPasswordCubit(
         _MockResetPassword(),

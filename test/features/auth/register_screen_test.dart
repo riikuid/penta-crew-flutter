@@ -51,9 +51,8 @@ void main() {
     cubit = _MockRegisterCubit();
     states = StreamController<RegisterState>.broadcast();
     when(() => cubit.loadBranches()).thenAnswer((_) async {});
-    when(
-      () => cubit.submit(address: any(named: 'address')),
-    ).thenAnswer((_) async {});
+    when(() => cubit.submit(address: any(named: 'address')))
+        .thenAnswer((_) async {});
   });
 
   tearDown(() => states.close());
@@ -152,8 +151,7 @@ void main() {
             RegisterField.name: 'Enter your full name.',
             RegisterField.email: 'Enter a valid email address.',
             RegisterField.phone: 'Enter your phone number.',
-            RegisterField.password:
-                'Use at least 8 characters with a number.',
+            RegisterField.password: 'Use at least 8 characters with a number.',
             RegisterField.passwordConfirmation: "Passwords don't match.",
           },
         ),
@@ -216,10 +214,7 @@ void main() {
       expect(tester.widget<StepHeader>(find.byType(StepHeader)).step, 2);
 
       // Address is a 3-row text area.
-      expect(
-        tester.widget<AppTextField>(appField('Home address')).maxLines,
-        3,
-      );
+      expect(tester.widget<AppTextField>(appField('Home address')).maxLines, 3);
     });
 
     testWidgets('shows chosen values: dd / MM / yyyy, gender, branch', (
@@ -305,10 +300,7 @@ void main() {
       await tester.tap(picker('Branch'));
       await tester.pumpAndSettle();
 
-      await emit(
-        tester,
-        _profileStep.copyWith(branchesError: 'Network error'),
-      );
+      await emit(tester, _profileStep.copyWith(branchesError: 'Network error'));
       expect(find.byType(ErrorView), findsOneWidget);
       expect(find.text('Network error'), findsOneWidget);
 

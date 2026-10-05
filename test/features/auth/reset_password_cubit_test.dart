@@ -27,9 +27,9 @@ void main() {
 
   blocTest<ResetPasswordCubit, ResetPasswordState>(
     'success → success, params carry token + email + password',
-    setUp: () => when(
-      () => resetPassword(any()),
-    ).thenAnswer((_) async => const Result.success(null)),
+    setUp: () =>
+        when(() => resetPassword(any()))
+            .thenAnswer((_) async => const Result.success(null)),
     build: build,
     act: (cubit) => cubit.submit('newpass1'),
     expect: () => const [
@@ -67,9 +67,9 @@ void main() {
 
   blocTest<ResetPasswordCubit, ResetPasswordState>(
     'generic failure → failure(message)',
-    setUp: () => when(
-      () => resetPassword(any()),
-    ).thenAnswer((_) async => const Result.failed('Server unavailable')),
+    setUp: () =>
+        when(() => resetPassword(any()))
+            .thenAnswer((_) async => const Result.failed('Server unavailable')),
     build: build,
     act: (cubit) => cubit.submit('newpass1'),
     expect: () => const [
