@@ -1,7 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/di/locator.dart';
 import '../../core/router/app_routes.dart';
 import '../../core/router/route_guard.dart';
+import 'presentation/cubit/notifications_cubit.dart';
 import 'presentation/screens/notifications_screen.dart';
 
 abstract final class NotificationsRoutes {
@@ -14,6 +17,9 @@ final List<RouteBase> notificationsRoutes = [
     path: NotificationsRoutes.root,
     parentNavigatorKey: rootNavigatorKey,
     redirect: guard(),
-    builder: (context, state) => const NotificationsScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<NotificationsCubit>()..load(),
+      child: const NotificationsScreen(),
+    ),
   ),
 ];
