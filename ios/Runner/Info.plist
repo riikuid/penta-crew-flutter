@@ -47,6 +47,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Penta Crew needs the camera to take your profile picture.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Penta Crew needs access to your photos to set your profile picture.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
