@@ -11,6 +11,7 @@ import 'core/theme/app_theme.dart';
 import 'core/widgets/app_toast.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/auth/presentation/cubit/auth_state.dart';
+import 'features/notifications/push_notification_listener.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -22,16 +23,27 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late final RouterRefresh _refresh;
   late final router = buildAppRouter(refreshListenable: _refresh);
+  late final PushNotificationListener _pushListener;
 
   @override
   void initState() {
     super.initState();
     // Guards re-run on every AuthCubit emission (login, logout, 401).
     _refresh = RouterRefresh([sl<AuthCubit>().stream]);
+    // Tapped pushes navigate on this router once the session has resolved.
+    _pushListener = PushNotificationListener(
+      pushService: sl(),
+      session: sl(),
+      sessionChanges: sl<AuthCubit>().stream,
+      router: router,
+      updateDeviceToken: sl(),
+      talker: sl(),
+    )..start();
   }
 
   @override
   void dispose() {
+    _pushListener.dispose();
     router.dispose();
     _refresh.dispose();
     super.dispose();
