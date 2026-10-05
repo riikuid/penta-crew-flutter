@@ -11,7 +11,8 @@ class FloatingPillNavItem {
 
 /// The floating bottom navigation from the prototype: a white pill with a
 /// hairline border and soft shadow; the active item expands into an ink pill
-/// showing icon + label, inactive items are icon-only 52×52 targets.
+/// showing a 20 px icon + label, inactive items are icon-only 52×52 targets
+/// drawn in ink at 22 px (prototype `screens.html` :567).
 ///
 /// This draws only the bar. The shell positions it (20px from the sides,
 /// above the home indicator) and owns [index].
@@ -101,8 +102,8 @@ class _NavItem extends StatelessWidget {
                   children: [
                     Icon(
                       item.icon,
-                      size: 20,
-                      color: selected ? tokens.surface : tokens.muted,
+                      size: selected ? 20 : 22,
+                      color: selected ? tokens.surface : tokens.ink,
                     ),
                     if (selected) ...[
                       const SizedBox(width: 8),

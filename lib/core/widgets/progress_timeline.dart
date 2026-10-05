@@ -190,11 +190,11 @@ class _Bar extends StatelessWidget {
                 child: Text(
                   steps[i].label.toUpperCase(),
                   style: labelStyle,
-                  textAlign: i == 0
-                      ? TextAlign.start
-                      : i == steps.length - 1
+                  // Every label hugs its segment's start; only the last one
+                  // hugs the end (prototype :697, :808, :870).
+                  textAlign: i == steps.length - 1
                       ? TextAlign.end
-                      : TextAlign.center,
+                      : TextAlign.start,
                 ),
               ),
           ],

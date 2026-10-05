@@ -15,25 +15,42 @@ class Skeleton extends StatefulWidget {
     this.width,
     this.height = 16,
     this.radius = 12,
+    this.color,
+    this.borderColor,
   });
 
   /// One line of text: pill-shaped, 16px high.
-  const Skeleton.line({super.key, this.width, this.height = 16})
-    : radius = AppRadius.pill;
+  const Skeleton.line({super.key, this.width, this.height = 16, this.color})
+    : radius = AppRadius.pill,
+      borderColor = null;
 
   /// Avatar / icon circle.
-  const Skeleton.circle({super.key, double size = 44})
+  const Skeleton.circle({super.key, double size = 44, this.color})
     : width = size,
       height = size,
-      radius = AppRadius.pill;
+      radius = AppRadius.pill,
+      borderColor = null;
 
-  /// Whole-card placeholder with the large card radius.
-  const Skeleton.card({super.key, this.width, required this.height})
-    : radius = AppRadius.cardLarge;
+  /// Whole-card placeholder with the large card radius. B2 uses a blush
+  /// hero (`color: tokens.accent`) and white counters with a hairline border
+  /// (`color: tokens.surface, borderColor: tokens.line`).
+  const Skeleton.card({
+    super.key,
+    this.width,
+    required this.height,
+    this.color,
+    this.borderColor,
+  }) : radius = AppRadius.cardLarge;
 
   final double? width;
   final double height;
   final double radius;
+
+  /// Fill; defaults to the hairline grey (`tokens.line`).
+  final Color? color;
+
+  /// Optional 1 px border; none by default.
+  final Color? borderColor;
 
   @override
   State<Skeleton> createState() => _SkeletonState();
@@ -59,7 +76,8 @@ class _SkeletonState extends State<Skeleton>
 
   @override
   Widget build(BuildContext context) {
-    final color = context.tokens.line;
+    final color = widget.color ?? context.tokens.line;
+    final borderColor = widget.borderColor;
     return ExcludeSemantics(
       child: FadeTransition(
         opacity: _opacity,
@@ -69,6 +87,7 @@ class _SkeletonState extends State<Skeleton>
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(widget.radius),
+            border: borderColor == null ? null : Border.all(color: borderColor),
           ),
         ),
       ),

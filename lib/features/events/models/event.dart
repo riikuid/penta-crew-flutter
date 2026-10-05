@@ -34,6 +34,7 @@ abstract class Event with _$Event {
   List<EventPosition> get matchingPositions =>
       positions.where((p) => p.matchesMyRole).toList();
 
-  /// `14:00 – 20:00` as shown on C1/C3.
-  String get timeRange => '$startTime – $endTime';
+  /// `14:00–20:00` as shown on C1/C3 — en dash, no spaces (prototype
+  /// `screens.html` :526, :647).
+  String get timeRange => '$startTime–$endTime';
 }

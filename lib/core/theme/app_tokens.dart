@@ -43,7 +43,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
   /// 40/500, -0.03em — screen headlines ("Welcome back.").
   final TextStyle display;
 
-  /// 44/500 — the larger headline variant (Home greeting).
+  /// 44/500 — the larger headline variant (A2/A3 "Welcome back.", not Home).
   final TextStyle displayLarge;
 
   /// 44/400, -0.04em — the day number in a date block ("05").

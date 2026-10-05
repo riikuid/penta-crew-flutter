@@ -19,7 +19,7 @@ void main() {
 
     expect(find.text('MON 05 OCT'), findsOneWidget);
     expect(find.text('Arunika annual gathering'), findsOneWidget);
-    expect(find.text('14:00 – 20:00 · JIExpo Kemayoran, Hall B'), findsOneWidget);
+    expect(find.text('14:00–20:00 · JIExpo Kemayoran, Hall B'), findsOneWidget);
     expect(find.text('Crew'), findsOneWidget);
     expect(find.text('Trainee'), findsNothing, reason: 'non-matching positions are hidden');
     expect(find.byIcon(Icons.schedule), findsOneWidget, reason: 'urgent → clock chip');

@@ -52,7 +52,7 @@ void main() {
     test('parses the contract sample', () {
       final event = Event.fromJson(eventJson);
       expect(event.date, DateTime(2026, 10, 5));
-      expect(event.timeRange, '14:00 – 20:00');
+      expect(event.timeRange, '14:00–20:00');
       expect(event.isUrgent, isTrue);
       expect(event.positions, hasLength(2));
       expect(event.matchingPositions.map((p) => p.role.name), ['Crew']);

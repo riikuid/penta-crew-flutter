@@ -6,7 +6,8 @@ import 'eyebrow.dart';
 
 /// Eyebrow label stacked 8px above any form control. Field-level errors are
 /// rendered by the control itself (via `InputDecoration.errorText`) so client
-/// validation and server `fieldErrors` look identical.
+/// validation and server `fieldErrors` look identical — as the A3 row:
+/// 16 px alert icon, 8 px gap, 14 px error text (see [FieldError]).
 class LabeledField extends StatelessWidget {
   const LabeledField({
     super.key,
@@ -18,7 +19,9 @@ class LabeledField extends StatelessWidget {
   final String label;
   final Widget child;
 
-  /// Optional widget on the label row's right edge ("Forgot password?").
+  /// Optional widget on the label row's right edge (e.g. a character count).
+  /// Note the A2 "Forgot password?" link sits *below* the password field,
+  /// right-aligned, not in this row — place it after the field instead.
   final Widget? trailing;
 
   @override
@@ -119,7 +122,9 @@ class _AppTextFieldState extends State<AppTextField> {
                 : null,
             tooltip: _obscure ? 'Show password' : 'Hide password',
             icon: Icon(
-              _obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              _obscure
+                  ? Icons.visibility_outlined
+                  : Icons.visibility_off_outlined,
               size: 20,
             ),
           )
@@ -149,14 +154,49 @@ class _AppTextFieldState extends State<AppTextField> {
         onFieldSubmitted: widget.onFieldSubmitted,
         onTap: widget.onTap,
         style: Theme.of(context).textTheme.bodyLarge,
+        // Server errors go through `forceErrorText` (wins over the validator)
+        // so both reach `errorBuilder` and render as the same A3 error row.
+        forceErrorText: widget.errorText,
+        errorBuilder: (context, errorText) => FieldError(errorText),
         decoration: InputDecoration(
           hintText: widget.hint,
-          errorText: widget.errorText,
           prefixIcon: widget.prefixIcon,
           suffixIcon: suffix,
           counterText: '',
         ),
       ),
+    );
+  }
+}
+
+/// The A3 field error row: 16 px alert icon, 8 px gap, 14 px error text
+/// (prototype `screens.html` :360-361). `AppTextField` renders it through
+/// `errorBuilder`; use it directly under custom controls.
+class FieldError extends StatelessWidget {
+  const FieldError(this.message, {super.key});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.tokens;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          // Optically centre the icon on the first text line.
+          padding: const EdgeInsets.only(top: 2),
+          child: Icon(Icons.error_outline, size: 16, color: tokens.error),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            message,
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: tokens.error),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -241,10 +281,7 @@ class AppPickerField extends StatelessWidget {
             Padding(
               // Matches InputDecoration's error offset so mixed forms align.
               padding: const EdgeInsets.only(top: 8, left: 20),
-              child: Text(
-                errorText!,
-                style: textTheme.bodySmall?.copyWith(color: tokens.error),
-              ),
+              child: FieldError(errorText!),
             ),
         ],
       ),

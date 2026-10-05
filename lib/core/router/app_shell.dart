@@ -41,7 +41,10 @@ class AppShell extends StatelessWidget {
   static const _items = [
     FloatingPillNavItem(icon: Icons.home_outlined, label: 'Home'),
     FloatingPillNavItem(icon: Icons.explore_outlined, label: 'Events'),
-    FloatingPillNavItem(icon: Icons.event_available_outlined, label: 'Schedule'),
+    FloatingPillNavItem(
+      icon: Icons.event_available_outlined,
+      label: 'Schedule',
+    ),
     FloatingPillNavItem(icon: Icons.account_circle_outlined, label: 'Profile'),
   ];
 
@@ -49,6 +52,7 @@ class AppShell extends StatelessWidget {
   static const double navHeight = 64;
   static const double sideInset = 20;
   static const double bottomInset = 30;
+  static const double navGap = 24;
 
   void _onTap(int index) => navigationShell.goBranch(
     index,
@@ -60,7 +64,8 @@ class AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     final bottom = math.max(bottomInset, media.padding.bottom + 8);
-    final clearance = bottom + navHeight;
+    // Extra 24 so the last card never touches the pill (prototype :506).
+    final clearance = bottom + navHeight + navGap;
 
     return Scaffold(
       extendBody: true,

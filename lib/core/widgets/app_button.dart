@@ -11,10 +11,13 @@ enum AppButtonVariant {
   /// Blush fill, ink text — secondary actions ("Create account", "Edit").
   secondary,
 
-  /// White fill, hairline border — neutral actions ("Sign out", "Cancel").
+  /// White fill, hairline border — neutral actions ("Cancel", "Try again").
   outlined,
 
-  /// White fill, hairline border, error-red text — "Withdraw application".
+  /// Transparent fill, 1 px ink border, ink text — C5 "Withdraw application".
+  outlinedInk,
+
+  /// White fill, hairline border, error-red text — E1 "Sign out".
   danger,
 
   /// No fill — inline links ("Forgot password?").
@@ -66,9 +69,7 @@ class AppButton extends StatelessWidget {
       minimumSize: WidgetStatePropertyAll(
         Size(expand ? double.infinity : 64, size.height),
       ),
-      maximumSize: WidgetStatePropertyAll(
-        Size(double.infinity, size.height),
-      ),
+      maximumSize: WidgetStatePropertyAll(Size(double.infinity, size.height)),
     );
 
     return switch (variant) {
@@ -85,6 +86,20 @@ class AppButton extends StatelessWidget {
       AppButtonVariant.outlined => OutlinedButton(
         onPressed: callback,
         style: sizeStyle,
+        child: child,
+      ),
+      AppButtonVariant.outlinedInk => OutlinedButton(
+        onPressed: callback,
+        style: sizeStyle.copyWith(
+          backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+          side: WidgetStateProperty.resolveWith(
+            (states) => BorderSide(
+              color: states.contains(WidgetState.disabled)
+                  ? context.tokens.line
+                  : context.tokens.ink,
+            ),
+          ),
+        ),
         child: child,
       ),
       AppButtonVariant.danger => OutlinedButton(
@@ -108,7 +123,11 @@ class AppButton extends StatelessWidget {
 }
 
 class _Label extends StatelessWidget {
-  const _Label({required this.label, required this.icon, required this.loading});
+  const _Label({
+    required this.label,
+    required this.icon,
+    required this.loading,
+  });
 
   final String label;
   final IconData? icon;

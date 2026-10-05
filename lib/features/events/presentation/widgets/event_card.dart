@@ -4,6 +4,7 @@ import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/utils/app_dates.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/status_pill.dart';
+import '../../../../core/widgets/tag_chip.dart';
 import '../../models/event.dart';
 
 /// An open event as the prototype draws it:
@@ -98,7 +99,7 @@ class _List extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             '${event.timeRange} · ${event.venueName}',
-            style: text.bodyMedium?.copyWith(color: tokens.muted),
+            style: text.bodySmall?.copyWith(color: tokens.muted),
           ),
           const SizedBox(height: 16),
           Container(
@@ -113,8 +114,8 @@ class _List extends StatelessWidget {
                     spacing: 6,
                     runSpacing: 6,
                     children: [
-                      for (final p in event.matchingPositions)
-                        _PositionChip(label: p.role.name),
+                      for (final position in event.matchingPositions)
+                        TagChip(label: position.role.name),
                     ],
                   ),
                 ),
@@ -164,7 +165,7 @@ class _Compact extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _PositionChip(
+                TagChip(
                   label: AppDates.dayStamp(event.date),
                   style: tokens.eyebrow.copyWith(
                     color: tokens.ink,
@@ -202,40 +203,6 @@ class _Compact extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// 30 px scaffold-grey pill (`Crew`, `Event Manager`); also the date pill on
-/// the compact card.
-class _PositionChip extends StatelessWidget {
-  const _PositionChip({required this.label, this.style, this.height = 30});
-
-  final String label;
-  final TextStyle? style;
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = context.tokens;
-    return Container(
-      height: height,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: tokens.background,
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-      ),
-      child: Text(
-        label,
-        style:
-            style ??
-            Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: tokens.ink,
-            ),
       ),
     );
   }

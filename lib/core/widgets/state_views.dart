@@ -15,7 +15,7 @@ class LoadingView extends StatelessWidget {
 }
 
 /// Empty list / no data, in the prototype's card form: blush icon circle,
-/// 28px headline, muted body, optional action.
+/// 28px headline, 15px muted body, 14px gaps, optional action.
 class EmptyView extends StatelessWidget {
   const EmptyView({
     super.key,
@@ -117,16 +117,13 @@ class _StateCard extends StatelessWidget {
               const SizedBox(height: 14),
               if (title != null) ...[
                 Text(title!, style: textTheme.headlineMedium),
-                const SizedBox(height: 8),
+                const SizedBox(height: 14),
               ],
               Text(
                 message,
-                style: textTheme.bodySmall?.copyWith(color: tokens.muted),
+                style: textTheme.bodyMedium?.copyWith(color: tokens.muted),
               ),
-              if (action != null) ...[
-                const SizedBox(height: 20),
-                action!,
-              ],
+              if (action != null) ...[const SizedBox(height: 20), action!],
             ],
           ),
         ),

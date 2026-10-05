@@ -71,5 +71,7 @@ abstract class EventDetail with _$EventDetail {
   bool get isClosed => status == EventStatus.closed;
   List<EventPosition> get matchingPositions =>
       positions.where((p) => p.matchesMyRole).toList();
-  String get timeRange => '$startTime – $endTime';
+
+  /// `14:00–20:00` — same shape as `Event.timeRange` (en dash, no spaces).
+  String get timeRange => '$startTime–$endTime';
 }

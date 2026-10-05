@@ -9,7 +9,8 @@ abstract final class AppColors {
   /// Primary text, primary buttons, active nav/tab, "Selected" pills.
   static const Color ink = Color(0xFF221F1F);
 
-  /// Secondary text, eyebrow labels, inactive icons.
+  /// Secondary text, eyebrow labels, muted icons inside content (inactive
+  /// nav icons are ink, not muted).
   static const Color muted = Color(0xFF6F6B69);
 
   /// Cards, inputs, the floating nav.
