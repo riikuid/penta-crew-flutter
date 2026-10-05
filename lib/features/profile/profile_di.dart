@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import 'avatar_picker.dart';
+import 'presentation/cubit/change_password_cubit.dart';
 import 'presentation/cubit/edit_profile_cubit.dart';
 
 /// Profile reuses `AuthRepository` and the auth usecases (UpdateProfile,
@@ -20,4 +21,5 @@ void registerProfile(GetIt sl) {
       auth: sl(),
     ),
   );
+  sl.registerFactory(() => ChangePasswordCubit(sl()));
 }
