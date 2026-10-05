@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: _blockGap),
                   _inset(_buildGreeting(context, state, user, now)),
                   const SizedBox(height: _blockGap),
-                  _inset(_buildNextShift(context, state, user, now)),
+                  _inset(_buildNextShift(context, state, user)),
                   const SizedBox(height: _blockGap),
                   _inset(_buildCounters(context, state)),
                   const SizedBox(height: _blockGap),
@@ -159,12 +159,7 @@ class HomeScreen extends StatelessWidget {
     };
   }
 
-  Widget _buildNextShift(
-    BuildContext context,
-    HomeState state,
-    User? user,
-    DateTime now,
-  ) {
+  Widget _buildNextShift(BuildContext context, HomeState state, User? user) {
     final tokens = context.tokens;
     return switch (state.nextShift) {
       SectionLoading() => Skeleton.card(height: 290, color: tokens.accent),
