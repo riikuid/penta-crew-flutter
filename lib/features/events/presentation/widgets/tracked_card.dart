@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_tokens.dart';
-import '../../../../core/utils/app_dates.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/progress_timeline.dart';
 import '../../../../core/widgets/status_pill.dart';
@@ -81,7 +80,7 @@ class TrackedCard extends StatelessWidget {
     final later = decided ? TimelineStepState.done : TimelineStepState.upcoming;
     return [
       const TimelineStep(label: 'Applied', state: TimelineStepState.done),
-      TimelineStep(label: AppDates.closes(application.closesAt), state: later),
+      TimelineStep(label: EventFormats.closes(application.closesAt), state: later),
       TimelineStep(label: 'Result', state: later),
     ];
   }
