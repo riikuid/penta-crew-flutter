@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/env.dart';
 import '../../../../core/router/app_routes.dart';
+import '../../../../core/theme/app_tokens.dart';
 import '../../../../core/widgets/state_views.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
 
-/// Waits for `AuthCubit.checkSession()` (started in `main.dart`) and then goes
-/// to `?from=` or home. Guards take over from there (home → login if signed out).
+/// A1. Waits for `AuthCubit.checkSession()` (started in `main.dart`) and then
+/// goes to `?from=` or home. Guards take over from there (home → login if
+/// signed out).
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key, this.from});
 
@@ -29,11 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  void _maybeLeave(AuthState state) {
-    if (state is AuthUnknown || state is AuthUnavailable) return;
-    context.go(widget.from ?? AppRoutes.home);
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
@@ -45,22 +42,40 @@ class _SplashScreenState extends State<SplashScreen> {
               message: message,
               onRetry: () => context.read<AuthCubit>().checkSession(),
             ),
-            _ => Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    Env.appName,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: 24),
-                  const CircularProgressIndicator.adaptive(),
-                ],
-              ),
-            ),
+            _ => const _Brand(),
           },
         );
       },
+    );
+  }
+
+  void _maybeLeave(AuthState state) {
+    if (state is AuthUnknown || state is AuthUnavailable) return;
+    context.go(widget.from ?? AppRoutes.home);
+  }
+}
+
+/// Centred wordmark over the "Freelance event crew" eyebrow (A1). There is no
+/// logo asset in the repo yet, so the app name stands in for the 168 px image.
+class _Brand extends StatelessWidget {
+  const _Brand();
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.tokens;
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(Env.appName, style: tokens.display, textAlign: TextAlign.center),
+          const SizedBox(height: 28),
+          Text(
+            'Freelance event crew'.toUpperCase(),
+            // A1 tracks wider than the other eyebrows: 0.08em × 11px.
+            style: tokens.eyebrow.copyWith(letterSpacing: 0.88),
+          ),
+        ],
+      ),
     );
   }
 }

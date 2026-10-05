@@ -9,6 +9,8 @@ import 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._login, this._auth) : super(const LoginState.idle());
 
+  static const invalidCredentialsCode = 'invalid_credentials';
+
   final Login _login;
   final AuthCubit _auth;
 
@@ -20,8 +22,12 @@ class LoginCubit extends Cubit<LoginState> {
       case Success(:final value):
         _auth.setAuthenticated(value.user);
         emit(const LoginState.success());
+      case Failed(code: invalidCredentialsCode):
+        emit(const LoginState.invalidCredentials());
       case Failed(:final message, :final fieldErrors):
-        emit(LoginState.failure(message: message, fieldErrors: fieldErrors ?? {}));
+        emit(
+          LoginState.failure(message: message, fieldErrors: fieldErrors ?? {}),
+        );
     }
   }
 }
