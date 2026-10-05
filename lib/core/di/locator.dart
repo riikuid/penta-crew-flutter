@@ -4,6 +4,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 import '../../features/auth/auth_di.dart';
 import '../../features/events/events_di.dart';
+import '../../features/home/home_di.dart';
 import '../../features/notifications/notifications_di.dart';
 import '../../features/profile/profile_di.dart';
 import '../../features/sample/sample_di.dart';
@@ -43,6 +44,7 @@ Future<void> setupLocator() async {
   registerAuth(sl);
   registerEvents(sl);
   registerSchedule(sl);
+  registerHome(sl);
   registerNotifications(sl);
   registerProfile(sl);
   registerVerification(sl);

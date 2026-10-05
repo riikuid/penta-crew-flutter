@@ -67,6 +67,12 @@ Backend **belum ada**, jadi kita yang mengusulkan bentuknya.
   bentrok dengan nama tab: label eyebrow `WAITING` (bukan `TRACKED`),
   sub-copy tetap "waiting for selection". Final copy dikunci saat implementasi
   Home.
+- **Copy final counter Home (TASK-018, 5 Okt 2026):** eyebrow `Waiting`
+  (dirender `WAITING`), numeral `{waiting_count:02}` dari `meta.total`
+  `GET /applications?status=waiting&per_page=1`, sub-copy
+  **`applications pending`** — bukan "waiting for selection", karena
+  mengulang eyebrow-nya ("WAITING … waiting for selection"). Kartu tetap
+  menuju tab Events (Tracked).
 - Application yang **di-withdraw tidak muncul** di Tracked, tidak dihitung di
   counter, dan tidak muncul di History.
 - Default yang diusulkan (belum dikonfirmasi eksplisit, tandai jika keberatan):
