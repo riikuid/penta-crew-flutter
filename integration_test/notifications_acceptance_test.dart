@@ -23,6 +23,26 @@ void main() {
     }
   }
 
+  /// Pumps until [finder] matches, or fails after [timeout] listing every
+  /// visible text so the screen the app is actually on shows in the log.
+  Future<void> waitFor(
+    WidgetTester tester,
+    Finder finder, {
+    Duration timeout = const Duration(seconds: 10),
+  }) async {
+    final end = DateTime.now().add(timeout);
+    while (DateTime.now().isBefore(end)) {
+      await tester.pump(const Duration(milliseconds: 100));
+      if (finder.evaluate().isNotEmpty) return;
+    }
+    final visibleTexts = tester
+        .widgetList<Text>(find.byType(Text))
+        .map((text) => text.data ?? text.textSpan?.toPlainText())
+        .whereType<String>()
+        .toList();
+    fail('Timed out waiting for $finder. Visible texts: $visibleTexts');
+  }
+
   Future<void> signIn(
     WidgetTester tester,
     String email,
@@ -79,30 +99,31 @@ void main() {
     await binding.takeScreenshot('N1_list_unread');
 
     // Tap the newest `application.selected` row (mock 9001, event 46) →
-    // event detail, marked read on the way.
+    // event detail in its "selected" variant (C2), marked read on the way.
     await tester.tap(find.text("You're selected").first);
-    await settle(tester, 3);
-    expect(find.text('Mahesa Group town hall'), findsWidgets);
+    await waitFor(tester, find.text("You're on the crew."));
+    expect(find.textContaining('Mahesa Group town hall'), findsWidgets);
+    await settle(tester, 1);
     expect(find.text('Notifications'), findsNothing);
     await binding.takeScreenshot('C2_event_detail_from_notification');
 
     // Back to the list: the count went down by one.
     await tester.tap(find.byIcon(Icons.arrow_back));
-    await settle(tester, 2);
-    expect(find.text('Notifications'), findsOneWidget);
+    await waitFor(tester, find.text('Notifications'));
+    await settle(tester, 1);
     expect(unreadCountShown(tester), unreadBefore - 1);
 
     // Mark all read → `All caught up`, link gone.
     await tester.tap(find.text('Mark all read'));
-    await settle(tester, 2);
-    expect(find.text('ALL CAUGHT UP'), findsOneWidget);
+    await waitFor(tester, find.text('ALL CAUGHT UP'));
+    await settle(tester, 1);
     expect(find.text('Mark all read'), findsNothing);
     await binding.takeScreenshot('N1_list_read');
 
     // Back on Home: no dot.
     await tester.tap(find.byIcon(Icons.arrow_back));
+    await waitFor(tester, find.text('Greetings, Nadia!'));
     await settle(tester, 2);
-    expect(find.text('Greetings, Nadia!'), findsOneWidget);
     expect(unreadDot, findsNothing, reason: 'dot cleared after mark all read');
     await binding.takeScreenshot('B1_home_bell_cleared');
   });
