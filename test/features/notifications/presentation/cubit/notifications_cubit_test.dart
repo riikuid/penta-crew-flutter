@@ -7,6 +7,7 @@ import 'package:penta_crew/core/usecase/usecase.dart';
 import 'package:penta_crew/features/notifications/models/app_notification.dart';
 import 'package:penta_crew/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:penta_crew/features/notifications/presentation/cubit/notifications_state.dart';
+import 'package:penta_crew/features/notifications/presentation/cubit/unread_count_cubit.dart';
 import 'package:penta_crew/features/notifications/usecases/get_notifications.dart';
 import 'package:penta_crew/features/notifications/usecases/mark_all_notifications_read.dart';
 import 'package:penta_crew/features/notifications/usecases/mark_notification_read.dart';
@@ -20,10 +21,14 @@ class _MockMarkNotificationRead extends Mock implements MarkNotificationRead {}
 class _MockMarkAllNotificationsRead extends Mock
     implements MarkAllNotificationsRead {}
 
+class _MockUnreadCountCubit extends MockCubit<int>
+    implements UnreadCountCubit {}
+
 void main() {
   late _MockGetNotifications getNotifications;
   late _MockMarkNotificationRead markNotificationRead;
   late _MockMarkAllNotificationsRead markAllNotificationsRead;
+  late _MockUnreadCountCubit unreadCount;
 
   setUpAll(() {
     registerFallbackValue(const GetNotificationsParams(page: 1));
@@ -34,6 +39,7 @@ void main() {
     getNotifications = _MockGetNotifications();
     markNotificationRead = _MockMarkNotificationRead();
     markAllNotificationsRead = _MockMarkAllNotificationsRead();
+    unreadCount = _MockUnreadCountCubit();
     when(() => markNotificationRead(any()))
         .thenAnswer((_) async => const Result.success(null));
     when(() => markAllNotificationsRead(any()))
@@ -56,6 +62,7 @@ void main() {
     getNotifications: getNotifications,
     markNotificationRead: markNotificationRead,
     markAllNotificationsRead: markAllNotificationsRead,
+    unreadCount: unreadCount,
   );
 
   final twoUnread = [notification(), notification(id: 9002)];
@@ -75,6 +82,7 @@ void main() {
             .having((state) => state.unreadCount, 'unreadCount', 5)
             .having((state) => state.hasReachedMax, 'hasReachedMax', true),
       ],
+      verify: (_) => verify(() => unreadCount.set(5)).called(1),
     );
 
     blocTest<NotificationsCubit, NotificationsState>(
@@ -271,7 +279,10 @@ void main() {
             .having((state) => state.data[1].isRead, 'second unread', isFalse)
             .having((state) => state.unreadCount, 'unreadCount', 1),
       ],
-      verify: (_) => verify(() => markNotificationRead(9001)).called(1),
+      verify: (_) {
+        verify(() => markNotificationRead(9001)).called(1);
+        verify(() => unreadCount.decrement()).called(1);
+      },
     );
 
     blocTest<NotificationsCubit, NotificationsState>(
@@ -310,7 +321,10 @@ void main() {
       },
       skip: 2,
       expect: () => <NotificationsState>[],
-      verify: (_) => verifyNever(() => markNotificationRead(any())),
+      verify: (_) {
+        verifyNever(() => markNotificationRead(any()));
+        verifyNever(() => unreadCount.decrement());
+      },
     );
 
     blocTest<NotificationsCubit, NotificationsState>(
@@ -365,8 +379,10 @@ void main() {
             .having((state) => state.data[2].readAt, 'existing readAt', now)
             .having((state) => state.unreadCount, 'unreadCount', 0),
       ],
-      verify: (_) =>
-          verify(() => markAllNotificationsRead(const NoParams())).called(1),
+      verify: (_) {
+        verify(() => markAllNotificationsRead(const NoParams())).called(1);
+        verify(() => unreadCount.clear()).called(1);
+      },
     );
 
     blocTest<NotificationsCubit, NotificationsState>(
@@ -384,7 +400,10 @@ void main() {
       },
       skip: 2,
       expect: () => <NotificationsState>[],
-      verify: (_) => verifyNever(() => markAllNotificationsRead(any())),
+      verify: (_) {
+        verifyNever(() => markAllNotificationsRead(any()));
+        verifyNever(() => unreadCount.clear());
+      },
     );
   });
 }

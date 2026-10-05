@@ -8,6 +8,7 @@ import '../../usecases/get_notifications.dart';
 import '../../usecases/mark_all_notifications_read.dart';
 import '../../usecases/mark_notification_read.dart';
 import 'notifications_state.dart';
+import 'unread_count_cubit.dart';
 
 /// N1 Notifications list. Page-scoped: provided by the route, closed when the
 /// page is popped.
@@ -17,16 +18,21 @@ import 'notifications_state.dart';
 /// [loadMore] appending the next page. [markRead] and [markAllRead] are
 /// optimistic — the local state changes first and a failed `POST` is ignored
 /// (both endpoints are idempotent, contract §6.3/§6.4; the next load resyncs).
+///
+/// Every change to the count is mirrored into the app-scoped
+/// [UnreadCountCubit] so the Home bell dot stays right without a refetch.
 class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit({
     required this._getNotifications,
     required this._markNotificationRead,
     required this._markAllNotificationsRead,
+    required this._unreadCount,
   }) : super(const NotificationsState.initial());
 
   final GetNotifications _getNotifications;
   final MarkNotificationRead _markNotificationRead;
   final MarkAllNotificationsRead _markAllNotificationsRead;
+  final UnreadCountCubit _unreadCount;
 
   /// Bumped by every first-page load; a load-more response whose sequence is
   /// stale (a load/refresh started after it) is discarded.
@@ -87,6 +93,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         unreadCount: max(0, current.unreadCount - 1),
       ),
     );
+    _unreadCount.decrement();
 
     await _markNotificationRead(id);
   }
@@ -108,6 +115,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         unreadCount: 0,
       ),
     );
+    _unreadCount.clear();
 
     await _markAllNotificationsRead(const NoParams());
   }
@@ -124,10 +132,12 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
     switch (result) {
       case Success(:final value):
+        final unreadCount = _unreadCountOf(value.meta['unread_count']);
+        _unreadCount.set(unreadCount);
         emit(
           NotificationsState.loaded(
             data: value.data,
-            unreadCount: _unreadCountOf(value.meta['unread_count']),
+            unreadCount: unreadCount,
             page: value.currentPage,
             hasReachedMax: !value.hasMore,
           ),
