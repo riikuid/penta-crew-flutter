@@ -180,9 +180,8 @@ class _UpcomingTabState extends State<_UpcomingTab> {
         header: widget.header,
         slivers: [
           switch (state) {
-            UpcomingInitial() || UpcomingLoading() => _bodySliver(
-              const _UpcomingSkeleton(),
-            ),
+            UpcomingInitial() ||
+            UpcomingLoading() => _bodySliver(const _UpcomingSkeleton()),
             UpcomingError(:final message) => SliverToBoxAdapter(
               child: ErrorView(message: message, onRetry: _cubit.retry),
             ),
@@ -281,7 +280,7 @@ class _UpcomingRow extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(width: 52, child: _buildDateRail(event, tokens)),
         const SizedBox(width: 16),
@@ -448,9 +447,8 @@ class _HistoryTabState extends State<_HistoryTab> {
         header: widget.header,
         slivers: [
           switch (state) {
-            HistoryInitial() || HistoryLoading() => _bodySliver(
-              const _HistorySkeleton(),
-            ),
+            HistoryInitial() ||
+            HistoryLoading() => _bodySliver(const _HistorySkeleton()),
             HistoryError(:final message) => SliverToBoxAdapter(
               child: ErrorView(message: message, onRetry: _cubit.retry),
             ),
@@ -557,9 +555,8 @@ class _WorkedCounter extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 2),
             child: Text(
               caption,
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: tokens.muted, height: 1.4),
+              style: Theme.of(context).textTheme.bodySmall
+                  ?.copyWith(color: tokens.muted, height: 1.4),
             ),
           ),
         ],
