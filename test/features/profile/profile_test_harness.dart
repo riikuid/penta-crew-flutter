@@ -81,6 +81,13 @@ class AuthHarness {
   }
 }
 
+/// Phone-width, tall viewport so lazily built lists render every row.
+void useTallViewport(WidgetTester tester) {
+  tester.view.physicalSize = const Size(430, 2200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+}
+
 /// Pumps [home] at `/` inside a `GoRouter` whose other routes render their
 /// own path, so navigation can be asserted with `find.text(path)`.
 /// [extraRoutes] are mounted as-is (e.g. to provide a cubit on a page).
@@ -91,6 +98,7 @@ Future<GoRouter> pumpRouted(
   List<String> stubPaths = const [],
   List<RouteBase> extraRoutes = const [],
 }) async {
+  useTallViewport(tester);
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => home),

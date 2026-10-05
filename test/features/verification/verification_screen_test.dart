@@ -68,7 +68,8 @@ void main() {
         (_) async => Result.success(pendingUser),
       );
 
-      await tester.fling(find.byType(CustomScrollView), const Offset(0, 400), 1000);
+      // RefreshIndicator triggers after a quarter of the viewport height.
+      await tester.drag(find.byType(CustomScrollView), const Offset(0, 900));
       await tester.pumpAndSettle();
 
       verify(() => auth.getMe(any())).called(1);
