@@ -27,14 +27,6 @@ class CheckEmailScreen extends StatelessWidget {
           _ => 'Resend',
         };
         return AuthPage(
-          children: [
-            AuthIntro(
-              headline: 'Check your email.',
-              body:
-                  'If $email is registered, we\'ve sent a link to reset your '
-                  'password. The link works for 60 minutes.',
-            ),
-          ],
           actions: [
             AppButton(
               label: 'Back to sign in',
@@ -48,6 +40,14 @@ class CheckEmailScreen extends StatelessWidget {
               onPressed: state is CheckEmailReady
                   ? context.read<CheckEmailCubit>().resend
                   : null,
+            ),
+          ],
+          children: [
+            AuthIntro(
+              headline: 'Check your email.',
+              body:
+                  'If $email is registered, we\'ve sent a link to reset your '
+                  'password. The link works for 60 minutes.',
             ),
           ],
         );

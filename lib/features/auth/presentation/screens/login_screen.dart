@@ -53,6 +53,20 @@ class _LoginScreenState extends State<LoginScreen> {
             : const <String, List<String>>{};
 
         return AuthPage(
+          actions: [
+            AppButton(
+              label: 'Sign in',
+              loading: submitting,
+              onPressed: _submit,
+            ),
+            AppButton(
+              label: 'Create account',
+              variant: AppButtonVariant.secondary,
+              onPressed: submitting
+                  ? null
+                  : () => context.push(AuthRoutes.register),
+            ),
+          ],
           children: [
             AuthIntro(
               headline: 'Welcome back.',
@@ -104,20 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            ),
-          ],
-          actions: [
-            AppButton(
-              label: 'Sign in',
-              loading: submitting,
-              onPressed: _submit,
-            ),
-            AppButton(
-              label: 'Create account',
-              variant: AppButtonVariant.secondary,
-              onPressed: submitting
-                  ? null
-                  : () => context.push(AuthRoutes.register),
             ),
           ],
         );

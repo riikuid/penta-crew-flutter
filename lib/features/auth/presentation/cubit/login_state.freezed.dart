@@ -56,13 +56,14 @@ extension LoginStatePatterns on LoginState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoginIdle value)?  idle,TResult Function( LoginSubmitting value)?  submitting,TResult Function( LoginSuccess value)?  success,TResult Function( LoginFailure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoginIdle value)?  idle,TResult Function( LoginSubmitting value)?  submitting,TResult Function( LoginSuccess value)?  success,TResult Function( LoginInvalidCredentials value)?  invalidCredentials,TResult Function( LoginFailure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoginIdle() when idle != null:
 return idle(_that);case LoginSubmitting() when submitting != null:
 return submitting(_that);case LoginSuccess() when success != null:
-return success(_that);case LoginFailure() when failure != null:
+return success(_that);case LoginInvalidCredentials() when invalidCredentials != null:
+return invalidCredentials(_that);case LoginFailure() when failure != null:
 return failure(_that);case _:
   return orElse();
 
@@ -81,13 +82,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoginIdle value)  idle,required TResult Function( LoginSubmitting value)  submitting,required TResult Function( LoginSuccess value)  success,required TResult Function( LoginFailure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoginIdle value)  idle,required TResult Function( LoginSubmitting value)  submitting,required TResult Function( LoginSuccess value)  success,required TResult Function( LoginInvalidCredentials value)  invalidCredentials,required TResult Function( LoginFailure value)  failure,}){
 final _that = this;
 switch (_that) {
 case LoginIdle():
 return idle(_that);case LoginSubmitting():
 return submitting(_that);case LoginSuccess():
-return success(_that);case LoginFailure():
+return success(_that);case LoginInvalidCredentials():
+return invalidCredentials(_that);case LoginFailure():
 return failure(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -102,13 +104,14 @@ return failure(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoginIdle value)?  idle,TResult? Function( LoginSubmitting value)?  submitting,TResult? Function( LoginSuccess value)?  success,TResult? Function( LoginFailure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoginIdle value)?  idle,TResult? Function( LoginSubmitting value)?  submitting,TResult? Function( LoginSuccess value)?  success,TResult? Function( LoginInvalidCredentials value)?  invalidCredentials,TResult? Function( LoginFailure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case LoginIdle() when idle != null:
 return idle(_that);case LoginSubmitting() when submitting != null:
 return submitting(_that);case LoginSuccess() when success != null:
-return success(_that);case LoginFailure() when failure != null:
+return success(_that);case LoginInvalidCredentials() when invalidCredentials != null:
+return invalidCredentials(_that);case LoginFailure() when failure != null:
 return failure(_that);case _:
   return null;
 
@@ -126,12 +129,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  submitting,TResult Function()?  success,TResult Function( String message,  Map<String, List<String>> fieldErrors)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  submitting,TResult Function()?  success,TResult Function()?  invalidCredentials,TResult Function( String message,  Map<String, List<String>> fieldErrors)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoginIdle() when idle != null:
 return idle();case LoginSubmitting() when submitting != null:
 return submitting();case LoginSuccess() when success != null:
-return success();case LoginFailure() when failure != null:
+return success();case LoginInvalidCredentials() when invalidCredentials != null:
+return invalidCredentials();case LoginFailure() when failure != null:
 return failure(_that.message,_that.fieldErrors);case _:
   return orElse();
 
@@ -150,12 +154,13 @@ return failure(_that.message,_that.fieldErrors);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  submitting,required TResult Function()  success,required TResult Function( String message,  Map<String, List<String>> fieldErrors)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  submitting,required TResult Function()  success,required TResult Function()  invalidCredentials,required TResult Function( String message,  Map<String, List<String>> fieldErrors)  failure,}) {final _that = this;
 switch (_that) {
 case LoginIdle():
 return idle();case LoginSubmitting():
 return submitting();case LoginSuccess():
-return success();case LoginFailure():
+return success();case LoginInvalidCredentials():
+return invalidCredentials();case LoginFailure():
 return failure(_that.message,_that.fieldErrors);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -170,12 +175,13 @@ return failure(_that.message,_that.fieldErrors);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  submitting,TResult? Function()?  success,TResult? Function( String message,  Map<String, List<String>> fieldErrors)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  submitting,TResult? Function()?  success,TResult? Function()?  invalidCredentials,TResult? Function( String message,  Map<String, List<String>> fieldErrors)?  failure,}) {final _that = this;
 switch (_that) {
 case LoginIdle() when idle != null:
 return idle();case LoginSubmitting() when submitting != null:
 return submitting();case LoginSuccess() when success != null:
-return success();case LoginFailure() when failure != null:
+return success();case LoginInvalidCredentials() when invalidCredentials != null:
+return invalidCredentials();case LoginFailure() when failure != null:
 return failure(_that.message,_that.fieldErrors);case _:
   return null;
 
@@ -272,6 +278,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
     return 'LoginState.success()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class LoginInvalidCredentials implements LoginState {
+  const LoginInvalidCredentials();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginInvalidCredentials);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+    return 'LoginState.invalidCredentials()';
 }
 
 

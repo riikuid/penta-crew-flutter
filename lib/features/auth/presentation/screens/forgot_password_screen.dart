@@ -45,6 +45,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         final submitting = state is ForgotPasswordSubmitting;
         return AuthPage(
           leading: const CircleBackButton(),
+          actions: [
+            AppButton(
+              label: 'Send link',
+              loading: submitting,
+              onPressed: _submit,
+            ),
+            AppButton(
+              label: 'Back to sign in',
+              variant: AppButtonVariant.ghost,
+              size: AppButtonSize.medium,
+              onPressed: submitting ? null : () => context.go(AppRoutes.login),
+            ),
+          ],
           children: [
             const AuthIntro(
               headline: 'Reset your password.',
@@ -70,19 +83,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         : 'Enter a valid email address.',
                 onFieldSubmitted: (_) => _submit(),
               ),
-            ),
-          ],
-          actions: [
-            AppButton(
-              label: 'Send link',
-              loading: submitting,
-              onPressed: _submit,
-            ),
-            AppButton(
-              label: 'Back to sign in',
-              variant: AppButtonVariant.ghost,
-              size: AppButtonSize.medium,
-              onPressed: submitting ? null : () => context.go(AppRoutes.login),
             ),
           ],
         );
