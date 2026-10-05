@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:penta_crew/core/di/locator.dart';
 import 'package:penta_crew/core/theme/app_theme.dart';
 import 'package:penta_crew/core/widgets/skeleton.dart';
 import 'package:penta_crew/core/widgets/status_pill.dart';
@@ -18,6 +19,7 @@ import 'package:penta_crew/features/home/presentation/cubit/home_cubit.dart';
 import 'package:penta_crew/features/home/presentation/cubit/home_state.dart';
 import 'package:penta_crew/features/home/presentation/cubit/section.dart';
 import 'package:penta_crew/features/home/presentation/screens/home_screen.dart';
+import 'package:penta_crew/features/notifications/presentation/cubit/unread_count_cubit.dart';
 import 'package:penta_crew/features/schedule/models/history_summary.dart';
 import 'package:toastification/toastification.dart';
 
@@ -26,6 +28,9 @@ import '../../../events/event_models_test.dart' show applicationJson, eventJson;
 class _MockHomeCubit extends MockCubit<HomeState> implements HomeCubit {}
 
 class _MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
+
+class _MockUnreadCountCubit extends MockCubit<int>
+    implements UnreadCountCubit {}
 
 void main() {
   // 8 days before the contract sample event (5 Oct 2026).
@@ -76,7 +81,15 @@ void main() {
     when(() => authCubit.user).thenReturn(user);
     when(() => homeCubit.refresh()).thenAnswer((_) async {});
     when(() => homeCubit.retry(any())).thenAnswer((_) async {});
+
+    // The bell's `UnreadDot` reads the app-scoped cubit from `sl`.
+    final unreadCount = _MockUnreadCountCubit();
+    when(() => unreadCount.state).thenReturn(0);
+    when(unreadCount.fetch).thenAnswer((_) async {});
+    sl.registerSingleton<UnreadCountCubit>(unreadCount);
   });
+
+  tearDown(() async => sl.reset());
 
   Future<void> pumpHome(WidgetTester tester, HomeState state) async {
     // Tall enough for the whole B1 column; the ListView builds lazily.

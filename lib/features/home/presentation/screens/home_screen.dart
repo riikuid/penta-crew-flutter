@@ -16,6 +16,7 @@ import '../../../events/models/application.dart';
 import '../../../events/models/event.dart';
 import '../../../events/presentation/widgets/event_card.dart';
 import '../../../notifications/notifications_routes.dart';
+import '../../../notifications/presentation/widgets/unread_dot.dart';
 import '../../../schedule/schedule_routes.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -339,8 +340,8 @@ class _LogoMark extends StatelessWidget {
   );
 }
 
-/// 44 px white circle with a hairline border and a 20 px bell (B1 `:509`).
-/// The unread badge arrives with Notifications (T9).
+/// 44 px white circle with a hairline border and a 20 px bell (B1 `:509`),
+/// wrapped in the unread dot.
 class _BellButton extends StatelessWidget {
   const _BellButton({required this.onTap});
 
@@ -349,19 +350,21 @@ class _BellButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    return Material(
-      color: tokens.surface,
-      shape: CircleBorder(side: BorderSide(color: tokens.line)),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: SizedBox(
-          width: 44,
-          height: 44,
-          child: Icon(
-            Icons.notifications_outlined,
-            size: 20,
-            color: tokens.ink,
+    return UnreadDot(
+      child: Material(
+        color: tokens.surface,
+        shape: CircleBorder(side: BorderSide(color: tokens.line)),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: SizedBox(
+            width: 44,
+            height: 44,
+            child: Icon(
+              Icons.notifications_outlined,
+              size: 20,
+              color: tokens.ink,
+            ),
           ),
         ),
       ),
