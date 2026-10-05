@@ -129,14 +129,14 @@ return saved(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( String message)?  error,TResult Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)?  ready,TResult Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)?  failure,TResult Function()?  saved,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( String message)?  error,TResult Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)?  ready,TResult Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)?  failure,TResult Function( bool resubmitted)?  saved,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case EditProfileLoading() when loading != null:
 return loading();case EditProfileError() when error != null:
 return error(_that.message);case EditProfileReady() when ready != null:
 return ready(_that.branches,_that.saving,_that.uploadingAvatar);case EditProfileFailure() when failure != null:
 return failure(_that.branches,_that.message,_that.fieldErrors);case EditProfileSaved() when saved != null:
-return saved();case _:
+return saved(_that.resubmitted);case _:
   return orElse();
 
 }
@@ -154,14 +154,14 @@ return saved();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( String message)  error,required TResult Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)  ready,required TResult Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)  failure,required TResult Function()  saved,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( String message)  error,required TResult Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)  ready,required TResult Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)  failure,required TResult Function( bool resubmitted)  saved,}) {final _that = this;
 switch (_that) {
 case EditProfileLoading():
 return loading();case EditProfileError():
 return error(_that.message);case EditProfileReady():
 return ready(_that.branches,_that.saving,_that.uploadingAvatar);case EditProfileFailure():
 return failure(_that.branches,_that.message,_that.fieldErrors);case EditProfileSaved():
-return saved();}
+return saved(_that.resubmitted);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -175,14 +175,14 @@ return saved();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( String message)?  error,TResult? Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)?  ready,TResult? Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)?  failure,TResult? Function()?  saved,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( String message)?  error,TResult? Function( List<Branch> branches,  bool saving,  bool uploadingAvatar)?  ready,TResult? Function( List<Branch> branches,  String message,  Map<String, List<String>> fieldErrors)?  failure,TResult? Function( bool resubmitted)?  saved,}) {final _that = this;
 switch (_that) {
 case EditProfileLoading() when loading != null:
 return loading();case EditProfileError() when error != null:
 return error(_that.message);case EditProfileReady() when ready != null:
 return ready(_that.branches,_that.saving,_that.uploadingAvatar);case EditProfileFailure() when failure != null:
 return failure(_that.branches,_that.message,_that.fieldErrors);case EditProfileSaved() when saved != null:
-return saved();case _:
+return saved(_that.resubmitted);case _:
   return null;
 
 }
@@ -193,8 +193,8 @@ return saved();case _:
 /// @nodoc
 
 
-class EditProfileLoading implements EditProfileState {
-  const EditProfileLoading();
+class EditProfileLoading extends EditProfileState {
+  const EditProfileLoading(): super._();
   
 
 
@@ -225,8 +225,8 @@ String toString() {
 /// @nodoc
 
 
-class EditProfileError implements EditProfileState {
-  const EditProfileError(this.message);
+class EditProfileError extends EditProfileState {
+  const EditProfileError(this.message): super._();
   
 
  final  String message;
@@ -293,8 +293,8 @@ as String,
 /// @nodoc
 
 
-class EditProfileReady implements EditProfileState {
-  const EditProfileReady({required  List<Branch> branches, this.saving = false, this.uploadingAvatar = false}): _branches = branches;
+class EditProfileReady extends EditProfileState {
+  const EditProfileReady({required  List<Branch> branches, this.saving = false, this.uploadingAvatar = false}): _branches = branches,super._();
   
 
  final  List<Branch> _branches;
@@ -371,8 +371,8 @@ as bool,
 /// @nodoc
 
 
-class EditProfileFailure implements EditProfileState {
-  const EditProfileFailure({required  List<Branch> branches, required this.message,  Map<String, List<String>> fieldErrors = const {}}): _branches = branches,_fieldErrors = fieldErrors;
+class EditProfileFailure extends EditProfileState {
+  const EditProfileFailure({required  List<Branch> branches, required this.message,  Map<String, List<String>> fieldErrors = const {}}): _branches = branches,_fieldErrors = fieldErrors,super._();
   
 
  final  List<Branch> _branches;
@@ -455,33 +455,69 @@ as Map<String, List<String>>,
 /// @nodoc
 
 
-class EditProfileSaved implements EditProfileState {
-  const EditProfileSaved();
+class EditProfileSaved extends EditProfileState {
+  const EditProfileSaved({this.resubmitted = false}): super._();
   
 
+@JsonKey() final  bool resubmitted;
 
-
+/// Create a copy of EditProfileState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EditProfileSavedCopyWith<EditProfileSaved> get copyWith => _$EditProfileSavedCopyWithImpl<EditProfileSaved>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileSaved);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileSaved&&(identical(other.resubmitted, resubmitted) || other.resubmitted == resubmitted));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode {
+    return Object.hash(runtimeType,resubmitted);
+}
 
 @override
 String toString() {
-    return 'EditProfileState.saved()';
+    return 'EditProfileState.saved(resubmitted: $resubmitted)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $EditProfileSavedCopyWith<$Res> implements $EditProfileStateCopyWith<$Res> {
+  factory $EditProfileSavedCopyWith(EditProfileSaved value, $Res Function(EditProfileSaved) _then) = _$EditProfileSavedCopyWithImpl;
+@useResult
+$Res call({
+ bool resubmitted
+});
 
 
+
+
+}
+/// @nodoc
+class _$EditProfileSavedCopyWithImpl<$Res>
+    implements $EditProfileSavedCopyWith<$Res> {
+  _$EditProfileSavedCopyWithImpl(this._self, this._then);
+
+  final EditProfileSaved _self;
+  final $Res Function(EditProfileSaved) _then;
+
+/// Create a copy of EditProfileState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? resubmitted = null,}) {
+  return _then(EditProfileSaved(
+resubmitted: null == resubmitted ? _self.resubmitted : resubmitted // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 // dart format on
