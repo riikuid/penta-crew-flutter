@@ -256,8 +256,8 @@ return $default(_that.nextShift,_that.waitingCount,_that.worked,_that.openEvents
 /// @nodoc
 
 
-class _HomeState implements HomeState {
-  const _HomeState({this.nextShift = const Section<Application?>.loading(), this.waitingCount = const Section<int>.loading(), this.worked = const Section<HistorySummary>.loading(), this.openEvents = const Section<List<Event>>.loading(), this.refreshError});
+class _HomeState extends HomeState {
+  const _HomeState({this.nextShift = const Section<Application?>.loading(), this.waitingCount = const Section<int>.loading(), this.worked = const Section<HistorySummary>.loading(), this.openEvents = const Section<List<Event>>.loading(), this.refreshError}): super._();
   
 
 /// First item of `GET /schedule/upcoming`; `null` when nothing is

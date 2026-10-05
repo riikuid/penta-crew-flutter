@@ -16,6 +16,8 @@ part 'home_state.freezed.dart';
 /// listener should react when it is non-null.
 @freezed
 abstract class HomeState with _$HomeState {
+  const HomeState._();
+
   const factory HomeState({
     /// First item of `GET /schedule/upcoming`; `null` when nothing is
     /// scheduled (B3).
@@ -31,4 +33,12 @@ abstract class HomeState with _$HomeState {
     @Default(Section<List<Event>>.loading()) Section<List<Event>> openEvents,
     String? refreshError,
   }) = _HomeState;
+
+  /// B2: nothing has answered yet, so even the request-free blocks (bell,
+  /// greeting) draw as skeletons to keep the prototype's loading frame.
+  bool get isInitialLoading =>
+      nextShift is SectionLoading &&
+      waitingCount is SectionLoading &&
+      worked is SectionLoading &&
+      openEvents is SectionLoading;
 }

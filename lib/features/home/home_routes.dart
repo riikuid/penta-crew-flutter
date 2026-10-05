@@ -18,8 +18,9 @@ abstract final class HomeRoutes {
 final GoRoute homeTabRoute = GoRoute(
   path: HomeRoutes.root,
   builder: (context, state) => BlocProvider(
-    create: (context) => sl<HomeCubit>()
-      ..load(branchId: context.read<AuthCubit>().user?.branch?.id ?? 0),
+    create: (context) =>
+        sl<HomeCubit>()
+          ..load(branchId: context.read<AuthCubit>().user?.branch?.id ?? 0),
     child: const HomeScreen(),
   ),
 );

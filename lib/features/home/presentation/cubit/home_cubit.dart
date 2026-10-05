@@ -72,25 +72,25 @@ class HomeCubit extends Cubit<HomeState> {
     HomeSection.nextShift => _run<Application?>(
       previous: state.nextShift,
       showLoading: showLoading,
-      fetch: () async => (await _getUpcomingSchedule(
-        GetUpcomingScheduleParams.next,
-      )).map((page) => page.data.firstOrNull),
+      fetch: () async =>
+          (await _getUpcomingSchedule(GetUpcomingScheduleParams.next))
+              .map((page) => page.data.firstOrNull),
       apply: (result) => state.copyWith(nextShift: result),
     ),
     HomeSection.waitingCount => _run<int>(
       previous: state.waitingCount,
       showLoading: showLoading,
-      fetch: () async => (await _getApplications(
-        GetApplicationsParams.waitingCount,
-      )).map((page) => page.total),
+      fetch: () async =>
+          (await _getApplications(GetApplicationsParams.waitingCount))
+              .map((page) => page.total),
       apply: (result) => state.copyWith(waitingCount: result),
     ),
     HomeSection.worked => _run<HistorySummary>(
       previous: state.worked,
       showLoading: showLoading,
-      fetch: () async => (await _getScheduleHistory(
-        GetScheduleHistoryParams.summaryOnly,
-      )).map((page) => HistorySummary.fromMeta(page.meta)),
+      fetch: () async =>
+          (await _getScheduleHistory(GetScheduleHistoryParams.summaryOnly))
+              .map((page) => HistorySummary.fromMeta(page.meta)),
       apply: (result) => state.copyWith(worked: result),
     ),
     HomeSection.openEvents => _run<List<Event>>(
