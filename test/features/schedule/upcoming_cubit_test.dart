@@ -120,10 +120,7 @@ void main() {
     blocTest<UpcomingCubit, UpcomingState>(
       'appends the next page and regroups; Next stays the first item',
       build: () {
-        stubPage(
-          1,
-          Result.success(schedulePage(upcomingOctober, lastPage: 2)),
-        );
+        stubPage(1, Result.success(schedulePage(upcomingOctober, lastPage: 2)));
         stubPage(
           2,
           Result.success(schedulePage(upcomingNovember, page: 2, lastPage: 2)),
@@ -181,10 +178,7 @@ void main() {
     blocTest<UpcomingCubit, UpcomingState>(
       'failure keeps the groups: transient error, then back to loaded',
       build: () {
-        stubPage(
-          1,
-          Result.success(schedulePage(upcomingOctober, lastPage: 2)),
-        );
+        stubPage(1, Result.success(schedulePage(upcomingOctober, lastPage: 2)));
         stubPage(2, const Result.failed('offline'));
         return UpcomingCubit(getUpcoming);
       },

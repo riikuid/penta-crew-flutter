@@ -68,9 +68,7 @@ class UpcomingCubit extends Cubit<UpcomingState> {
     final previous = state;
     if (showLoading) emit(const UpcomingState.loading());
 
-    final result = await _getUpcoming(
-      const GetUpcomingScheduleParams(page: 1),
-    );
+    final result = await _getUpcoming(const GetUpcomingScheduleParams(page: 1));
     if (isClosed || sequence != _sequence) return;
 
     switch (result) {

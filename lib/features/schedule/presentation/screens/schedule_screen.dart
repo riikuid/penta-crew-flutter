@@ -304,14 +304,8 @@ class _UpcomingRow extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  event.title,
-                  style: textTheme.titleMedium?.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.18,
-                  ),
-                ),
+                // titleMedium is the prototype's 18/500, -0.01em.
+                Text(event.title, style: textTheme.titleMedium),
                 const SizedBox(height: 10),
                 Text(
                   '${event.timeRange} · ${event.venueName}',

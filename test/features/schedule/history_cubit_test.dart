@@ -107,7 +107,9 @@ void main() {
         );
         stubPage(
           2,
-          Result.success(schedulePage([historyRows.last], page: 2, lastPage: 2)),
+          Result.success(
+            schedulePage([historyRows.last], page: 2, lastPage: 2),
+          ),
         );
         return HistoryCubit(getHistory);
       },
