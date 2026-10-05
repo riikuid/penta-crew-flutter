@@ -11,6 +11,7 @@ AppNotification notification({
   NotificationType type = NotificationType.applicationSelected,
   String title = "You're selected",
   String body = 'Arunika annual gathering · 5 Oct · Crew',
+  Map<String, dynamic> data = const {'event_id': 41, 'application_id': 301},
   DateTime? createdAt,
   DateTime? readAt,
 }) => AppNotification(
@@ -18,7 +19,7 @@ AppNotification notification({
   type: type,
   title: title,
   body: body,
-  data: const {'event_id': 41, 'application_id': 301},
+  data: data,
   readAt: readAt,
   createdAt: createdAt ?? now.subtract(const Duration(hours: 2)),
 );

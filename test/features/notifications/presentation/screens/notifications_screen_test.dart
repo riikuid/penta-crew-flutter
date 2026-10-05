@@ -2,11 +2,14 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:penta_crew/core/theme/app_theme.dart';
 import 'package:penta_crew/core/widgets/app_card.dart';
 import 'package:penta_crew/core/widgets/skeleton.dart';
 import 'package:penta_crew/core/widgets/state_views.dart';
+import 'package:penta_crew/features/events/events_routes.dart';
+import 'package:penta_crew/features/notifications/models/app_notification.dart';
 import 'package:penta_crew/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:penta_crew/features/notifications/presentation/cubit/notifications_state.dart';
 import 'package:penta_crew/features/notifications/presentation/screens/notifications_screen.dart';
@@ -28,6 +31,8 @@ void main() {
     when(() => cubit.markAllRead()).thenAnswer((_) async {});
   });
 
+  /// The screen at `/` plus a stub event detail route, so a row tap can be
+  /// asserted by what ends up on screen (same approach as the Schedule tests).
   Future<void> pumpScreen(
     WidgetTester tester, {
     required NotificationsState state,
@@ -41,14 +46,24 @@ void main() {
       const Stream<NotificationsState>.empty(),
       initialState: state,
     );
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: AppTheme.light(),
-        home: BlocProvider<NotificationsCubit>.value(
-          value: cubit,
-          child: NotificationsScreen(now: now),
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => BlocProvider<NotificationsCubit>.value(
+            value: cubit,
+            child: NotificationsScreen(now: now),
+          ),
         ),
-      ),
+        GoRoute(
+          path: '${EventsRoutes.root}/:id',
+          builder: (context, state) =>
+              Text('event detail ${state.pathParameters['id']}'),
+        ),
+      ],
+    );
+    await tester.pumpWidget(
+      MaterialApp.router(theme: AppTheme.light(), routerConfig: router),
     );
     await tester.pump();
   }
@@ -202,6 +217,46 @@ void main() {
 
       await tester.tap(find.text('New event for you'));
       verify(() => cubit.markRead(3)).called(1);
+    });
+
+    testWidgets('tapping application.selected opens its event detail', (
+      tester,
+    ) async {
+      await pumpScreen(
+        tester,
+        state: NotificationsState.loaded(data: items, unreadCount: 2),
+      );
+
+      await tester.tap(find.text("You're selected"));
+      await tester.pumpAndSettle();
+
+      verify(() => cubit.markRead(1)).called(1);
+      expect(find.text('event detail 41'), findsOneWidget);
+      expect(find.text('Notifications'), findsNothing);
+    });
+
+    testWidgets('tapping an unknown type marks read and stays', (tester) async {
+      await pumpScreen(
+        tester,
+        state: NotificationsState.loaded(
+          data: [
+            notification(
+              id: 7,
+              type: NotificationType.unknown,
+              title: 'Something new',
+              data: const {},
+            ),
+          ],
+          unreadCount: 1,
+        ),
+      );
+
+      await tester.tap(find.text('Something new'));
+      await tester.pumpAndSettle();
+
+      verify(() => cubit.markRead(7)).called(1);
+      expect(find.text('Notifications'), findsOneWidget);
+      expect(find.textContaining('event detail'), findsNothing);
     });
 
     testWidgets('Mark all read calls markAllRead', (tester) async {
