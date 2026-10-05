@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 
+import 'presentation/cubit/event_detail_cubit.dart';
+import 'presentation/cubit/open_events_cubit.dart';
+import 'presentation/cubit/tracked_cubit.dart';
 import 'repositories/events_repository.dart';
 import 'usecases/apply_to_event.dart';
 import 'usecases/get_applications.dart';
@@ -18,5 +21,17 @@ void registerEvents(GetIt sl) {
   sl.registerFactory(() => WithdrawApplication(sl()));
   sl.registerFactory(() => GetApplications(sl()));
 
-  // Page cubits are added by the Events feature ticket (TASK-016).
+  // Page cubits are factories; the route's BlocProvider owns their lifecycle.
+  // `OpenEventsCubit` takes the user's branch id (D-10) as `param1`.
+  sl.registerFactoryParam<OpenEventsCubit, int, void>(
+    (branchId, _) => OpenEventsCubit(sl(), branchId: branchId),
+  );
+  sl.registerFactory(() => TrackedCubit(sl()));
+  sl.registerFactory(
+    () => EventDetailCubit(
+      getEventDetail: sl(),
+      applyToEvent: sl(),
+      withdrawApplication: sl(),
+    ),
+  );
 }
