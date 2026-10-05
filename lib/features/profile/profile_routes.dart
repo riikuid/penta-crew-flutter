@@ -1,7 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/di/locator.dart';
 import '../../core/router/app_routes.dart';
 import '../../core/router/route_guard.dart';
+import 'presentation/cubit/change_password_cubit.dart';
+import 'presentation/cubit/edit_profile_cubit.dart';
 import 'presentation/screens/change_password_screen.dart';
 import 'presentation/screens/edit_profile_screen.dart';
 import 'presentation/screens/profile_screen.dart';
@@ -25,12 +29,18 @@ final List<RouteBase> profileRoutes = [
     path: ProfileRoutes.edit,
     parentNavigatorKey: rootNavigatorKey,
     redirect: guard(requireVerified: false),
-    builder: (context, state) => const EditProfileScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<EditProfileCubit>()..load(),
+      child: const EditProfileScreen(),
+    ),
   ),
   GoRoute(
     path: ProfileRoutes.password,
     parentNavigatorKey: rootNavigatorKey,
     redirect: guard(),
-    builder: (context, state) => const ChangePasswordScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (_) => sl<ChangePasswordCubit>(),
+      child: const ChangePasswordScreen(),
+    ),
   ),
 ];

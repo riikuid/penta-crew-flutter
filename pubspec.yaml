@@ -41,6 +41,7 @@ dependencies:
   # Inter. Pinned <9: v9 switched to material_ui types, which this app does not
   # use yet. Drop Inter TTFs into assets/google_fonts/ to bundle them offline.
   google_fonts: ^8.1.0
+  image_picker: ^1.2.3
 
 dev_dependencies:
   flutter_test:
