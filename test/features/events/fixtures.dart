@@ -82,8 +82,7 @@ EventDetail detail({
   positions: positions,
   briefingTime: briefingTime,
   requirements: const ['Usher', 'Registration desk', 'Any gender'],
-  description:
-      'All black, closed shoes. Briefing at 13:00 at the Hall B loading dock. Meals provided.',
+  description: 'All black, closed shoes. Briefing at 13:00 at the Hall B loading dock. Meals provided.',
   adminNote: adminNote,
   status: status,
   canApply: canApply,

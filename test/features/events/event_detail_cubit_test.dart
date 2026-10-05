@@ -26,9 +26,7 @@ void main() {
   late _MockWithdrawApplication withdrawApplication;
 
   setUpAll(() {
-    registerFallbackValue(
-      const ApplyToEventParams(eventId: 41, positionId: 7),
-    );
+    registerFallbackValue(const ApplyToEventParams(eventId: 41, positionId: 7));
     registerFallbackValue(const WithdrawApplicationParams(applicationId: 301));
   });
 
@@ -145,9 +143,8 @@ void main() {
           detail(),
           detail(canApply: false, myApplication: application()),
         );
-        when(
-          () => applyToEvent(any()),
-        ).thenAnswer((_) async => Result.success(application()));
+        when(() => applyToEvent(any()))
+            .thenAnswer((_) async => Result.success(application()));
         return build();
       },
       act: (cubit) async {
@@ -287,9 +284,8 @@ void main() {
           detail(canApply: false, myApplication: application()),
           detail(),
         );
-        when(
-          () => withdrawApplication(any()),
-        ).thenAnswer((_) async => const Result.success(null));
+        when(() => withdrawApplication(any()))
+            .thenAnswer((_) async => const Result.success(null));
         return build();
       },
       act: (cubit) async {

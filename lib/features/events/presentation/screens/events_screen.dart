@@ -140,10 +140,7 @@ class _EventsScreenState extends State<EventsScreen> {
               child: IndexedStack(
                 index: _tab.index,
                 children: [
-                  _OpenList(
-                    scrollController: _openScroll,
-                    onOpen: _openDetail,
-                  ),
+                  _OpenList(scrollController: _openScroll, onOpen: _openDetail),
                   _TrackedList(
                     scrollController: _trackedScroll,
                     onOpen: _openDetail,
@@ -337,8 +334,7 @@ class _OpenList extends StatelessWidget {
           child: const EmptyView(
             icon: Icons.explore_outlined,
             title: 'No open events right now.',
-            message:
-                "New events for your roles will show up here. You'll also get a notification.",
+            message: "New events for your roles will show up here. You'll also get a notification.",
           ),
         ),
         OpenEventsLoaded(:final data, :final isLoadingMore) => RefreshIndicator(
@@ -445,9 +441,8 @@ class _TrackedIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     'Monitor your applications and selection results.',
-    style: Theme.of(
-      context,
-    ).textTheme.bodyMedium?.copyWith(fontSize: 15, color: context.tokens.muted),
+    style: Theme.of(context).textTheme.bodyMedium
+        ?.copyWith(fontSize: 15, color: context.tokens.muted),
   );
 }
 
@@ -518,9 +513,5 @@ class _Refreshable extends StatelessWidget {
 
 /// 20 px sides, 18 px below the tabs, and the shell's nav clearance (it is
 /// handed down as bottom `MediaQuery.padding`) plus the page gutter.
-EdgeInsets _listPadding(BuildContext context) => EdgeInsets.fromLTRB(
-  20,
-  18,
-  20,
-  MediaQuery.paddingOf(context).bottom + 24,
-);
+EdgeInsets _listPadding(BuildContext context) =>
+    EdgeInsets.fromLTRB(20, 18, 20, MediaQuery.paddingOf(context).bottom + 24);

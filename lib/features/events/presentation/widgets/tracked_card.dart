@@ -80,7 +80,10 @@ class TrackedCard extends StatelessWidget {
     final later = decided ? TimelineStepState.done : TimelineStepState.upcoming;
     return [
       const TimelineStep(label: 'Applied', state: TimelineStepState.done),
-      TimelineStep(label: EventFormats.closes(application.closesAt), state: later),
+      TimelineStep(
+        label: EventFormats.closes(application.closesAt),
+        state: later,
+      ),
       TimelineStep(label: 'Result', state: later),
     ];
   }

@@ -34,10 +34,7 @@ class SheetScaffold extends StatelessWidget {
               ),
             ),
           ),
-          for (final child in children) ...[
-            const SizedBox(height: 22),
-            child,
-          ],
+          for (final child in children) ...[const SizedBox(height: 22), child],
         ],
       ),
     );

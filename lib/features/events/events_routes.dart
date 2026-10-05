@@ -35,8 +35,7 @@ final GoRoute eventsTabRoute = GoRoute(
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) =>
-              sl<OpenEventsCubit>(param1: branchId)..fetch(),
+          create: (_) => sl<OpenEventsCubit>(param1: branchId)..fetch(),
         ),
         BlocProvider(create: (_) => sl<TrackedCubit>()..fetch()),
       ],

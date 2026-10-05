@@ -20,12 +20,14 @@ class ApplySheet extends StatefulWidget {
 
   final EventDetail detail;
 
-  static Future<int?> show(BuildContext context, {required EventDetail detail}) =>
-      showModalBottomSheet<int>(
-        context: context,
-        isScrollControlled: true,
-        builder: (_) => ApplySheet(detail: detail),
-      );
+  static Future<int?> show(
+    BuildContext context, {
+    required EventDetail detail,
+  }) => showModalBottomSheet<int>(
+    context: context,
+    isScrollControlled: true,
+    builder: (_) => ApplySheet(detail: detail),
+  );
 
   @override
   State<ApplySheet> createState() => _ApplySheetState();

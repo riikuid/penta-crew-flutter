@@ -138,9 +138,7 @@ void main() {
       ]);
     });
 
-    testWidgets('empty: C10 copy and no count on the Open tab', (
-      tester,
-    ) async {
+    testWidgets('empty: C10 copy and no count on the Open tab', (tester) async {
       await pumpScreen(
         tester,
         open: const OpenEventsState.loaded(data: [], total: 0),
@@ -160,7 +158,10 @@ void main() {
     });
 
     testWidgets('error without data: ErrorView and retry', (tester) async {
-      await pumpScreen(tester, open: const OpenEventsState.error(message: 'Offline'));
+      await pumpScreen(
+        tester,
+        open: const OpenEventsState.error(message: 'Offline'),
+      );
       await tester.pump();
 
       expect(find.byType(ErrorView), findsOneWidget);

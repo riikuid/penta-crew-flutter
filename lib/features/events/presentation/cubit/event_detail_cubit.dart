@@ -123,7 +123,9 @@ class EventDetailCubit extends Cubit<EventDetailState> {
     required String message,
     required bool stale,
   }) async {
-    emit(EventDetailState.loaded(detail: previous, notice: ActionFailed(message)));
+    emit(
+      EventDetailState.loaded(detail: previous, notice: ActionFailed(message)),
+    );
     if (!stale) return;
     final detail = await _refetch(fallback: previous);
     if (!isClosed) emit(EventDetailState.loaded(detail: detail));

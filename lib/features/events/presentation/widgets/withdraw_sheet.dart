@@ -13,11 +13,13 @@ class WithdrawSheet extends StatelessWidget {
 
   final DateTime closesAt;
 
-  static Future<bool?> show(BuildContext context, {required DateTime closesAt}) =>
-      showModalBottomSheet<bool>(
-        context: context,
-        builder: (_) => WithdrawSheet(closesAt: closesAt),
-      );
+  static Future<bool?> show(
+    BuildContext context, {
+    required DateTime closesAt,
+  }) => showModalBottomSheet<bool>(
+    context: context,
+    builder: (_) => WithdrawSheet(closesAt: closesAt),
+  );
 
   @override
   Widget build(BuildContext context) {

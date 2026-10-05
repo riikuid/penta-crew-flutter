@@ -47,9 +47,8 @@ class EventDetailScreen extends StatelessWidget {
               identical(previous.notice, next.notice)),
       listener: (_, state) => _showNotice((state as EventDetailLoaded).notice!),
       builder: (context, state) => switch (state) {
-        EventDetailInitial() || EventDetailLoading() => const _Frame(
-          body: _DetailSkeleton(),
-        ),
+        EventDetailInitial() ||
+        EventDetailLoading() => const _Frame(body: _DetailSkeleton()),
         EventDetailError(:final message) => _Frame(
           body: ErrorView(
             message: message,
@@ -206,10 +205,7 @@ class _Loaded extends StatelessWidget {
         children: switch (view) {
           EventDetailView.open => _buildOpen(context),
           EventDetailView.applied => _buildWaiting(context, application!),
-          EventDetailView.closedWaiting => _buildWaiting(
-            context,
-            application!,
-          ),
+          EventDetailView.closedWaiting => _buildWaiting(context, application!),
           EventDetailView.selected => _buildSelected(context, application!),
           EventDetailView.notSelected => _buildNotSelected(
             context,
@@ -307,7 +303,8 @@ class _Loaded extends StatelessWidget {
     CannotApplyReason.notVerified =>
       'Your profile needs to be approved before you can apply.',
     CannotApplyReason.alreadyApplied => "You've already applied to this event.",
-    CannotApplyReason.closed => "Applications closed. This can't be changed now.",
+    CannotApplyReason.closed =>
+      "Applications closed. This can't be changed now.",
     CannotApplyReason.unknown => "You can't apply to this event.",
   };
 
@@ -370,10 +367,7 @@ class _Loaded extends StatelessWidget {
         ],
       ),
       const SizedBox(height: 20),
-      _InfoRows(
-        detail: detail,
-        timeLine: _timeWithHours(),
-      ),
+      _InfoRows(detail: detail, timeLine: _timeWithHours()),
     ];
   }
 
@@ -621,12 +615,11 @@ class _DeadlineCard extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(color: tokens.ink, shape: BoxShape.circle),
-            child: Icon(
-              Icons.hourglass_empty,
-              size: 18,
-              color: tokens.surface,
+            decoration: BoxDecoration(
+              color: tokens.ink,
+              shape: BoxShape.circle,
             ),
+            child: Icon(Icons.hourglass_empty, size: 18, color: tokens.surface),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -791,9 +784,8 @@ class _LockNote extends StatelessWidget {
           Expanded(
             child: Text(
               "Applications closed. This can't be changed now.",
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: tokens.muted),
+              style: Theme.of(context).textTheme.bodySmall
+                  ?.copyWith(color: tokens.muted),
             ),
           ),
         ],

@@ -15,7 +15,8 @@ abstract final class EventFormats {
       '$total open · $branchName';
 
   /// `Closes 28 Sep` — C2/C5 timeline step while the deadline is ahead.
-  static String closes(DateTime deadline) => AppDates.closes(deadline.toLocal());
+  static String closes(DateTime deadline) =>
+      AppDates.closes(deadline.toLocal());
 
   /// `Closed 28 Sep` — C7 timeline step after the deadline.
   static String closed(DateTime deadline) =>

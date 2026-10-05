@@ -89,12 +89,7 @@ void main() {
         stubPage(
           2,
           Result.success(
-            page(
-              [application(id: 302)],
-              currentPage: 2,
-              lastPage: 2,
-              total: 2,
-            ),
+            page([application(id: 302)], currentPage: 2, lastPage: 2, total: 2),
           ),
         );
         return TrackedCubit(getApplications);
