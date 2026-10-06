@@ -28,8 +28,8 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    // Guards re-run on every AuthCubit emission (login, logout, 401).
-    _refresh = RouterRefresh([sl<AuthCubit>().stream]);
+    // Guards re-run when the session they read changes (login, logout, 401).
+    _refresh = RouterRefresh(sl<AuthCubit>().stream, sl<AuthCubit>());
     // Tapped pushes navigate on this router once the session has resolved.
     _pushListener = PushNotificationListener(
       pushService: sl(),
