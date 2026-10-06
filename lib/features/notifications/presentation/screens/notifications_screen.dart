@@ -75,35 +75,48 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         };
         return Scaffold(
           body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const _Header(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildEyebrow(state),
-                      const SizedBox(height: 6),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Notifications',
-                              style: context.tokens.display,
-                            ),
+            child: RefreshIndicator(
+              onRefresh: _cubit.refresh,
+              child: CustomScrollView(
+                controller: _scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const _Header(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildEyebrow(state),
+                              const SizedBox(height: 6),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Notifications',
+                                      style: context.tokens.display,
+                                    ),
+                                  ),
+                                  if (unreadCount > 0)
+                                    _MarkAllReadLink(
+                                      onTap: _cubit.markAllRead,
+                                    ),
+                                ],
+                              ),
+                            ],
                           ),
-                          if (unreadCount > 0)
-                            _MarkAllReadLink(onTap: _cubit.markAllRead),
-                        ],
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(child: _buildBody(state)),
-              ],
+                  _buildBody(state),
+                ],
+              ),
             ),
           ),
         );
@@ -131,18 +144,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   Widget _buildBody(NotificationsState state) => switch (state) {
     NotificationsInitial() || NotificationsLoading() => const _ListSkeleton(),
-    NotificationsError(:final message) => ErrorView(
-      message: message,
-      onRetry: _cubit.load,
+    NotificationsError(:final message) => SliverFillRemaining(
+      child: ErrorView(message: message, onRetry: _cubit.load),
     ),
-    NotificationsLoaded(:final data) when data.isEmpty => _Refreshable(
-      onRefresh: _cubit.refresh,
-      child: const EmptyView(
-        icon: Icons.notifications_none_outlined,
-        title: 'No notifications yet.',
-        message: 'Selection results and new events for your roles will show up here.',
+    NotificationsLoaded(:final data) when data.isEmpty =>
+      const SliverFillRemaining(
+        child: EmptyView(
+          icon: Icons.notifications_none_outlined,
+          title: 'No notifications yet.',
+          message: 'Selection results and new events for your roles will show up here.',
+        ),
       ),
-    ),
     NotificationsLoaded(:final data, :final isLoadingMore) => _buildList(
       data,
       isLoadingMore: isLoadingMore,
@@ -164,12 +176,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       if (isLoadingMore) const _LoadingRow(),
     ];
 
-    return RefreshIndicator(
-      onRefresh: _cubit.refresh,
-      child: ListView.builder(
-        controller: _scrollController,
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: _listPadding(context),
+    return SliverPadding(
+      padding: _listPadding(context),
+      sliver: SliverList.builder(
         itemCount: rows.length,
         itemBuilder: (context, index) => switch (rows[index]) {
           _HeaderRow(:final label) => Padding(
@@ -371,28 +380,29 @@ class _ListSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
+    return SliverPadding(
       padding: _listPadding(context),
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(bottom: 12),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Skeleton.line(width: 48, height: 12),
-          ),
-        ),
-        for (var index = 0; index < 3; index++)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Skeleton(
-              height: 112,
-              radius: AppRadius.card,
-              color: tokens.surface,
-              borderColor: tokens.line,
+      sliver: SliverList(
+        delegate: SliverChildListDelegate([
+          const Padding(
+            padding: EdgeInsets.only(bottom: 12),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Skeleton.line(width: 48, height: 12),
             ),
           ),
-      ],
+          for (var index = 0; index < 3; index++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Skeleton(
+                height: 112,
+                radius: AppRadius.card,
+                color: tokens.surface,
+                borderColor: tokens.line,
+              ),
+            ),
+        ]),
+      ),
     );
   }
 }
@@ -405,27 +415,6 @@ class _LoadingMoreRow extends StatelessWidget {
     padding: EdgeInsets.symmetric(vertical: 16),
     child: Center(child: CircularProgressIndicator.adaptive()),
   );
-}
-
-/// Makes a non-scrollable child (empty view) pull-to-refreshable.
-class _Refreshable extends StatelessWidget {
-  const _Refreshable({required this.onRefresh, required this.child});
-
-  final Future<void> Function() onRefresh;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: onRefresh,
-      child: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: SizedBox(height: constraints.maxHeight, child: child),
-        ),
-      ),
-    );
-  }
 }
 
 /// 20 px sides, 18 px below the headline, bottom safe area plus gutter.

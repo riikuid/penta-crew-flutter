@@ -282,13 +282,31 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
+    testWidgets('dragging the list scrolls the header away', (tester) async {
+      await pumpScreen(
+        tester,
+        state: NotificationsState.loaded(data: items, unreadCount: 2),
+      );
+      tester.view.physicalSize = const Size(480, 400);
+      await tester.pump();
+
+      final before = tester.getTopLeft(find.text('Notifications')).dy;
+      await tester.drag(find.byType(CustomScrollView), const Offset(0, -150));
+      await tester.pump();
+
+      expect(
+        tester.getTopLeft(find.text('Notifications')).dy,
+        lessThan(before),
+      );
+    });
+
     testWidgets('pull to refresh calls refresh()', (tester) async {
       await pumpScreen(
         tester,
         state: NotificationsState.loaded(data: items, unreadCount: 2),
       );
 
-      await tester.fling(find.byType(ListView), const Offset(0, 400), 1000);
+      await tester.fling(find.byType(CustomScrollView), const Offset(0, 400), 1000);
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       verify(() => cubit.refresh()).called(1);

@@ -268,4 +268,40 @@ void main() {
       verify(() => trackedCubit.retry()).called(1);
     });
   });
+
+  group('scrolling header', () {
+    final manyEvents = [
+      for (var index = 0; index < 6; index++)
+        event(id: 100 + index, title: 'Event $index', isUrgent: false),
+    ];
+
+    testWidgets('dragging the list scrolls the header away', (tester) async {
+      await pumpScreen(
+        tester,
+        open: OpenEventsState.loaded(data: manyEvents, total: 6),
+      );
+      await tester.pump();
+      tester.view.physicalSize = const Size(480, 700);
+      await tester.pump();
+
+      final before = tester.getTopLeft(find.text('Events')).dy;
+      await tester.drag(find.byType(EventCard).first, const Offset(0, -100));
+      await tester.pump();
+
+      expect(tester.getTopLeft(find.text('Events')).dy, lessThan(before));
+    });
+
+    testWidgets('no overflow with a 300 px bottom inset', (tester) async {
+      await pumpScreen(
+        tester,
+        open: OpenEventsState.loaded(data: manyEvents, total: 6),
+      );
+      tester.view.physicalSize = const Size(480, 800);
+      tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+      expect(find.byType(EventCard), findsWidgets);
+    });
+  });
 }

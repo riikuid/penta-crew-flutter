@@ -102,51 +102,34 @@ class _EventsScreenState extends State<EventsScreen> {
     final openState = context.watch<OpenEventsCubit>().state;
     final trackedState = context.watch<TrackedCubit>().state;
 
+    // The shell's Scaffold already insets for the keyboard; applying it again
+    // here left the list ~0 pt tall while typing.
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: IndexedStack(
+          index: _tab.index,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildEyebrow(openState, trackedState, branchName),
-                  const SizedBox(height: 6),
-                  Text('Events', style: context.tokens.display),
-                  const SizedBox(height: 18),
-                  if (_tab == EventsTab.open) ...[
-                    _SearchField(
-                      controller: _searchController,
-                      onChanged: _onSearchChanged,
-                      onSubmitted: _submitSearch,
-                      onClear: _clearSearch,
-                    ),
-                    const SizedBox(height: 18),
-                  ],
-                  SegmentedTabs(
-                    labels: const ['Open', 'Tracked'],
-                    counts: [_count(openState), _count(trackedState)],
-                    index: _tab.index,
-                    onChanged: (index) =>
-                        setState(() => _tab = EventsTab.values[index]),
-                  ),
-                ],
+            _OpenList(
+              scrollController: _openScroll,
+              onOpen: _openDetail,
+              header: _buildHeader(
+                EventsTab.open,
+                openState,
+                trackedState,
+                branchName,
               ),
             ),
-            Expanded(
-              child: IndexedStack(
-                index: _tab.index,
-                children: [
-                  _OpenList(scrollController: _openScroll, onOpen: _openDetail),
-                  _TrackedList(
-                    scrollController: _trackedScroll,
-                    onOpen: _openDetail,
-                    onBrowse: () => setState(() => _tab = EventsTab.open),
-                  ),
-                ],
+            _TrackedList(
+              scrollController: _trackedScroll,
+              onOpen: _openDetail,
+              onBrowse: () => setState(() => _tab = EventsTab.open),
+              header: _buildHeader(
+                EventsTab.tracked,
+                openState,
+                trackedState,
+                branchName,
               ),
             ),
           ],
@@ -155,14 +138,52 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  /// `3 open · Jakarta` (C1) / `4 applications` (C2); a skeleton pill while
-  /// the tab's first page is in flight, a neutral label when it failed.
-  Widget _buildEyebrow(
+  /// Eyebrow, headline, search (Open only) and tabs; scrolls with the list.
+  Widget _buildHeader(
+    EventsTab tab,
     OpenEventsState openState,
     TrackedState trackedState,
     String branchName,
   ) {
-    final text = switch (_tab) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildEyebrow(tab, openState, trackedState, branchName),
+          const SizedBox(height: 6),
+          Text('Events', style: context.tokens.display),
+          const SizedBox(height: 18),
+          if (tab == EventsTab.open) ...[
+            _SearchField(
+              controller: _searchController,
+              onChanged: _onSearchChanged,
+              onSubmitted: _submitSearch,
+              onClear: _clearSearch,
+            ),
+            const SizedBox(height: 18),
+          ],
+          SegmentedTabs(
+            labels: const ['Open', 'Tracked'],
+            counts: [_count(openState), _count(trackedState)],
+            index: _tab.index,
+            onChanged: (index) =>
+                setState(() => _tab = EventsTab.values[index]),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// `3 open · Jakarta` (C1) / `4 applications` (C2); a skeleton pill while
+  /// the tab's first page is in flight, a neutral label when it failed.
+  Widget _buildEyebrow(
+    EventsTab tab,
+    OpenEventsState openState,
+    TrackedState trackedState,
+    String branchName,
+  ) {
+    final text = switch (tab) {
       EventsTab.open => switch (openState) {
         OpenEventsLoaded(:final total) => EventFormats.openHeader(
           total,
@@ -304,10 +325,15 @@ class _SearchField extends StatelessWidget {
 /// C1 list: skeleton cards → `EventCard` list sorted as returned, pull to
 /// refresh, infinite scroll; C10 empty card; error card with retry.
 class _OpenList extends StatelessWidget {
-  const _OpenList({required this.scrollController, required this.onOpen});
+  const _OpenList({
+    required this.scrollController,
+    required this.onOpen,
+    required this.header,
+  });
 
   final ScrollController scrollController;
   final ValueChanged<int> onOpen;
+  final Widget header;
 
   @override
   Widget build(BuildContext context) {
@@ -320,43 +346,44 @@ class _OpenList extends StatelessWidget {
       listener: (_, state) =>
           AppToast.error((state as OpenEventsError).message),
       buildWhen: (_, next) => next is! OpenEventsError || next.data.isEmpty,
-      builder: (context, state) => switch (state) {
-        OpenEventsInitial() || OpenEventsLoading() => const _ListSkeleton(
-          cardHeight: 212,
-          radius: AppRadius.cardLarge,
-        ),
-        OpenEventsError(:final message) => ErrorView(
-          message: message,
-          onRetry: cubit.retry,
-        ),
-        OpenEventsLoaded(:final data) when data.isEmpty => _Refreshable(
-          onRefresh: cubit.refresh,
-          child: const EmptyView(
-            icon: Icons.explore_outlined,
-            title: 'No open events right now.',
-            message: "New events for your roles will show up here. You'll also get a notification.",
+      builder: (context, state) => _ScrollList(
+        controller: scrollController,
+        header: header,
+        onRefresh: cubit.refresh,
+        body: switch (state) {
+          OpenEventsInitial() || OpenEventsLoading() => const _ListSkeleton(
+            cardHeight: 212,
+            radius: AppRadius.cardLarge,
           ),
-        ),
-        OpenEventsLoaded(:final data, :final isLoadingMore) => RefreshIndicator(
-          onRefresh: cubit.refresh,
-          child: ListView.separated(
-            controller: scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
+          OpenEventsError(:final message) => SliverFillRemaining(
+            child: ErrorView(message: message, onRetry: cubit.retry),
+          ),
+          OpenEventsLoaded(:final data) when data.isEmpty =>
+            const SliverFillRemaining(
+              child: EmptyView(
+                icon: Icons.explore_outlined,
+                title: 'No open events right now.',
+                message: "New events for your roles will show up here. You'll also get a notification.",
+              ),
+            ),
+          OpenEventsLoaded(:final data, :final isLoadingMore) => SliverPadding(
             padding: _listPadding(context),
-            itemCount: data.length + (isLoadingMore ? 1 : 0),
-            separatorBuilder: (_, _) => const SizedBox(height: 18),
-            itemBuilder: (context, index) {
-              if (index >= data.length) return const _LoadingMoreRow();
-              final event = data[index];
-              return EventCard(
-                event: event,
-                now: now,
-                onTap: () => onOpen(event.id),
-              );
-            },
+            sliver: SliverList.separated(
+              itemCount: data.length + (isLoadingMore ? 1 : 0),
+              separatorBuilder: (_, _) => const SizedBox(height: 18),
+              itemBuilder: (context, index) {
+                if (index >= data.length) return const _LoadingMoreRow();
+                final event = data[index];
+                return EventCard(
+                  event: event,
+                  now: now,
+                  onTap: () => onOpen(event.id),
+                );
+              },
+            ),
           ),
-        ),
-      },
+        },
+      ),
     );
   }
 }
@@ -368,11 +395,13 @@ class _TrackedList extends StatelessWidget {
     required this.scrollController,
     required this.onOpen,
     required this.onBrowse,
+    required this.header,
   });
 
   final ScrollController scrollController;
   final ValueChanged<int> onOpen;
   final VoidCallback onBrowse;
+  final Widget header;
 
   @override
   Widget build(BuildContext context) {
@@ -382,55 +411,55 @@ class _TrackedList extends StatelessWidget {
       listenWhen: (_, next) => next is TrackedError && next.data.isNotEmpty,
       listener: (_, state) => AppToast.error((state as TrackedError).message),
       buildWhen: (_, next) => next is! TrackedError || next.data.isEmpty,
-      builder: (context, state) => switch (state) {
-        TrackedInitial() || TrackedLoading() => const _ListSkeleton(
-          cardHeight: 150,
-          radius: AppRadius.card,
-          intro: _TrackedIntro(),
-        ),
-        TrackedError(:final message) => ErrorView(
-          message: message,
-          onRetry: cubit.retry,
-        ),
-        TrackedLoaded(:final data) when data.isEmpty => _Refreshable(
-          onRefresh: cubit.refresh,
-          child: EmptyView(
-            icon: Icons.explore_outlined,
-            title: "You haven't applied to any events.",
-            message:
-                'Applications you send will appear here with their status.',
-            action: AppButton(
-              label: 'Browse open events',
-              onPressed: onBrowse,
-              variant: AppButtonVariant.secondary,
-              size: AppButtonSize.medium,
-              expand: false,
+      builder: (context, state) => _ScrollList(
+        controller: scrollController,
+        header: header,
+        onRefresh: cubit.refresh,
+        body: switch (state) {
+          TrackedInitial() || TrackedLoading() => const _ListSkeleton(
+            cardHeight: 150,
+            radius: AppRadius.card,
+            intro: _TrackedIntro(),
+          ),
+          TrackedError(:final message) => SliverFillRemaining(
+            child: ErrorView(message: message, onRetry: cubit.retry),
+          ),
+          TrackedLoaded(:final data) when data.isEmpty => SliverFillRemaining(
+            child: EmptyView(
+              icon: Icons.explore_outlined,
+              title: "You haven't applied to any events.",
+              message:
+                  'Applications you send will appear here with their status.',
+              action: AppButton(
+                label: 'Browse open events',
+                onPressed: onBrowse,
+                variant: AppButtonVariant.secondary,
+                size: AppButtonSize.medium,
+                expand: false,
+              ),
             ),
           ),
-        ),
-        TrackedLoaded(:final data, :final isLoadingMore) => RefreshIndicator(
-          onRefresh: cubit.refresh,
-          child: ListView.separated(
-            controller: scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
+          TrackedLoaded(:final data, :final isLoadingMore) => SliverPadding(
             padding: _listPadding(context),
-            // Item 0 is the intro line.
-            itemCount: 1 + data.length + (isLoadingMore ? 1 : 0),
-            separatorBuilder: (_, index) =>
-                SizedBox(height: index == 0 ? 18 : 14),
-            itemBuilder: (context, index) {
-              if (index == 0) return const _TrackedIntro();
-              if (index > data.length) return const _LoadingMoreRow();
-              final application = data[index - 1];
-              final event = application.event;
-              return TrackedCard(
-                application: application,
-                onTap: event == null ? null : () => onOpen(event.id),
-              );
-            },
+            sliver: SliverList.separated(
+              // Item 0 is the intro line.
+              itemCount: 1 + data.length + (isLoadingMore ? 1 : 0),
+              separatorBuilder: (_, index) =>
+                  SizedBox(height: index == 0 ? 18 : 14),
+              itemBuilder: (context, index) {
+                if (index == 0) return const _TrackedIntro();
+                if (index > data.length) return const _LoadingMoreRow();
+                final application = data[index - 1];
+                final event = application.event;
+                return TrackedCard(
+                  application: application,
+                  onTap: event == null ? null : () => onOpen(event.id),
+                );
+              },
+            ),
           ),
-        ),
-      },
+        },
+      ),
     );
   }
 }
@@ -461,21 +490,22 @@ class _ListSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
+    return SliverPadding(
       padding: _listPadding(context),
-      children: [
-        if (intro != null) ...[intro!, const SizedBox(height: 18)],
-        for (var index = 0; index < 3; index++) ...[
-          if (index > 0) const SizedBox(height: 18),
-          Skeleton(
-            height: cardHeight,
-            radius: radius,
-            color: tokens.surface,
-            borderColor: tokens.line,
-          ),
-        ],
-      ],
+      sliver: SliverList(
+        delegate: SliverChildListDelegate([
+          if (intro != null) ...[intro!, const SizedBox(height: 18)],
+          for (var index = 0; index < 3; index++) ...[
+            if (index > 0) const SizedBox(height: 18),
+            Skeleton(
+              height: cardHeight,
+              radius: radius,
+              color: tokens.surface,
+              borderColor: tokens.line,
+            ),
+          ],
+        ]),
+      ),
     );
   }
 }
@@ -490,22 +520,30 @@ class _LoadingMoreRow extends StatelessWidget {
   );
 }
 
-/// Makes a non-scrollable child (empty view) pull-to-refreshable.
-class _Refreshable extends StatelessWidget {
-  const _Refreshable({required this.onRefresh, required this.child});
+/// One scroll view per tab: [header] scrolls away with the [body] sliver,
+/// pull to refresh on the whole thing. The structure is the same in every
+/// state so the search field keeps focus while results reload.
+class _ScrollList extends StatelessWidget {
+  const _ScrollList({
+    required this.controller,
+    required this.header,
+    required this.onRefresh,
+    required this.body,
+  });
 
+  final ScrollController controller;
+  final Widget header;
   final Future<void> Function() onRefresh;
-  final Widget child;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: SizedBox(height: constraints.maxHeight, child: child),
-        ),
+      child: CustomScrollView(
+        controller: controller,
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [SliverToBoxAdapter(child: header), body],
       ),
     );
   }
