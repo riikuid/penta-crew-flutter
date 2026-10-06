@@ -13,12 +13,14 @@ class GroupedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: tokens.surface,
+    // Material (not DecoratedBox) so ActionRow ink paints above the fill.
+    return Material(
+      color: tokens.surface,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: tokens.line),
+        side: BorderSide(color: tokens.line),
       ),
+      clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
         child: Column(
