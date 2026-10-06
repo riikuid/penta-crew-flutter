@@ -356,4 +356,68 @@ void main() {
       await tester.pump(const Duration(seconds: 4));
     });
   });
+
+  group('refresh on show', () {
+    testWidgets('refetches silently when the branch is shown again, once '
+        'per burst', (tester) async {
+      final visible = ValueNotifier(true);
+      addTearDown(visible.dispose);
+      when(() => homeCubit.state).thenReturn(loaded);
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light(),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthCubit>.value(value: authCubit),
+              BlocProvider<HomeCubit>.value(value: homeCubit),
+            ],
+            child: ValueListenableBuilder(
+              valueListenable: visible,
+              builder: (_, isVisible, _) => TickerMode(
+                enabled: isVisible,
+                child: HomeScreen(now: now),
+              ),
+            ),
+          ),
+        ),
+      );
+      verifyNever(() => homeCubit.refresh());
+
+      for (var i = 0; i < 3; i++) {
+        visible.value = false;
+        await tester.pump();
+        visible.value = true;
+        await tester.pump();
+      }
+
+      verify(() => homeCubit.refresh()).called(1);
+      expect(find.byType(Skeleton), findsNothing);
+      expect(find.text('02'), findsOneWidget);
+    });
+
+    testWidgets('refetches after a pushed detail pops', (tester) async {
+      when(() => homeCubit.state).thenReturn(loaded);
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light(),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthCubit>.value(value: authCubit),
+              BlocProvider<HomeCubit>.value(value: homeCubit),
+            ],
+            child: HomeScreen(now: now),
+          ),
+        ),
+      );
+      final navigator = tester.state<NavigatorState>(find.byType(Navigator));
+      navigator.push(MaterialPageRoute<void>(builder: (_) => const Scaffold()));
+      await tester.pumpAndSettle();
+      verifyNever(() => homeCubit.refresh());
+
+      navigator.pop();
+      await tester.pumpAndSettle();
+
+      verify(() => homeCubit.refresh()).called(1);
+    });
+  });
 }

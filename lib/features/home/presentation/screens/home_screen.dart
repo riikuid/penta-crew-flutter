@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -41,30 +43,32 @@ class HomeScreen extends StatelessWidget {
     final user = context.select((AuthCubit cubit) => cubit.user);
     final bottom = MediaQuery.paddingOf(context).bottom;
 
-    return Scaffold(
-      body: BlocListener<HomeCubit, HomeState>(
-        // A failed refresh keeps the data on screen; only the message surfaces.
-        listenWhen: (_, next) => next.refreshError != null,
-        listener: (_, state) => AppToast.error(state.refreshError!),
-        child: SafeArea(
-          bottom: false,
-          child: RefreshIndicator(
-            onRefresh: context.read<HomeCubit>().refresh,
-            child: BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) => ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.only(top: 12, bottom: bottom),
-                children: [
-                  _inset(_buildHeader(context, state)),
-                  const SizedBox(height: _blockGap),
-                  _inset(_buildGreeting(context, state, user, now)),
-                  const SizedBox(height: _blockGap),
-                  _inset(_buildNextShift(context, state, user)),
-                  const SizedBox(height: _blockGap),
-                  _inset(_buildCounters(context, state)),
-                  const SizedBox(height: _blockGap),
-                  _buildOpenEvents(context, state, now),
-                ],
+    return _RefreshOnShow(
+      child: Scaffold(
+        body: BlocListener<HomeCubit, HomeState>(
+          // A failed refresh keeps the data on screen; only the message surfaces.
+          listenWhen: (_, next) => next.refreshError != null,
+          listener: (_, state) => AppToast.error(state.refreshError!),
+          child: SafeArea(
+            bottom: false,
+            child: RefreshIndicator(
+              onRefresh: context.read<HomeCubit>().refresh,
+              child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) => ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(top: 12, bottom: bottom),
+                  children: [
+                    _inset(_buildHeader(context, state)),
+                    const SizedBox(height: _blockGap),
+                    _inset(_buildGreeting(context, state, user, now)),
+                    const SizedBox(height: _blockGap),
+                    _inset(_buildNextShift(context, state, user)),
+                    const SizedBox(height: _blockGap),
+                    _inset(_buildCounters(context, state)),
+                    const SizedBox(height: _blockGap),
+                    _buildOpenEvents(context, state, now),
+                  ],
+                ),
               ),
             ),
           ),
@@ -702,3 +706,40 @@ TextStyle _metaStyle(AppTokens tokens) => tokens.eyebrow.copyWith(
   letterSpacing: 0.44,
   color: tokens.muted,
 );
+
+/// Silently refetches Home when its shell branch becomes visible again, which
+/// also covers returning from a pushed detail (the route under it is
+/// `TickerMode`-disabled while covered). Mutations elsewhere (apply, withdraw)
+/// change the Waiting counter and the carousel; no event bus (plan §4 T6).
+class _RefreshOnShow extends StatefulWidget {
+  const _RefreshOnShow({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_RefreshOnShow> createState() => _RefreshOnShowState();
+}
+
+class _RefreshOnShowState extends State<_RefreshOnShow> {
+  static const _minGap = Duration(seconds: 2);
+
+  bool _wasVisible = true;
+  DateTime? _lastRefresh;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final visible = TickerMode.valuesOf(context).enabled;
+    final shown = visible && !_wasVisible;
+    _wasVisible = visible;
+    if (!shown) return;
+    final now = DateTime.now();
+    final last = _lastRefresh;
+    if (last != null && now.difference(last) < _minGap) return;
+    _lastRefresh = now;
+    unawaited(context.read<HomeCubit>().refresh());
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
+}
