@@ -130,7 +130,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 label: 'Change photo',
                 icon: Icons.camera_alt_outlined,
                 variant: AppButtonVariant.outlined,
-                size: AppButtonSize.medium,
+                size: AppButtonSize.small,
                 expand: false,
                 loading: state.uploadingAvatar,
                 onPressed: busy

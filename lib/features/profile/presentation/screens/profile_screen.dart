@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: 'Sign out',
               icon: Icons.logout,
               variant: AppButtonVariant.danger,
-              size: AppButtonSize.medium,
+              size: AppButtonSize.tall,
               loading: _signingOut,
               onPressed: _signOut,
             ),

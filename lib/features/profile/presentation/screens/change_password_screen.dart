@@ -67,19 +67,20 @@ class ChangePasswordScreen extends StatelessWidget {
                         errorText: currentPasswordError,
                         onChanged: cubit.currentPasswordChanged,
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 4),
                       Align(
                         alignment: Alignment.centerRight,
                         child: AppButton(
                           label: 'Forgot password?',
                           variant: AppButtonVariant.ghost,
-                          size: AppButtonSize.medium,
+                          size: AppButtonSize.small,
                           expand: false,
+                          padding: EdgeInsets.zero,
                           onPressed: () =>
                               context.push(AuthRoutes.forgotPassword),
                         ),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 4),
                       AppTextField(
                         label: 'New password',
                         hint: 'At least 8 characters',
