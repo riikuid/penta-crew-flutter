@@ -37,6 +37,7 @@ class MockServer {
   late List<Map<String, dynamic>> _applications;
   late List<Map<String, dynamic>> _notifications;
   final Map<String, int> _tokens = {};
+  final Set<String> _signedOut = {};
   int _nextId = 1000;
 
   DateTime get now => _clock();
@@ -80,6 +81,7 @@ class MockServer {
     if (m == 'GET' && _is(seg, ['me'])) return _ok(_publicUser(user));
     if (m == 'POST' && _is(seg, ['logout'])) {
       _tokens.remove(bearer);
+      _signedOut.add(bearer!);
       return _ok(null);
     }
     if (m == 'PUT' && _is(seg, ['me', 'profile'])) {
@@ -718,6 +720,7 @@ class MockServer {
 
   void _reset() {
     _tokens.clear();
+    _signedOut.clear();
     _nextId = 1000;
     // JSON round-trip: deep copy + every nested map becomes
     // `Map<String, dynamic>`, as a decoded HTTP body would be.
@@ -753,7 +756,15 @@ class MockServer {
   }
 
   Map<String, dynamic>? _userForToken(String bearer) {
-    final id = _tokens[bearer];
+    // Tokens outlive the process in the keychain; resume the persona by the id
+    // in `mock-token-<id>-…` unless it was signed out in this process.
+    final id = _tokens[bearer] ??
+        (_signedOut.contains(bearer)
+            ? null
+            : int.tryParse(
+                RegExp(r'^mock-token-(\d+)-').firstMatch(bearer)?.group(1) ??
+                    '',
+              ));
     return id == null ? null : _users.where((u) => u['id'] == id).firstOrNull;
   }
 
