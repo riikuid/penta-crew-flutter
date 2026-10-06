@@ -13,6 +13,13 @@ import '../theme/app_tokens.dart';
 /// status icon, then a 15/500 [title] and an optional 13 muted [description].
 /// Only the icon changes per kind; error swaps the circle to the error red.
 abstract final class AppToast {
+  /// Pass to `ToastificationWrapper`. The overlay list absorbs every tap over
+  /// its bounds, so it starts below the 44 px back-circle header of root-level
+  /// pages (C5/C6/E3) instead of covering it.
+  static final config = ToastificationConfig(
+    marginBuilder: (_, _) => const EdgeInsets.only(top: 104),
+  );
+
   static void success(String title, {String? description}) =>
       _show(title, description, Icons.check);
 
@@ -73,8 +80,7 @@ class _ToastCard extends StatelessWidget {
     );
 
     return Padding(
-      // toastification adds 12 on top; the prototype sits 60 from the edge.
-      padding: const EdgeInsets.only(top: 48, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: tokens.surface,

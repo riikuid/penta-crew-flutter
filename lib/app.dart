@@ -57,10 +57,10 @@ class _AppState extends State<App> {
         BlocProvider.value(value: sl<AuthCubit>()),
       ],
       child: BlocListener<AuthCubit, AuthState>(
-        listenWhen: (_, next) =>
-            next is Unauthenticated && next.sessionExpired,
+        listenWhen: (_, next) => next is Unauthenticated && next.sessionExpired,
         listener: (_, _) => AppToast.warning(AppMessages.sessionExpired),
         child: ToastificationWrapper(
+          config: AppToast.config,
           child: MaterialApp.router(
             title: Env.appName,
             debugShowCheckedModeBanner: !Env.isProd,
