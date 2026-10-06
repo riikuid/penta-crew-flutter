@@ -271,6 +271,28 @@ void main() {
       expect(_textOf(tester, 'Crew').style?.fontSize, 13);
       expect(_textOf(tester, 'Usher').style?.fontSize, 12);
     });
+
+    testWidgets('sizes to its content and wraps inline', (tester) async {
+      await tester.pumpApp(
+        const SizedBox(
+          width: 360,
+          child: Wrap(
+            spacing: 8,
+            children: [
+              TagChip(label: 'Crew'),
+              TagChip(label: 'Event Manager'),
+            ],
+          ),
+        ),
+      );
+
+      final chips = find.byType(TagChip);
+      expect(tester.getSize(chips.at(0)).width, lessThan(100));
+      expect(
+        tester.getTopLeft(chips.at(0)).dy,
+        tester.getTopLeft(chips.at(1)).dy,
+      );
+    });
   });
 
   group('ProgressTimeline.bar labels', () {

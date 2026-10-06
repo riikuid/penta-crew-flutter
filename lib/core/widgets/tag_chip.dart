@@ -55,14 +55,16 @@ class TagChip extends StatelessWidget {
     return Container(
       height: height,
       padding: EdgeInsets.symmetric(horizontal: height < 30 ? 10 : 12),
-      alignment: Alignment.center,
       decoration: ShapeDecoration(
         color: background,
         shape: StadiumBorder(
           side: border == null ? BorderSide.none : BorderSide(color: border),
         ),
       ),
-      child: Text(label, style: textStyle),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [Text(label, style: textStyle)],
+      ),
     );
   }
 }
