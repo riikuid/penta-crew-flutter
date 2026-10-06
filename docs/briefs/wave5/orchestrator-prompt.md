@@ -50,7 +50,7 @@ and needs the simulator exclusively for `flutter drive`.
 Grouped so that no two tickets in the same round edit the same file. Round
 N+1 only starts after round N is merged to `main` (the Lead does that).
 
-### Round 1 — 11 tickets, 10 subagents
+### Round 1 — 11 tickets, 10 subagents — **DONE, merged to `main` at `3c715d3`**
 
 | Ticket | Model | Files (expected) |
 |---|---|---|
@@ -70,7 +70,11 @@ For the 034+033 subagent the prompt names both briefs: do TASK-034 first,
 squash to its own commit, then TASK-033 on top, its own commit; one report
 file per ticket.
 
-### Round 2 — 3 tickets (after round 1 is on `main`)
+### Round 2 — 3 tickets, 3 subagents (round 1 is on `main`; start from `3c715d3` or later)
+
+Run all three concurrently (max 3 at once). TASK-041's `View list` line in
+`home_screen.dart` and the C1/C2/N1 headers now look as round 1 left them —
+read the merged code, not the TASK-020 screenshots, for the current layout.
 
 | Ticket | Why it waits | Files |
 |---|---|---|
@@ -83,8 +87,10 @@ file per ticket.
 | Ticket | Gate | Files |
 |---|---|---|
 | TASK-045 CircleBackButton + naming | after 040 (both edit `forgot_password_screen.dart`, `edit_profile_screen.dart`) | auth + profile widgets, `verification_data_screen.dart`, `change_password_screen.dart`, `progress_timeline.dart` |
+| TASK-047 round-1 leftovers | after 040 (`register_screen.dart`) and 041 (`events_screen.dart`, `home_screen.dart`) | `events_screen.dart` (tab sync only), `home_screen.dart` `_RefreshOnShow`, `core/widgets/app_button.dart`, `register_screen.dart` A4 |
 | TASK-039 page geometry | **user decision** on the 60/62-pt reading (brief says ask first); touches 8 screens, so always last and alone among screen tickets | `home/events/event_detail/schedule/profile/notifications` screens, `auth_page.dart`, `register_screen.dart` |
 | TASK-038 logo + BrandMark | **blocked on the logo asset** from design (put it under `assets/` and name it in the brief before spawning) | `splash_screen.dart`, `auth_page.dart`, `verification_screen.dart`, `home_screen.dart` |
 
-045 and 039 edit disjoint files, so they can run concurrently once both gates
-are open.
+045 and 047 edit disjoint files, so they run concurrently as soon as round 2
+is merged. 039 runs alone after them (it touches `home`, `events` and
+`register` screens that 047 also edits); 038 whenever the asset lands.
