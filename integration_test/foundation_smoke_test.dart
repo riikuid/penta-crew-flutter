@@ -27,8 +27,16 @@ void main() {
     String email,
     String password,
   ) async {
-    await tester.enterText(find.byType(TextFormField).at(0), email);
-    await tester.enterText(find.byType(TextFormField).at(1), password);
+    // `enterText` right after the app's unfocus() is silently dropped on a
+    // simulator; tap to attach the input client first.
+    for (final (index, value) in [(0, email), (1, password)]) {
+      final field = find.byType(TextFormField).at(index);
+      await tester.tap(field);
+      await settle(tester, 1);
+      await tester.enterText(field, value);
+    }
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pump(const Duration(milliseconds: 400));
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
     await settle(tester, 3);
   }
@@ -36,12 +44,22 @@ void main() {
   /// Taps the danger "Sign out" button on the current screen (E1, A6, A7),
   /// confirms in the sheet (plan §2.7) and expects to land back on A2.
   Future<void> signOut(WidgetTester tester) async {
-    final signOutButton = find.widgetWithText(OutlinedButton, 'Sign out');
-    await tester.tap(signOutButton);
+    // A6/A7 render a ghost TextButton, E1 an icon OutlinedButton (a private
+    // subclass, so match on the label). With the sheet open the label occurs
+    // twice; the sheet's confirm is the last one.
+    final signOutLabel = find.text('Sign out');
+    // E1 is a long scroll view: the button is built lazily, below the fold.
+    if (signOutLabel.evaluate().isEmpty) {
+      await tester.scrollUntilVisible(
+        signOutLabel,
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
+    }
+    await tester.tap(signOutLabel);
     await settle(tester, 1);
     expect(find.text('Sign out?'), findsOneWidget, reason: 'confirm sheet');
-    // The sheet's confirm is the same danger button, rendered above the page.
-    await tester.tap(signOutButton.last);
+    await tester.tap(signOutLabel.last);
     await settle(tester, 3);
     expect(find.widgetWithText(FilledButton, 'Sign in'), findsOneWidget);
   }
