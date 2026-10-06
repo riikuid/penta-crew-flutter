@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:penta_crew/core/di/locator.dart';
 import 'package:penta_crew/core/theme/app_theme.dart';
@@ -12,6 +13,7 @@ import 'package:penta_crew/features/auth/models/crew_role.dart';
 import 'package:penta_crew/features/auth/models/user.dart';
 import 'package:penta_crew/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:penta_crew/features/auth/presentation/cubit/auth_state.dart';
+import 'package:penta_crew/features/events/events_routes.dart';
 import 'package:penta_crew/features/events/models/application.dart';
 import 'package:penta_crew/features/events/models/event.dart';
 import 'package:penta_crew/features/events/presentation/widgets/event_card.dart';
@@ -418,6 +420,61 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(() => homeCubit.refresh()).called(1);
+    });
+  });
+
+  group('links into Events', () {
+    Future<GoRouter> pumpWithRouter(WidgetTester tester) async {
+      tester.view.physicalSize = const Size(402, 1400);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      when(() => homeCubit.state).thenReturn(loaded);
+      final router = GoRouter(
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (_, _) => MultiBlocProvider(
+              providers: [
+                BlocProvider<AuthCubit>.value(value: authCubit),
+                BlocProvider<HomeCubit>.value(value: homeCubit),
+              ],
+              child: HomeScreen(now: now),
+            ),
+          ),
+          GoRoute(
+            path: EventsRoutes.root,
+            builder: (_, _) => const Text('events tab'),
+          ),
+        ],
+      );
+      await tester.pumpWidget(
+        MaterialApp.router(theme: AppTheme.light(), routerConfig: router),
+      );
+      await tester.pump();
+      return router;
+    }
+
+    testWidgets('Waiting counter lands on Events > Tracked', (tester) async {
+      final router = await pumpWithRouter(tester);
+
+      await tester.tap(find.text('WAITING'));
+      await tester.pumpAndSettle();
+
+      expect(router.state.uri.path, EventsRoutes.root);
+      expect(
+        router.state.uri.queryParameters[EventsRoutes.tabParam],
+        'tracked',
+      );
+    });
+
+    testWidgets('View list lands on Events > Open', (tester) async {
+      final router = await pumpWithRouter(tester);
+
+      await tester.tap(find.text('View list'));
+      await tester.pumpAndSettle();
+
+      expect(router.state.uri.path, EventsRoutes.root);
+      expect(router.state.uri.queryParameters[EventsRoutes.tabParam], 'open');
     });
   });
 }

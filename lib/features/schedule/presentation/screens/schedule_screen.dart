@@ -238,7 +238,7 @@ class _UpcomingTabState extends State<_UpcomingTab> {
         'Pending applications stay in Events › Tracked.',
     action: AppButton(
       label: 'Browse events',
-      onPressed: () => context.go(EventsRoutes.root),
+      onPressed: () => context.go(EventsRoutes.open),
       variant: AppButtonVariant.secondary,
       size: AppButtonSize.medium,
       expand: false,

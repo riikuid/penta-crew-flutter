@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
           value: _twoDigits,
           sub: (_) => 'applications pending',
           showArrow: true,
-          onTap: () => context.go(EventsRoutes.root),
+          onTap: () => context.go(EventsRoutes.tracked),
         ),
       ),
       const SizedBox(width: 12),
@@ -303,7 +303,7 @@ class HomeScreen extends StatelessWidget {
               ),
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTap: () => context.go(EventsRoutes.root),
+                onTap: () => context.go(EventsRoutes.open),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(

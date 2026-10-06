@@ -235,7 +235,7 @@ void main() {
     testWidgets('empty (D3): copy and Browse events → Events tab', (
       tester,
     ) async {
-      await pumpSchedule(
+      final router = await pumpSchedule(
         tester,
         upcoming: const UpcomingState.loaded(groups: []),
         history: loadedHistory,
@@ -254,6 +254,7 @@ void main() {
       await tester.tap(find.text('Browse events'));
       await tester.pumpAndSettle();
       expect(find.text('events tab'), findsOneWidget);
+      expect(router.state.uri.queryParameters[EventsRoutes.tabParam], 'open');
     });
 
     testWidgets('error without data: ErrorView with retry', (tester) async {
