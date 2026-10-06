@@ -36,6 +36,7 @@ class ConfirmSheet extends StatelessWidget {
   }) async {
     final confirmed = await showModalBottomSheet<bool>(
       context: context,
+      useRootNavigator: true,
       builder: (context) => ConfirmSheet(
         title: title,
         body: body,

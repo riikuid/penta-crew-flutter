@@ -27,6 +27,7 @@ class OptionSheet<T> extends StatelessWidget {
     T? selected,
   }) => showModalBottomSheet<T>(
     context: context,
+    useRootNavigator: true,
     builder: (context) => OptionSheet<T>(
       title: title,
       options: options,
