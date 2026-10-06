@@ -9,6 +9,11 @@ abstract interface class SessionInfo {
 
   bool get isAuthenticated;
 
+  /// The user explicitly signed out (as opposed to an expired session or a
+  /// cold start). The login redirect then drops `from`, so the next sign-in
+  /// lands on Home instead of the previous user's last page.
+  bool get signedOutByUser;
+
   /// Signed in **and** approved by an admin (D-01). Unverified users are
   /// confined to `/verification` and the profile editor.
   bool get isVerified;

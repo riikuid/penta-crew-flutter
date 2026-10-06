@@ -145,6 +145,15 @@ void main() {
       expect: () => const [AuthState.unauthenticated()],
       verify: (_) => verify(() => logout(any())).called(1),
     );
+
+    test('signedOutByUser is set by logout and cleared by setAuthenticated', () async {
+      final cubit = build()..emit(const AuthState.authenticated(_user));
+      expect(cubit.signedOutByUser, isFalse);
+      await cubit.logout();
+      expect(cubit.signedOutByUser, isTrue);
+      cubit.setAuthenticated(_user);
+      expect(cubit.signedOutByUser, isFalse);
+    });
   });
 
   group('setAuthenticated / updateUser', () {

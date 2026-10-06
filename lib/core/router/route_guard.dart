@@ -4,6 +4,14 @@ import '../di/locator.dart';
 import '../session/session_info.dart';
 import 'app_routes.dart';
 
+String _loginRedirect(SessionInfo session, GoRouterState state) =>
+    session.signedOutByUser
+    ? AppRoutes.login
+    : Uri(
+        path: AppRoutes.login,
+        queryParameters: {AppRoutes.fromParam: state.uri.toString()},
+      ).toString();
+
 enum PermMode { any, all }
 
 /// Per-route guard.
@@ -33,10 +41,7 @@ GoRouterRedirect guard({
     if (session.isResolving) return null;
 
     if (requireAuth && !session.isAuthenticated) {
-      return Uri(
-        path: AppRoutes.login,
-        queryParameters: {AppRoutes.fromParam: state.uri.toString()},
-      ).toString();
+      return _loginRedirect(session, state);
     }
 
     if (requireVerified && session.isAuthenticated && !session.isVerified) {
@@ -71,12 +76,7 @@ GoRouterRedirect unverifiedOnly() {
   return (context, state) {
     final session = sl<SessionInfo>();
     if (session.isResolving) return null;
-    if (!session.isAuthenticated) {
-      return Uri(
-        path: AppRoutes.login,
-        queryParameters: {AppRoutes.fromParam: state.uri.toString()},
-      ).toString();
-    }
+    if (!session.isAuthenticated) return _loginRedirect(session, state);
     return session.isVerified ? AppRoutes.home : null;
   };
 }

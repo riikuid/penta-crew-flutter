@@ -12,6 +12,8 @@ class _FakeSession implements SessionInfo {
   @override
   bool isAuthenticated = false;
   @override
+  bool signedOutByUser = false;
+  @override
   bool isVerified = false;
   @override
   Set<String> permissions = const {};
@@ -77,6 +79,13 @@ void main() {
 
       expect(router.state.uri.path, AppRoutes.login);
       expect(router.state.uri.queryParameters[AppRoutes.fromParam], '/protected?tab=2');
+    });
+
+    testWidgets('signed out by user → /login without from', (tester) async {
+      session.signedOutByUser = true;
+      final router = await _pump(tester, _router(initial: '/protected'));
+
+      expect(router.state.uri.toString(), AppRoutes.login);
     });
 
     testWidgets('authenticated → stays', (tester) async {

@@ -28,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> implements SessionInfo {
   final Logout _logout;
   final SessionStorage _storage;
   late final StreamSubscription<SessionEvent> _eventsSub;
+  bool _signedOutByUser = false;
 
   // --- SessionInfo -----------------------------------------------------------
 
@@ -36,6 +37,9 @@ class AuthCubit extends Cubit<AuthState> implements SessionInfo {
 
   @override
   bool get isAuthenticated => state is Authenticated;
+
+  @override
+  bool get signedOutByUser => _signedOutByUser;
 
   @override
   bool get isVerified => user?.isVerified ?? false;
@@ -74,7 +78,10 @@ class AuthCubit extends Cubit<AuthState> implements SessionInfo {
     }
   }
 
-  void setAuthenticated(User user) => emit(AuthState.authenticated(user));
+  void setAuthenticated(User user) {
+    _signedOutByUser = false;
+    emit(AuthState.authenticated(user));
+  }
 
   /// Apply a profile change without a round-trip.
   void updateUser(User user) {
@@ -83,6 +90,7 @@ class AuthCubit extends Cubit<AuthState> implements SessionInfo {
 
   Future<void> logout() async {
     await _logout(const NoParams());
+    _signedOutByUser = true;
     emit(const AuthState.unauthenticated());
   }
 

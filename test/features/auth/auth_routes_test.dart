@@ -23,6 +23,8 @@ class _FakeSession implements SessionInfo {
   @override
   bool isAuthenticated = false;
   @override
+  bool signedOutByUser = false;
+  @override
   bool isVerified = false;
   @override
   Set<String> permissions = const {};
