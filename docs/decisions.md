@@ -112,6 +112,7 @@ Backend **belum ada**, jadi kita yang mengusulkan bentuknya.
   | `application.submitted` | user berhasil apply | Event detail (C5) |
   | `application.selected` | admin pilih user | Event detail (C8) |
   | `application.not_selected` | admin tutup seleksi, user tidak terpilih | Event detail (C9) |
+  | `event.updated` | admin ubah tanggal/jam/venue event yang punya pelamar (D-15) | Event detail |
 
   Reminder H-1 sebelum event **tidak** masuk v1 (catat sebagai kandidat v1.1).
 - Payload push `data` selalu memuat `type`, `notification_id`, dan
@@ -288,6 +289,42 @@ dikomunikasikan admin langsung ke crew setelah seleksi, bukan lewat app.
   mengisinya.
 - Hero B1 tetap `{start}–{end} · {VENUE}` tanpa baris briefing. Tidak ada
   pekerjaan lanjutan dari item ini.
+
+## D-15 · Admin dashboard: scope, kapasitas, konflik, notifikasi (15 Okt 2026)
+
+Jawaban atas pertanyaan terbuka Q1–Q8 di
+[`admin-dashboard-brief.md`](admin-dashboard-brief.md) §6. Mengikat untuk
+tim dashboard + backend; dua di antaranya mengubah kontrak mobile.
+
+- **Q1 Akses admin.** Dua tingkat: **superadmin** (akses semua branch,
+  mengelola master data, membuat akun admin) dan **admin** yang di-scope ke
+  **satu atau lebih branch** yang ditetapkan superadmin. Admin bukan `User`
+  crew; guard/tabel terpisah. Konsekuensi copy: A6/A7 tidak lagi menyebut
+  "admin from the {branch} branch" — admin tidak identik dengan satu branch
+  (diubah 15 Okt 2026 di `verification_screen.dart` + copy-table).
+- **Q2 `needed` bukan batas keras.** Angka kebutuhan per posisi hanya
+  target; admin boleh select lebih dari itu, dan **boleh tidak menyebutkan
+  jumlah sama sekali**. Konsekuensi kontrak: `EventPosition.needed` menjadi
+  `int|null`. App menampilkan `02 needed` bila ada, menyembunyikan baris
+  jumlah bila `null`. **Tiket mobile menyusul** (model `EventPosition`,
+  `EventFormats.needed`, C3/C4, fixture).
+- **Q3 Konflik tanggal saat select → blok.** Backend menolak select bila
+  user sudah `selected` di event lain dengan `date` sama (cermin
+  `date_conflict` D-09). Dashboard menampilkan alasannya.
+- **Q4 Status `draft` ada** di dashboard. Event draft tidak pernah
+  dikembalikan ke endpoint mobile; publish = `draft → open`.
+- **Q5 Admin boleh menutup seleksi sebelum `apply_deadline`.** Menjawab
+  kontrak §7.5: app membaca `EventDetail.status`, bukan jam.
+- **Q6 Edit event setelah publish → notifikasi.** Tipe baru
+  `event.updated` (record in-app + push FCM, `data: {event_id}`), dikirim
+  ke semua user dengan application `waiting`/`selected` di event itu bila
+  tanggal, jam, atau venue berubah. Tap → Event detail. **Tiket mobile
+  menyusul** (`NotificationType.eventUpdated` + routing); sampai itu ada,
+  app memparse tipe ini sebagai `unknown` tanpa crash (D-13).
+- **Q7 Deep link.** `APP_DOMAIN`, kedua file `.well-known`, dan halaman
+  fallback `/reset-password` di-host **backend yang sama** (menjawab
+  kontrak §7.1).
+- **Q8 Token Sanctum tidak expire** di v1 (menjawab kontrak §7.3).
 
 ---
 

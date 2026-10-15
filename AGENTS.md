@@ -20,10 +20,11 @@ Source of truth, in order of authority:
 | File | What it decides |
 |---|---|
 | `docs/implementation-plan.md` | Waves, kanban ticket map, **§2 binding tech decisions**, per-feature file ownership, definition of done (§2.8) |
-| `docs/decisions.md` | D-01..D-13 with reasoning. Do not silently contradict one; add a new D-xx instead |
+| `docs/decisions.md` | D-01..D-15 with reasoning. Do not silently contradict one; add a new D-xx instead |
 | `docs/api-contract.md` | Every endpoint, body, `code` values, `cannot_apply_reason` precedence. The mock backend implements this exactly |
 | `docs/prototype/screens.html` | Visual reference, screen ids A1..E3. Screenshots are compared 1:1 against it |
 | `README.md` | Architecture, folder layout, "Adding a feature in 4 steps", conventions |
+| `docs/admin-dashboard-brief.md` | Hand-off for the separate admin dashboard + backend team: admin features derived from the contract, state machines, invariants, open questions. Not binding for mobile tickets |
 
 If this file and `docs/` disagree, `docs/` wins — fix this file.
 

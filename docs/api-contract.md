@@ -75,7 +75,7 @@ ada yang diubah.
   "is_urgent": true,                     // backend: deadline < 48 jam (pill "urgent", C1)
   "positions": [                         // EventPosition[] — ringkas
     { "id": 7, "role": { "id": 1, "name": "Crew" }, "needed": 10, "matches_my_role": true },
-    { "id": 8, "role": { "id": 3, "name": "Trainee" }, "needed": 2, "matches_my_role": false }
+    { "id": 8, "role": { "id": 3, "name": "Trainee" }, "needed": null, "matches_my_role": false } // needed: int|null, target bukan batas (D-15)
   ]
 }
 ```
@@ -209,6 +209,7 @@ token user. FCM `data` (semua nilai string, karena batasan FCM):
 | `application.submitted` | 4.3 sukses | `event_id, application_id` | user |
 | `application.selected` | admin set selected | `event_id, application_id` | user |
 | `application.not_selected` | admin tutup seleksi | `event_id, application_id` | tiap user `waiting` yang tidak terpilih |
+| `event.updated` | admin ubah tanggal/jam/venue setelah publish (D-15) | `event_id` | tiap user `waiting`/`selected` di event itu |
 
 Catatan FCM: kirim `notification` block (title/body) **dan** `data` block;
 untuk iOS set `apns.payload.aps.sound = "default"` dan
@@ -218,13 +219,10 @@ untuk iOS set `apns.payload.aps.sound = "default"` dan
 
 ## 7. Hal yang belum ditentukan (perlu jawaban backend)
 
-1. `APP_DOMAIN` untuk deep link reset password — domain apa yang bisa dipakai
-   dan siapa yang host dua file `.well-known`?
-2. Rate limit login/forgot-password (usulan: 5/menit per IP+email) dan masa
+Dijawab di D-15 (15 Okt 2026): deep link di-host backend yang sama (§7.1),
+token Sanctum tidak expire (§7.3), admin boleh menutup seleksi sebelum
+`apply_deadline` (§7.5). Masih terbuka:
+
+1. Rate limit login/forgot-password (usulan: 5/menit per IP+email) dan masa
    berlaku token reset (usulan Laravel default 60 menit).
-3. Token Sanctum: kadaluarsa atau tidak? Jika ya, app perlu tahu agar bisa
-   menampilkan "Session expired" alih-alih error generik.
-4. `is_urgent` — ambang 48 jam OK, atau mau dikonfigurasi admin?
-5. Apakah admin bisa **menutup seleksi** sebelum `apply_deadline`? Jika ya,
-   `EventDetail.status = closed` bisa terjadi sebelum `closes_at`, dan app
-   akan menampilkan C6 berdasarkan `status`, bukan berdasarkan waktu.
+2. `is_urgent` — ambang 48 jam OK, atau mau dikonfigurasi admin?
