@@ -103,7 +103,6 @@ class _PendingBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     final textTheme = Theme.of(context).textTheme;
-    final branchName = user?.branch?.name;
     final submittedAt = user?.submittedAt;
 
     return Column(
@@ -118,9 +117,8 @@ class _PendingBody extends StatelessWidget {
         Text("We're reviewing your profile.", style: tokens.display),
         const SizedBox(height: 14),
         Text(
-          'An admin${branchName == null ? '' : ' from the $branchName branch'} '
-          "will check your data and assign your crew roles. We'll notify you "
-          "when it's done.",
+          "An admin will check your data and assign your crew roles. We'll "
+          "notify you when it's done.",
           style: textTheme.bodyMedium?.copyWith(color: tokens.muted),
         ),
         const SizedBox(height: 32),
@@ -135,11 +133,9 @@ class _PendingBody extends StatelessWidget {
                     : AppDates.stampWithTime(submittedAt),
                 state: TimelineStepState.done,
               ),
-              TimelineStep(
+              const TimelineStep(
                 label: 'Admin review',
-                sublabel: branchName == null
-                    ? 'IN PROGRESS'
-                    : '${branchName.toUpperCase()} BRANCH · IN PROGRESS',
+                sublabel: 'IN PROGRESS',
                 state: TimelineStepState.current,
               ),
               const TimelineStep(
@@ -165,12 +161,10 @@ class _RejectedBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     final textTheme = Theme.of(context).textTheme;
-    final branchName = user.branch?.name;
     final reviewedAt = user.reviewedAt;
-    final meta = [
-      if (branchName != null) '${branchName.toUpperCase()} BRANCH',
-      if (reviewedAt != null) AppDates.short(reviewedAt).toUpperCase(),
-    ].join(' · ');
+    final meta = reviewedAt == null
+        ? ''
+        : AppDates.short(reviewedAt).toUpperCase();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

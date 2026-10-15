@@ -37,8 +37,8 @@ void main() {
       expect(find.text("We're reviewing your profile."), findsOneWidget);
       expect(
         find.text(
-          'An admin from the Jakarta branch will check your data and assign '
-          "your crew roles. We'll notify you when it's done.",
+          "An admin will check your data and assign your crew roles. We'll "
+          "notify you when it's done.",
         ),
         findsOneWidget,
       );
@@ -46,7 +46,7 @@ void main() {
       expect(find.text('Profile submitted'), findsOneWidget);
       expect(find.text('25 SEP 2026 · 09:40'), findsOneWidget);
       expect(find.text('Admin review'), findsOneWidget);
-      expect(find.text('JAKARTA BRANCH · IN PROGRESS'), findsOneWidget);
+      expect(find.text('IN PROGRESS'), findsOneWidget);
       expect(find.text('Roles assigned'), findsOneWidget);
       expect(find.text('NEXT'), findsOneWidget);
       expect(find.text('View my data'), findsOneWidget);
@@ -99,7 +99,7 @@ void main() {
         ),
         findsOneWidget,
       );
-      expect(find.text('JAKARTA BRANCH · 26 SEP 2026'), findsOneWidget);
+      expect(find.text('26 SEP 2026'), findsOneWidget);
       expect(find.text('Edit profile'), findsOneWidget);
       expect(find.text('View my data'), findsNothing);
     });

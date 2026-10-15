@@ -85,9 +85,9 @@ Time ranges always use an en dash with no spaces: `14:00–20:00`.
 |---|---|---|
 | pill | `Under review` | blush, clock 14 |
 | headline | `We're reviewing your profile.` | 40 px |
-| body | `An admin from the {branch.name} branch will check your data and assign your crew roles. We'll notify you when it's done.` | |
+| body | `An admin will check your data and assign your crew roles. We'll notify you when it's done.` | branch dihapus (D-15 Q1: admin lintas branch) |
 | timeline 1 | `Profile submitted` · sub `{submitted_at:d MMM yyyy · HH:mm}` uppercased | state done |
-| timeline 2 | `Admin review` · sub `{BRANCH} BRANCH · IN PROGRESS` | state current |
+| timeline 2 | `Admin review` · sub `IN PROGRESS` | state current |
 | timeline 3 | `Roles assigned` · sub `NEXT` | state upcoming |
 | CTA secondary | `View my data` | 56 blush |
 | CTA ghost | `Sign out` | 48, 15 px |
@@ -110,7 +110,7 @@ Time ranges always use an en dash with no spaces: `14:00–20:00`.
 | body | `Update the details below and submit again. Your account stays inactive until it's approved.` | |
 | note eyebrow | `Note from admin` | ink |
 | note body | `"{verification_note}"` | 17 px, straight double quotes |
-| note meta | `{BRANCH} BRANCH · {reviewed_at:d MMM yyyy}` uppercased | |
+| note meta | `{reviewed_at:d MMM yyyy}` uppercased | |
 | CTA primary | `Edit profile` | 56 ink → `/profile/edit` |
 | CTA ghost | `Sign out` | 48 |
 | E2 CTA in rejected context | `Submit again` | `proposed` |
